@@ -248,7 +248,7 @@ export default function ServicesShowcase(): JSX.Element {
   return (
     <section
       ref={sectionRef}
-      className="bg-gray-100 py-8 md:py-16 overflow-hidden min-h-screen">
+      className=" py-8 md:py-16 overflow-hidden min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-6 lg:px-0 h-full">
         {/* ==================== Mobile Layout ==================== */}
         <div className="flex flex-col h-full md:hidden space-y-6">
@@ -294,7 +294,7 @@ export default function ServicesShowcase(): JSX.Element {
           <div className="px-4" ref={rightColumnRef}>
             {/* Service Image Card */}
             <div
-              className="active-card service-card relative rounded-4xl overflow-hidden shadow-xl cursor-pointer border border-white/20 h-80"
+              className="active-card z-10 service-card relative rounded-4xl overflow-hidden shadow-xl cursor-pointer border border-white/20 h-80"
               key={currentService.id}
               onMouseEnter={(e) => handleCardHover(e.currentTarget, true)}
               onMouseLeave={(e) => handleCardHover(e.currentTarget, false)}>

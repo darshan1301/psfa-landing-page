@@ -61,11 +61,11 @@ export default function TestimonialSection() {
   };
 
   return (
-    <section className="relative bg-gray-100 py-16 overflow-hidden">
+    <section className="relative py-16 overflow-hidden">
       {/* Top Bar with Tabs and Heading */}
       <div className="lg:flex ">
         <div className="px-6 lg:mx-28 flex items-center justify-center mb-8">
-          <div className="flex space-x-4">
+          <div className="lg:flex block space-x-4">
             <button className="px-4 py-1 text-sm font-medium text-gray-600 border border-gray-300 rounded-full">
               Testimonial
             </button>
@@ -75,7 +75,7 @@ export default function TestimonialSection() {
           </div>
         </div>
         {/* Navigation Arrows (centered under top bar) */}
-        <div className="max-w-7xl mx-auto px-6 flex justify-center mb-8">
+        <div className="max-w-7xl mx-auto px-6 hidden lg:flex justify-center mb-8">
           <button
             onClick={prev}
             className="bg-white p-4 rounded-full shadow hover:shadow-lg transition-all duration-200 disabled:opacity-50 mr-4"
@@ -92,9 +92,9 @@ export default function TestimonialSection() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-8 px-6 flex flex-col md:flex-row items-center gap-8">
+      <div className="max-w-7xl lg:mx-8 px-6 flex flex-col md:flex-row items-center gap-8">
         {/* Left: Large Image */}
-        <div className="md:w-full w-full flex justify-center">
+        <div className="md:w-full lg:w-full flex justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={testimonials[current].id}
@@ -106,7 +106,7 @@ export default function TestimonialSection() {
               <img
                 src={testimonials[current].image}
                 alt={testimonials[current].name}
-                className="object-cover w-full h-110"
+                className="object-cover w-52 lg:w-full lg:h-110 h-60"
               />
             </motion.div>
           </AnimatePresence>
@@ -121,7 +121,7 @@ export default function TestimonialSection() {
               initial="initial"
               animate="animate"
               exit="exit">
-              <blockquote className="text-4xl tracking-tight text-gray-900 mb-4">
+              <blockquote className="lg:text-4xl text-2xl tracking-tight text-gray-900 mb-4">
                 “{testimonials[current].comment}”
               </blockquote>
               <p className="text-lg font-medium text-blue-600 mb-1">
@@ -132,6 +132,21 @@ export default function TestimonialSection() {
               </p>
             </motion.div>
           </AnimatePresence>
+        </div>
+        {/* Navigation Arrows (centered under top bar) */}
+        <div className="max-w-7xl mx-auto px-3 flex lg:hidden justify-center mb-8">
+          <button
+            onClick={prev}
+            className="bg-white p-4 rounded-full shadow hover:shadow-lg transition-all duration-200 disabled:opacity-50 mr-4"
+            aria-label="Previous testimonial">
+            <ChevronLeft className="w-5 h-5 text-gray-700 hover:text-blue-500 transition-colors" />
+          </button>
+          <button
+            onClick={next}
+            className="bg-white p-4 rounded-full shadow hover:shadow-lg transition-all duration-200 disabled:opacity-50"
+            aria-label="Next testimonial">
+            <ChevronRight className="w-5 h-5 text-gray-700 hover:text-blue-500 transition-colors" />
+          </button>
         </div>
 
         {/* Right: Thumbnail and Counter */}

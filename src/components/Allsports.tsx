@@ -4,60 +4,10 @@
 import React, { FC, useRef, useState, useEffect } from "react";
 import Slider, { Settings } from "react-slick";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { sports } from "@/utils/sports";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-interface Facility {
-  id: string;
-  name: string;
-  tag: string;
-  image: string;
-  caption: string;
-}
-
-const facilities: Facility[] = [
-  {
-    id: "1",
-    name: "Tennis Court",
-    tag: "Tennis court",
-    image:
-      "https://a1.espncdn.com/combiner/i?img=%2Fphoto%2F2025%2F0531%2Fr1500800_1296x518_5%2D2.jpg&w=1320&h=528&scale=crop&cquality=40&location=center&format=jpg",
-    caption: "Professionally Designed Courts for Every Skill Level",
-  },
-  {
-    id: "2",
-    name: "Swimming Pool",
-    tag: "Swimming pool",
-    image:
-      "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=800&h=600&fit=crop",
-    caption: "Dive In – Relax and Enjoy in Our Pool",
-  },
-  {
-    id: "4",
-    name: "Basketball Court",
-    tag: "Basketball court",
-    image:
-      "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&h=600&fit=crop",
-    caption: "Full-Sized Courts for Play and Competition",
-  },
-  {
-    id: "5",
-    name: "Yoga Studio",
-    tag: "Yoga studio",
-    image:
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop",
-    caption: "Find Your Zen in Our Dedicated Space",
-  },
-  {
-    id: "6",
-    name: "Gym Area",
-    tag: "Gym area",
-    image:
-      "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=800&h=600&fit=crop",
-    caption: "Fully Equipped Gym for Strength & Cardio",
-  },
-];
 
 const FacilitiesCarousel: FC = () => {
   const sliderRef = useRef<Slider>(null);
@@ -107,7 +57,7 @@ const FacilitiesCarousel: FC = () => {
     ],
   };
 
-  const maxIndex = facilities.length - slidesToShow;
+  const maxIndex = sports.length - slidesToShow;
   const canGoPrev = currentSlide > 0;
   const canGoNext = currentSlide < maxIndex;
 
@@ -134,16 +84,16 @@ const FacilitiesCarousel: FC = () => {
       {/* Carousel */}
       <div className="relative">
         <Slider ref={sliderRef} {...settings}>
-          {facilities.map((facility) => (
+          {sports.map((facility) => (
             <div key={facility.id} className="px-1">
               <div className="relative rounded-3xl overflow-hidden">
                 <img
                   src={facility.image}
                   alt={facility.name}
-                  className="w-full h-96 object-cover"
+                  className="w-full transition-all hover:h-100 overflow-hidden h-96 object-cover"
                 />
                 {/* Tag Pill */}
-                <div className="absolute top-3 right-4 border border-white font-light backdrop-blur-sm text-white font tracking-tight px-3 py-1 rounded-full">
+                <div className="absolute bottom-4 left-4 lg:font backdrop-blur-sm text-white font tracking-tight px-3 py-1 rounded-full">
                   {facility.name}
                 </div>
               </div>
