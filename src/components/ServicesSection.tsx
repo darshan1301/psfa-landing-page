@@ -37,7 +37,8 @@ const serviceCards: ServiceCard[] = [
     features: ["Natural Turf", "Pro Lighting", "Multi-Sport"],
     capacity: "50+ Athletes",
     availability: "24/7 Access",
-    image: "/serviceCard/pexels-rdne-7187827.jpg",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/zgobehvpmmgyepbmbol3",
   },
   {
     id: 2,
@@ -50,7 +51,8 @@ const serviceCards: ServiceCard[] = [
     features: ["FIFA Standard", "Shock Absorption", "Climate Controlled"],
     capacity: "10v10 Games",
     availability: "All Weather",
-    image: "/serviceCard/pexels-mason-tuttle-612393380-17299530 (2).jpg",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/bkq17obxo9vs18jaethk",
   },
   {
     id: 3,
@@ -63,7 +65,8 @@ const serviceCards: ServiceCard[] = [
     features: ["Tactical Zones", "Fitness Area", "Team Sessions"],
     capacity: "Full Squad",
     availability: "Day & Night",
-    image: "/serviceCard/pexels-drewdempsey-29893638.jpg",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/gm1sbsufzwiv4offzu9k",
   },
   {
     id: 4,
@@ -76,7 +79,8 @@ const serviceCards: ServiceCard[] = [
     features: ["Pro Equipment", "Personal Training", "Recovery Zone"],
     capacity: "30 Members",
     availability: "6AM - 11PM",
-    image: "/serviceCard/pexels-rodrigo-ortega-2044210904-30864601.jpg",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/esldfd5vn6esxriidf2o",
   },
 ];
 
@@ -248,7 +252,7 @@ export default function ServicesShowcase(): JSX.Element {
   return (
     <section
       ref={sectionRef}
-      className=" py-8 md:py-16 overflow-hidden min-h-screen">
+      className=" py-8 md:py-0 md:mt-12 overflow-hidden lg:min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-6 lg:px-0 h-full">
         {/* ==================== Mobile Layout ==================== */}
         <div className="flex flex-col h-full md:hidden space-y-6">
@@ -294,7 +298,7 @@ export default function ServicesShowcase(): JSX.Element {
           <div className="px-4" ref={rightColumnRef}>
             {/* Service Image Card */}
             <div
-              className="active-card z-10 service-card relative rounded-4xl overflow-hidden shadow-xl cursor-pointer border border-white/20 h-80"
+              className="active-card service-card relative rounded-4xl overflow-hidden shadow-xl cursor-pointer border border-white/20 h-80"
               key={currentService.id}
               onMouseEnter={(e) => handleCardHover(e.currentTarget, true)}
               onMouseLeave={(e) => handleCardHover(e.currentTarget, false)}>
@@ -376,12 +380,12 @@ export default function ServicesShowcase(): JSX.Element {
         </div>
 
         {/* ==================== Desktop Layout - 3 Columns ==================== */}
-        <div className="hidden md:grid md:grid-cols-3 my-8 gap-8 items-start h-full">
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 my-8 gap-8 items-start h-full">
           {/* Column 1: Text Content */}
           <div
-            className="space-y-6 lg:h-max flex flex-col justify-between desktop-animate"
+            className="space-y-6 md:my-4 md:col-span-2 lg:col-span-1 lg:h-max flex flex-col  justify-between desktop-animate"
             ref={headerRef}>
-            <p className="text-black px-4 leading-tight text-base lg:font-normal tracking-tighter lg:text-3xl">
+            <p className="text-black md:text-2xl px-4 leading-tight text-base lg:font-normal tracking-tighter lg:text-3xl">
               From structured school programs to corporate wellness, our
               comprehensive services ensure a seamless experience—whether you’re
               training, competing, or just staying fit.
@@ -405,7 +409,7 @@ export default function ServicesShowcase(): JSX.Element {
           {/* Column 2: Static Hero Image */}
           <div className="desktop-animate" ref={mainCardRef}>
             <div
-              className="relative h-88 mx-4 lg:h-[500px] bg-cover bg-center rounded-3xl overflow-hidden shadow-2xl"
+              className="relative h-88 mx-4 md:h-[35rem] lg:h-[500px] bg-cover bg-center rounded-3xl overflow-hidden shadow-2xl"
               style={{ backgroundImage: "url('/basketball-a.jpg')" }}>
               {/* Floating Elements */}
               <div className="absolute bottom-4 mx-4 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">

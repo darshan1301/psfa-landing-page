@@ -1,9 +1,7 @@
 "use client";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { motion, Variants } from "framer-motion";
-import { Menu, X, ArrowUpRight } from "lucide-react";
 
 const LEFT_NAV_ITEMS = [
   { label: "Home", href: "/" },
@@ -13,187 +11,206 @@ const LEFT_NAV_ITEMS = [
 
 const RIGHT_BUTTON = { label: "Book Your Ground", href: "/contact" };
 
-// Desktop drop‐in variants
-const listVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      delayChildren: 4,
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { y: -20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { type: "spring", stiffness: 300, damping: 20 },
-  },
-};
-
-const logoVariants: Variants = {
-  hidden: { y: -20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 300,
-      damping: 20,
-      delay: 4 + 0.1 * LEFT_NAV_ITEMS.length, // 1 + 0.3 = 1.3s
-    },
-  },
-};
-
-const buttonVariants: Variants = {
-  hidden: { y: -20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 300,
-      damping: 20,
-      delay: 4 + 0.1 * (LEFT_NAV_ITEMS.length + 1), // 1 + 0.4 = 1.4s
-    },
-  },
-};
-
-// Mobile menu variants
-const mobileListVariants: Variants = {
-  hidden: { opacity: 0, height: 0 },
-  visible: {
-    opacity: 1,
-    height: "auto",
-    transition: {
-      when: "beforeChildren",
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const mobileItemVariants: Variants = {
-  hidden: { y: -20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { type: "spring", stiffness: 300, damping: 20 },
-  },
-};
-
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Show navbar after delay based on screen size
+  useEffect(() => {
+    const showNavbar = () => {
+      const delay = window.innerWidth >= 1024 ? 4000 : 3000; // 4s for desktop, 3s for mobile/tablet
+      setTimeout(() => {
+        setIsVisible(true);
+      }, delay);
+    };
+
+    showNavbar();
+
+    // Handle window resize
+    const handleResize = () => {
+      if (!isVisible) {
+        showNavbar();
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isVisible]);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-transparent px-6 py-4 md:px-20 md:py-6 flex items-center justify-between">
-      {/* ─────────────── Desktop Left Nav ─────────────── */}
-      <motion.ul
-        variants={listVariants}
-        initial="hidden"
-        animate="visible"
-        className="hidden md:flex space-x-8">
-        {LEFT_NAV_ITEMS.map((item) => (
-          <motion.li key={item.href} variants={itemVariants}>
-            <Link
-              href={item.href}
-              className="text-white font-light text-lg hover:text-gray-200 transition-colors duration-200">
-              {item.label}
-            </Link>
-          </motion.li>
-        ))}
-      </motion.ul>
-
-      {/* ─────────────── Logo (Center for desktop, left for mobile) ─────────────── */}
-      <motion.div
-        variants={logoVariants}
-        initial="hidden"
-        animate="visible"
-        className="text-2xl tracking-wider font-medium uppercase text-white">
-        <Link href="/">Pratigrham</Link>
-      </motion.div>
-
-      {/* ─────────────── Desktop Right Button & Mobile Hamburger ─────────────── */}
-      <div className="flex items-center space-x-4">
-        {/* Desktop Button */}
-        <motion.div
-          variants={buttonVariants}
-          initial="hidden"
-          animate="visible"
-          className="hidden md:block">
-          <Link href={RIGHT_BUTTON.href}>
-            <button
-              className="
-             bg-gradient-to-r from-black to-gray-800
-              text-white 
-              font-light 
-              px-6 py-3 
-              rounded-full 
-              flex items-center 
-              space-x-2
-              hover:bg-gray-700 
-              transition-colors 
-              duration-200
-            ">
-              <span>{RIGHT_BUTTON.label}</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </button>
-          </Link>
-        </motion.div>
-
-        {/* Mobile Hamburger Icon */}
-        <button
-          onClick={() => setMenuOpen((prev) => !prev)}
-          className="md:hidden text-white hover:text-gray-200 transition-colors duration-200">
-          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
-      {/* ─────────────── Mobile Menu ─────────────── */}
-      {menuOpen && (
-        <motion.div
-          variants={mobileListVariants}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          className="absolute top-full left-0 w-full bg-black/90 backdrop-blur-md md:hidden">
-          <motion.ul className="flex flex-col items-center space-y-6 py-6">
-            {LEFT_NAV_ITEMS.map((item) => (
-              <motion.li key={item.href} variants={mobileItemVariants}>
+    <nav
+      className={`fixed lg:top-4 top-0 items-center left-0 w-full z-50  transition-all duration-1000 ease-out ${
+        isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+      }`}>
+      <div className="max-w-5xl lg:rounded-full bg-black/20 border-b border-white/10 mx-auto backdrop-blur-lg px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-14 lg:h-18">
+          {/* Desktop Left Navigation */}
+          <div className="hidden lg:flex items-center space-x-8">
+            {LEFT_NAV_ITEMS.map((item, index) => (
+              <div
+                key={item.href}
+                className={`transition-all duration-600 ease-out ${
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-[-20px]"
+                }`}
+                style={{
+                  transitionDelay: isVisible ? `${0.2 + 0.1 * index}s` : "0s",
+                }}>
                 <Link
                   href={item.href}
-                  className="text-white font-medium text-xl hover:text-gray-300 transition-colors duration-200"
-                  onClick={() => setMenuOpen(false)}>
+                  className="relative text-white/90 hover:text-white font-light tracking-wide transition-all duration-300 group">
                   {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-              </motion.li>
+              </div>
             ))}
+          </div>
 
-            <motion.li variants={mobileItemVariants}>
+          {/* Logo */}
+          <div className="flex-1 lg:flex-none flex justify-start lg:justify-center">
+            <div
+              className={`transition-all duration-600 ease-out ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-[-20px]"
+              }`}
+              style={{
+                transitionDelay: isVisible
+                  ? `${0.2 + 0.1 * LEFT_NAV_ITEMS.length}s`
+                  : "0s",
+              }}>
+              <Link
+                href="/"
+                className="text-xl lg:text-2xl font-semibold text-white uppercase hover:text-gray-200 transition-colors duration-300">
+                Pratigrham
+              </Link>
+            </div>
+          </div>
+
+          {/* Desktop CTA Button */}
+          <div className="hidden lg:flex items-center">
+            <div
+              className={`transition-all duration-600 ease-out ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-[-20px]"
+              }`}
+              style={{
+                transitionDelay: isVisible
+                  ? `${0.2 + 0.1 * (LEFT_NAV_ITEMS.length + 1)}s`
+                  : "0s",
+              }}>
               <Link href={RIGHT_BUTTON.href}>
-                <button
-                  className="
-                    bg-white 
-                    text-slate-800 
-                    font-medium 
-                    px-6 py-3 
-                    rounded-full 
-                    flex items-center 
-                    space-x-2
-                    hover:bg-gray-100 
-                    transition-colors 
-                    duration-200
-                  "
-                  onClick={() => setMenuOpen(false)}>
-                  <span>{RIGHT_BUTTON.label}</span>
-                  <ArrowUpRight className="w-4 h-4" />
+                <button className="group relative overflow-hidden bg-gradient-to-r from-black to-gray-700 text-white font-medium px-6 py-3 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105">
+                  <span className="relative z-10 flex items-center space-x-2">
+                    <span className="text-sm tracking-wide">
+                      {RIGHT_BUTTON.label}
+                    </span>
+                    <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-700 via-purple-700 to-blue-900 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
                 </button>
               </Link>
-            </motion.li>
-          </motion.ul>
-        </motion.div>
-      )}
+            </div>
+          </div>
+
+          {/* Mobile/Tablet Menu Button */}
+          <div className="lg:hidden">
+            <div
+              className={`transition-all duration-600 ease-out ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-[-20px]"
+              }`}
+              style={{ transitionDelay: isVisible ? "0.2s" : "0s" }}>
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="relative p-2 text-white hover:text-blue-300 transition-colors duration-200"
+                aria-label="Toggle menu">
+                <div className="w-6 h-6 relative">
+                  <span
+                    className={`absolute top-0 left-0 w-full h-0.5 bg-current transition-all duration-300 ${
+                      menuOpen ? "rotate-45 translate-y-2.5" : ""
+                    }`}></span>
+                  <span
+                    className={`absolute top-2.5 left-0 w-full h-0.5 bg-current transition-all duration-300 ${
+                      menuOpen ? "opacity-0" : ""
+                    }`}></span>
+                  <span
+                    className={`absolute top-5 left-0 w-full h-0.5 bg-current transition-all duration-300 ${
+                      menuOpen ? "-rotate-45 -translate-y-2.5" : ""
+                    }`}></span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile/Tablet Menu */}
+        <div
+          className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
+            menuOpen ? "max-h-screen opacity-100 py-8" : "max-h-0 opacity-0"
+          }`}>
+          <div className="px-4 py-6 backdrop-blur-xl border-t border-white/10 rounded-b-2xl">
+            <div className="flex flex-col space-y-6">
+              {LEFT_NAV_ITEMS.map((item, index) => (
+                <div
+                  key={item.href}
+                  className={`transform transition-all duration-500 ${
+                    menuOpen
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-4 opacity-0"
+                  }`}
+                  style={{
+                    transitionDelay: menuOpen ? `${index * 0.1}s` : "0s",
+                  }}>
+                  <Link
+                    href={item.href}
+                    className="block text-white/90 hover:text-white font-medium text-lg transition-colors duration-200 hover:translate-x-2 transform"
+                    onClick={() => setMenuOpen(false)}>
+                    {item.label}
+                  </Link>
+                </div>
+              ))}
+
+              <div
+                className={`transform transition-all duration-500 pt-4 ${
+                  menuOpen
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-4 opacity-0"
+                }`}
+                style={{
+                  transitionDelay: menuOpen
+                    ? `${LEFT_NAV_ITEMS.length * 0.1}s`
+                    : "0s",
+                }}>
+                <a href={RIGHT_BUTTON.href}>
+                  <button
+                    className="w-full bg-gradient-to-r from-black to-gray-700 text-white font-medium px-6 py-4 rounded-2xl flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 hover:scale-[1.02]"
+                    onClick={() => setMenuOpen(false)}>
+                    <span className="text-base">{RIGHT_BUTTON.label}</span>
+                    <ArrowUpRight className="w-5 h-5" />
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes slideDown {
+          0% {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </nav>
   );
 }

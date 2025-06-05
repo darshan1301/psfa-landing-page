@@ -62,18 +62,18 @@ const FacilitiesCarousel: FC = () => {
   const canGoNext = currentSlide < maxIndex;
 
   return (
-    <div className="lg:max-w-fit bg-white lg:rounded-4xl lg:mx-4 px-6 py-8 lg:px-16 lg:py-12">
+    <div className="lg:max-w-fit bg-white lg:rounded-4xl lg:mx-4 px-6 py-4 pt-10 lg:px-16 lg:py-8">
       {/* Header / Search / View All */}
-      <div className="flex lg:flex-row justify-between items-center my-14 gap-4">
-        <div className="lg:flex w-full lg:w-fit lg:items-center ">
-          <span className="px-3 lg:block hidden py-1 border border-gray-300 rounded-full tracking-tight text-gray-900">
+      <div className="flex lg:flex-row justify-between md:justify-center lg:justify-between mb-6 items-center md:my-10 gap-4">
+        <div className="md:flex w-full md:gap-4 lg:items-center ">
+          <span className="px-3 md:block hidden py-1 border border-gray-300 rounded-full tracking-tight text-gray-900">
             Sports
           </span>
-          <h2 className="text-black max-w-fit lg:px-4 leading-tight text-base lg:font-normal tracking-tighter lg:text-3xl">
-            Explore Our Facilities
+          <h2 className="text-black text-xl max-w-fit md:max-w-full lg:px-4 leading-tight lg:font-normal tracking-tighter md:text-2xl lg:text-3xl">
+            Our Facilities
           </h2>
         </div>
-        <div className="items-end lg:gap-4 w-full lg:w-auto">
+        <div className="items-end lg:gap-4 w-60 md:w-40">
           <button className="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors flex items-center gap-2">
             View All
             <ArrowRight className="w-4 h-4" />
@@ -103,7 +103,7 @@ const FacilitiesCarousel: FC = () => {
       </div>
 
       {/* Custom Prev/Next Buttons */}
-      <div className="lg:flex justify-between align-top lg:items-center my-8 lg:my-14 lg:space-x-4">
+      <div className="lg:flex justify-between align-top lg:items-center my-8 lg:my-10 lg:space-x-4">
         <div className="flex justify-center gap-4 ">
           <button
             onClick={() => sliderRef.current?.slickPrev()}

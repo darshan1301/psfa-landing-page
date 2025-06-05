@@ -75,7 +75,7 @@ export default function TestimonialSection() {
           </div>
         </div>
         {/* Navigation Arrows (centered under top bar) */}
-        <div className="max-w-7xl mx-auto px-6 hidden lg:flex justify-center mb-8">
+        <div className="max-w-7xl mx-auto px-6 hidden md:flex justify-center mb-8">
           <button
             onClick={prev}
             className="bg-white p-4 rounded-full shadow hover:shadow-lg transition-all duration-200 disabled:opacity-50 mr-4"
@@ -94,7 +94,7 @@ export default function TestimonialSection() {
       {/* Main Content */}
       <div className="max-w-7xl lg:mx-8 px-6 flex flex-col md:flex-row items-center gap-8">
         {/* Left: Large Image */}
-        <div className="md:w-full lg:w-full flex justify-center">
+        <div className="md:w-full flex justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={testimonials[current].id}
@@ -106,7 +106,7 @@ export default function TestimonialSection() {
               <img
                 src={testimonials[current].image}
                 alt={testimonials[current].name}
-                className="object-cover w-52 lg:w-full lg:h-110 h-60"
+                className="object-cover w-52 md:w-full md:h-90 lg:h-110 h-60"
               />
             </motion.div>
           </AnimatePresence>
@@ -134,7 +134,7 @@ export default function TestimonialSection() {
           </AnimatePresence>
         </div>
         {/* Navigation Arrows (centered under top bar) */}
-        <div className="max-w-7xl mx-auto px-3 flex lg:hidden justify-center mb-8">
+        <div className="max-w-7xl mx-auto px-3 flex md:hidden justify-center mb-8">
           <button
             onClick={prev}
             className="bg-white p-4 rounded-full shadow hover:shadow-lg transition-all duration-200 disabled:opacity-50 mr-4"
