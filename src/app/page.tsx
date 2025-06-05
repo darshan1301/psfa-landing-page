@@ -9,7 +9,7 @@ export default function Home() {
       <main className="">
         <div className="lg:w-full lg:h-fit h-screen overflow-hidden">
           <video
-            src={"/video-2.mp4"}
+            src={"/web-video.mp4"}
             width={1920}
             height={1080}
             autoPlay

@@ -121,7 +121,7 @@ export default function TestimonialSection() {
               initial="initial"
               animate="animate"
               exit="exit">
-              <blockquote className="lg:text-4xl text-2xl tracking-tight text-gray-900 mb-4">
+              <blockquote className=" text-2xl leading-tight lg:font-normal tracking-tighter lg:text-3xl text-gray-900 mb-4">
                 “{testimonials[current].comment}”
               </blockquote>
               <p className="text-lg font-medium text-blue-600 mb-1">
