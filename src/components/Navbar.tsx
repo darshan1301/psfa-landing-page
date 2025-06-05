@@ -126,7 +126,7 @@ export default function Navbar() {
               style={{ transitionDelay: isVisible ? "0.2s" : "0s" }}>
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="relative p-2 text-white hover:text-blue-300 transition-colors duration-200"
+                className="relative p-2\ text-white hover:text-blue-300 transition-colors duration-200"
                 aria-label="Toggle menu">
                 <div className="w-6 h-6 relative">
                   <span
@@ -150,7 +150,9 @@ export default function Navbar() {
         {/* Mobile/Tablet Menu */}
         <div
           className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-            menuOpen ? "max-h-screen opacity-100 py-8" : "max-h-0 opacity-0"
+            menuOpen
+              ? "max-h-screen opacity-100 py-2 pb-8"
+              : "max-h-0 opacity-0"
           }`}>
           <div className="px-4 py-6 backdrop-blur-xl border-t border-white/10 rounded-b-2xl">
             <div className="flex flex-col space-y-6">
