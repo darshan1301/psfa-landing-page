@@ -8,6 +8,7 @@ import { sports } from "@/utils/sports";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Image from "next/image";
 
 const FacilitiesCarousel: FC = () => {
   const sliderRef = useRef<Slider>(null);
@@ -87,7 +88,7 @@ const FacilitiesCarousel: FC = () => {
           {sports.map((facility) => (
             <div key={facility.id} className="px-1">
               <div className="relative rounded-3xl overflow-hidden">
-                <img
+                <Image
                   src={facility.image}
                   alt={facility.name}
                   className="w-full transition-all hover:h-100 overflow-hidden h-96 object-cover"

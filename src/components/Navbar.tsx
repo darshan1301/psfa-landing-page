@@ -42,7 +42,10 @@ export default function Navbar() {
       className={`fixed lg:top-4 top-0 items-center left-0 w-full z-50  transition-all duration-1000 ease-out ${
         isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
       }`}>
-      <div className="max-w-5xl lg:rounded-full bg-black/20 border-b border-white/10 mx-auto backdrop-blur-lg px-4 sm:px-6 lg:px-8">
+      <div
+        className={`${
+          menuOpen ? "rounded-3xl" : "rounded-full"
+        } max-w-5xl lg:rounded-full  bg-black/20 border-b border-white/10 mx-2 mt-2 lg:mx-auto backdrop-blur-lg px-4 sm:px-6 lg:px-8`}>
         <div className="flex items-center justify-between h-14 lg:h-18">
           {/* Desktop Left Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
@@ -149,9 +152,9 @@ export default function Navbar() {
 
         {/* Mobile/Tablet Menu */}
         <div
-          className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
+          className={`lg:hidden overflow-hidden transition-all duration-100 ease-in-out ${
             menuOpen
-              ? "max-h-screen opacity-100 py-2 pb-8"
+              ? "max-h-screen opacity-100 py-2 pb-4"
               : "max-h-0 opacity-0"
           }`}>
           <div className="px-4 py-6 backdrop-blur-xl border-t border-white/10 rounded-b-2xl">
