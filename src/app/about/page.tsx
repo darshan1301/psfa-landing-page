@@ -117,14 +117,6 @@ const containerVariants = {
   exit: { opacity: 0, y: -30, transition: { duration: 0.4 } },
 };
 
-// const staggerContainer = {
-//   animate: {
-//     transition: {
-//       staggerChildren: 0.1,
-//     },
-//   },
-// };
-
 export default function AboutUsSection() {
   const [currentMilestone, setCurrentMilestone] = useState(0);
   const [currentTeamMember, setCurrentTeamMember] = useState(0);
@@ -184,7 +176,7 @@ export default function AboutUsSection() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-gray-900 mb-6">
             Building Champions,
             <br />
-            <span className="text-blue-600">Creating Futures</span>
+            <span className="text-blue-600 font-normal">Creating Futures</span>
           </h1>
 
           <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">

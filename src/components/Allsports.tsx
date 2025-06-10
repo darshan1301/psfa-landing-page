@@ -4,7 +4,7 @@
 import React, { FC, useRef, useState, useEffect } from "react";
 import Slider, { Settings } from "react-slick";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { sports } from "@/utils/sports";
+import { sports } from "@/app/lib/sports";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -91,6 +91,8 @@ const FacilitiesCarousel: FC = () => {
                 <Image
                   src={facility.image}
                   alt={facility.name}
+                  height={1080}
+                  width={1920}
                   className="w-full transition-all hover:h-100 overflow-hidden h-96 object-cover"
                 />
                 {/* Tag Pill */}
