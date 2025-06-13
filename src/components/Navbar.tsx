@@ -9,7 +9,7 @@ const LEFT_NAV_ITEMS = [
   { label: "Services", href: "/services" },
 ];
 
-const RIGHT_BUTTON = { label: "Book Your Ground", href: "/contact" };
+const RIGHT_BUTTON = { label: "Contact Us", href: "/contact" };
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);

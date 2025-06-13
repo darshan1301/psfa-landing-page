@@ -9,8 +9,8 @@ import {
   ShoppingCart,
   MapPin,
   CheckCircle,
-  Heart,
   ArrowRight,
+  Trophy,
 } from "lucide-react";
 
 type Service = {
@@ -360,7 +360,7 @@ export default function StickyScrollRevealDemo() {
   return (
     <div className="w-full">
       {/* Services Heading Section - Desktop Only */}
-      <div className="relative hidden lg:block pt-32 pb-20 bg-white overflow-hidden">
+      <div className="relative hidden lg:block pt-24 pb-10 bg-white overflow-hidden">
         <div className="text-center mb-16 px-0">
           <div className="flex items-center mt-14 justify-center mb-8">
             <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
@@ -402,7 +402,7 @@ export default function StickyScrollRevealDemo() {
 
       {/* CTA Section */}
       <div className="text-center bg-gradient-to-br mx-4 from-gray-900 to-black shadow-md rounded-3xl p-8 md:p-12 my-8">
-        <Heart className="w-12 h-12 text-red-400 mx-auto mb-6" />
+        <Trophy className="w-12 h-12 text-red-400 mx-auto mb-6" />
         <h2 className="text-2xl md:text-3xl font-light tracking-tight text-white mb-4">
           Ready to Join Our Community?
         </h2>

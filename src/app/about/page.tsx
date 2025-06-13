@@ -369,6 +369,7 @@ export default function AboutUsSection() {
 
         {/* Team Section */}
         <motion.div
+          id="our-team"
           className="mb-20 px-4"
           variants={containerVariants}
           initial="initial"
