@@ -9,10 +9,11 @@ export default function Home() {
       <main className="">
         <div className="lg:w-full lg:h-fit h-screen overflow-hidden">
           <video
-            src={"/webvideo-4.mp4"}
+            src={"/webvideo-compressed.mp4"}
             width={1920}
             height={1080}
             autoPlay
+            preload="none"
             muted
             className="h-screen lg:h-auto object-cover"
           />
