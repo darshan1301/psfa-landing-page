@@ -90,7 +90,7 @@ export default function ContactForm(): JSX.Element {
                   </h3>
                 </div>
                 <div className="text-sm text-white/80">
-                  <p>+1 (800) 123 XX21</p>
+                  <p>+919156620658</p>
                 </div>
               </div>
 

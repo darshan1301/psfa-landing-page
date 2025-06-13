@@ -75,38 +75,38 @@ const milestones: Milestone[] = [
 const teamMembers: TeamMember[] = [
   {
     id: 1,
-    name: "Rajesh Kumar",
-    position: "Founder & Director",
+    name: "Sunny Bodwani",
+    position: "Founder & CEO",
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop",
-    bio: "Former national-level athlete with 15+ years in sports management",
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/team/fqihs0yazgqy98xv0kjx",
+    bio: "Lorem Ipsum Is Simply Dummy Text Of The Printing and Typesetting Industry.",
     experience: "15+ Years",
   },
   {
     id: 2,
-    name: "Priya Sharma",
-    position: "Head of Training",
+    name: "Anubhav Gupta",
+    position: "Co-founder & COO",
     image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1974&auto=format&fit=crop",
-    bio: "Certified sports trainer specializing in youth development programs",
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/team/l8mqtly7yevshbw6ncuv",
+    bio: "Lorem Ipsum Is Simply Dummy Text Of The Printing and Typesetting Industry.",
     experience: "12+ Years",
   },
   {
     id: 3,
-    name: "Arjun Singh",
-    position: "Facilities Manager",
+    name: "Hitesh Bodwani",
+    position: "Chief Product Officer",
     image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=1974&auto=format&fit=crop",
-    bio: "Expert in sports infrastructure and facility management",
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/team/oistlmbmqifher5asajd",
+    bio: "Lorem Ipsum Is Simply Dummy Text Of The Printing and Typesetting Industry.",
     experience: "10+ Years",
   },
   {
     id: 4,
-    name: "Kavita Patel",
-    position: "Nutrition Specialist",
+    name: "Nikhil Mahant",
+    position: "Assistant General Manager",
     image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1974&auto=format&fit=crop",
-    bio: "Sports nutritionist helping athletes achieve peak performance",
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/team/zynerz8w4xae3vossdue",
+    bio: "Lorem Ipsum Is Simply Dummy Text Of The Printing and Typesetting Industry.",
     experience: "8+ Years",
   },
 ];
@@ -155,10 +155,10 @@ export default function AboutUsSection() {
 
   return (
     <section ref={sectionRef} className="py-1 mt-10 lg:mt-20 overflow-hidden">
-      <div className="max-w-7xl mx-auto sm:px-4 ">
+      <div className="max-w-screen  sm:px-4 ">
         {/* Hero Section */}
         <motion.div
-          className="text-center mb-16 px-0"
+          className="text-center mx-10 mb-16 px-0"
           variants={containerVariants}
           initial="initial"
           animate="animate">
@@ -187,7 +187,7 @@ export default function AboutUsSection() {
         </motion.div>
 
         {/* Company History & Vision/Mission */}
-        <div className="grid px-4 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid px-4 lg:mx-20 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {/* History */}
           <motion.div
             className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100"
@@ -263,7 +263,7 @@ export default function AboutUsSection() {
 
         {/* Milestones Section */}
         <motion.div
-          className="mb-20 bg-white md:rounded-2xl lg:rounded-4xl px-4 py-8 lg:p-8"
+          className="mb-20 bg-white lg:mx-24 md:rounded-2xl lg:rounded-4xl px-4 py-8 lg:p-6"
           variants={containerVariants}
           initial="initial"
           animate="animate">
@@ -370,7 +370,7 @@ export default function AboutUsSection() {
         {/* Team Section */}
         <motion.div
           id="our-team"
-          className="mb-20 px-4"
+          className="mb-20 lg:mx-24 px-4"
           variants={containerVariants}
           initial="initial"
           animate="animate">
@@ -417,7 +417,7 @@ export default function AboutUsSection() {
             </div>
 
             {/* Previous Team Member Thumbnail */}
-            <div className="md:order-1 flex justify-center">
+            <div className="md:order-1 hidden md:flex justify-center">
               <div className="w-24 h-24 rounded-xl overflow-hidden shadow-lg">
                 <Image
                   src={

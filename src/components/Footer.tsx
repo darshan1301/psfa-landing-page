@@ -62,28 +62,35 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/programs/football"
+                  href="/services/#sports-for-all"
+                  className="text-base hover:underline hover:text-gray-700 transition-colors duration-200">
+                  Sports For All
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/#sports-academy"
                   className="text-base hover:underline hover:text-gray-700 transition-colors duration-200">
                   Sports Academy
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/programs/cricket"
+                  href="/services/#sports-space"
                   className="text-base hover:underline hover:text-gray-700 transition-colors duration-200">
                   Sports Space
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/programs/wellness"
+                  href="/services/#sports-infra"
                   className="text-base hover:underline hover:text-gray-700 transition-colors duration-200">
                   Sports Infra
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/programs/equipment"
+                  href="/services/#sportskart"
                   className="text-base hover:underline hover:text-gray-700 transition-colors duration-200">
                   Sportskart
                 </Link>

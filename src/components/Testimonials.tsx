@@ -4,6 +4,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 interface Testimonial {
   id: number;
@@ -103,7 +104,9 @@ export default function TestimonialSection() {
               animate="animate"
               exit="exit"
               className="w-full max-w-sm rounded-4xl overflow-hidden shadow-lg">
-              <img
+              <Image
+                width={1920}
+                height={1080}
                 src={testimonials[current].image}
                 alt={testimonials[current].name}
                 className="object-cover w-52 md:w-full md:h-90 lg:h-110 h-60"
@@ -152,7 +155,9 @@ export default function TestimonialSection() {
         {/* Right: Thumbnail and Counter */}
         <div className="md:w-fit w-full flex flex-col items-center">
           <div className="w-24 h-24 rounded-xl overflow-hidden shadow-lg mb-4">
-            <img
+            <Image
+              width={1920}
+              height={1080}
               src={testimonials[(current + 1) % total].image}
               alt={testimonials[(current + 1) % total].name}
               className="object-cover w-full h-full"

@@ -11,6 +11,7 @@ export const StickyScroll = ({
 }: {
   content: {
     title: string;
+    tag?: string;
     description?: React.ReactNode;
     content?: React.ReactNode;
     icon?: React.ReactNode;
@@ -79,7 +80,7 @@ export const StickyScroll = ({
       <div className="relative flex items-start px-4">
         <div className="max-w-2xl">
           {content.map((item, index) => (
-            <div key={item.title + index} className="my-40">
+            <div key={item.title + index} id={item.tag} className="my-40">
               <motion.h2
                 className="lg:font-normal tracking-tighter text-2xl lg:text-3xl text-gray-900 flex items-center gap-2"
                 animate={{ opacity: activeCard === index ? 1 : 0.3 }}>

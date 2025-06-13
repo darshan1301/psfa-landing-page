@@ -12,9 +12,11 @@ import {
   ArrowRight,
   Trophy,
 } from "lucide-react";
+import Image from "next/image";
 
 type Service = {
   title: string;
+  tag?: string;
   icon: React.JSX.Element;
   content: React.JSX.Element;
   image: string;
@@ -24,6 +26,7 @@ type Service = {
 const services: Service[] = [
   {
     title: "Sports For All",
+    tag: "sports-for-all",
     icon: <School className="w-5 h-5 text-cyan-400" />,
     content: (
       <ul className="space-y-2">
@@ -51,6 +54,7 @@ const services: Service[] = [
   },
   {
     title: "Pratigrham Sports Academy",
+    tag: "sports-academy",
     icon: <Dumbbell className="w-5 h-5 text-emerald-400" />,
     content: (
       <ul className="space-y-2">
@@ -78,6 +82,7 @@ const services: Service[] = [
   },
   {
     title: "Sports Infra",
+    tag: "sports-infra",
     icon: <Building2 className="w-5 h-5 text-orange-400" />,
     content: (
       <ul className="space-y-2">
@@ -105,6 +110,7 @@ const services: Service[] = [
   },
   {
     title: "Sports Space",
+    tag: "sports-space",
     icon: <MapPin className="w-5 h-5 text-pink-400" />,
     content: (
       <ul className="space-y-2">
@@ -132,6 +138,7 @@ const services: Service[] = [
   },
   {
     title: "SportsKart",
+    tag: "sportskart",
     icon: <ShoppingCart className="w-5 h-5 text-purple-400" />,
     content: (
       <ul className="space-y-2">
@@ -265,7 +272,9 @@ const MobileServicesSection = ({ services }: { services: Service[] }) => {
             className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
             {/* Image */}
             <div className="h-48 sm:h-56 md:h-64 overflow-hidden">
-              <img
+              <Image
+                width={1920}
+                height={1080}
                 src={service.image}
                 className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                 alt={service.title}
@@ -329,7 +338,9 @@ const TabletServicesSection = ({ services }: { services: Service[] }) => {
             className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
             {/* Image */}
             <div className="h-48 overflow-hidden">
-              <img
+              <Image
+                width={1920}
+                height={1080}
                 src={service.image}
                 className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                 alt={service.title}
