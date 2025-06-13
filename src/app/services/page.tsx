@@ -238,7 +238,7 @@ const services: Service[] = [
 // Mobile services section
 const MobileServicesSection = ({ services }: { services: Service[] }) => {
   return (
-    <div className="lg:hidden px-4 py-16 bg-gradient-to-br from-gray-50 to-white">
+    <div className="lg:hidden px-4 py-16 mt-10 bg-gradient-to-br from-gray-50 to-white">
       <div className="text-center mb-12">
         <div className="flex items-center justify-center mb-6">
           <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
