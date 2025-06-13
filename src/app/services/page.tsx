@@ -269,6 +269,7 @@ const MobileServicesSection = ({ services }: { services: Service[] }) => {
         {services.map((service: Service, index: number) => (
           <div
             key={index}
+            id={service.tag}
             className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
             {/* Image */}
             <div className="h-48 sm:h-56 md:h-64 overflow-hidden">
@@ -334,6 +335,7 @@ const TabletServicesSection = ({ services }: { services: Service[] }) => {
       <div className="grid grid-cols-2 gap-6">
         {services.map((service: Service, index: number) => (
           <div
+            id={service.tag}
             key={index}
             className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
             {/* Image */}
