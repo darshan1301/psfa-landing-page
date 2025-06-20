@@ -430,6 +430,7 @@ export default function ServicesShowcase(): JSX.Element {
               onMouseLeave={(e) => handleCardHover(e.currentTarget, false)}>
               {/* Next.js Image as background */}
               <Image
+                priority
                 src={`${currentService.image}`}
                 alt={currentService.title}
                 fill

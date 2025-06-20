@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  role      Role     @default(USER)
+}
+
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String?  @unique
+  phone     String?  @unique
+  createdAt DateTime @default(now())
+  isActive  Boolean  @default(true)
+}
+
+model Enquiry {
+  id        String        @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  createdAt DateTime      @default(now())
+  status    EnquiryStatus @default(NEW)
+}
+
+model JobPosition {
+  id        String   @id @default(cuid())
+  title        String
+  department   String
+  location     String
+  type         String
+  experience   String
+  description  String
+  requirements String[]
+  benefits     String[]
+  createdAt    DateTime         @default(now())
+  applications JobApplication[]
+}
+
+model JobApplication {
+  id               String      @id @default(cuid())
+  jobPositionId    String
+  resume           String
+  coverLetter      String?
+  email            String
+  phone            String?
+  fullName         String
+  yearOfExperience String
+  status           String      @default("APPLIED")
+  createdAt        DateTime    @default(now())
+  jobPosition      JobPosition @relation(fields: [jobPositionId], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum EnquiryStatus {
+  NEW
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum JobApplicationStatus {
+  APPLIED
+  UNDER_REVIEW
+  INTERVIEW_SCHEDULED
+  OFFERED
+  REJECTED
+}

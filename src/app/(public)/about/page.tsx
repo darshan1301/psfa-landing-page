@@ -291,6 +291,7 @@ export default function AboutUsSection() {
                   exit="exit"
                   className="relative h-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl">
                   <Image
+                    priority
                     src={milestones[currentMilestone].image}
                     alt={milestones[currentMilestone].title}
                     fill
@@ -401,6 +402,7 @@ export default function AboutUsSection() {
                     src={teamMembers[currentTeamMember].image}
                     alt={teamMembers[currentTeamMember].name}
                     fill
+                    priority
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
@@ -420,6 +422,7 @@ export default function AboutUsSection() {
             <div className="md:order-1 hidden md:flex justify-center">
               <div className="w-24 h-24 rounded-xl overflow-hidden shadow-lg">
                 <Image
+                  priority
                   src={
                     teamMembers[
                       (currentTeamMember - 1 + teamMembers.length) %

@@ -166,79 +166,10 @@ const services: Service[] = [
   },
 ];
 
-// Simple sticky scroll implementation for desktop
-// const StickyScroll = ({ content }: { content: Service[] }) => {
-//   const [activeIndex, setActiveIndex] = useState(0);
-
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       const scrollPosition = window.scrollY;
-//       const stickyContainer = document.querySelector(".sticky-container");
-//       if (!stickyContainer) return;
-
-//       const containerRect = stickyContainer.getBoundingClientRect();
-//       const containerTop = containerRect.top + window.scrollY;
-//       const relativeScroll = scrollPosition - containerTop;
-//       const sectionHeight = window.innerHeight;
-
-//       // Calculate which section should be active
-//       const newActiveIndex = Math.floor(relativeScroll / sectionHeight);
-//       const clampedIndex = Math.max(
-//         0,
-//         Math.min(newActiveIndex, content.length - 1)
-//       );
-
-//       if (clampedIndex !== activeIndex) {
-//         setActiveIndex(clampedIndex);
-//       }
-//     };
-
-//     window.addEventListener("scroll", handleScroll);
-//     handleScroll(); // Initial call
-//     return () => window.removeEventListener("scroll", handleScroll);
-//   }, [activeIndex, content.length]);
-
-//   return (
-//     <div className="relative sticky-container">
-//       <div className="flex">
-//         {/* Left side - Content */}
-//         <div className="w-1/2 pr-8">
-//           {content.map((item, index) => (
-//             <div key={index} className="h-screen flex items-center">
-//               <div className="max-w-md mx-auto">
-//                 <div className="flex items-center gap-3 mb-6">
-//                   {item.icon}
-//                   <h3 className="text-2xl font-semibold text-gray-900">
-//                     {item.title}
-//                   </h3>
-//                 </div>
-//                 <div className="text-gray-600 space-y-3">{item.content}</div>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-
-//         {/* Right side - Images */}
-//         <div className="w-1/2 pl-8">
-//           <div className="sticky top-1/2 transform -translate-y-1/2">
-//             <div className="w-full h-96 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500">
-//               <img
-//                 src={content[activeIndex].image}
-//                 className="w-full h-full object-cover"
-//                 alt={content[activeIndex].title}
-//               />
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
 // Mobile services section
 const MobileServicesSection = ({ services }: { services: Service[] }) => {
   return (
-    <div className="lg:hidden px-4 py-16 mt-10 bg-gradient-to-br from-gray-50 to-white">
+    <div className="lg:hidden px-4 py-16 md:px-10 mt-10 bg-gradient-to-br from-gray-50 to-white">
       <div className="text-center mb-12">
         <div className="flex items-center justify-center mb-6">
           <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
@@ -269,10 +200,11 @@ const MobileServicesSection = ({ services }: { services: Service[] }) => {
         {services.map((service: Service, index: number) => (
           <div
             key={index}
-            id={service.tag}
             className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
             {/* Image */}
-            <div className="h-48 sm:h-56 md:h-64 overflow-hidden">
+            <div
+              id={service.tag}
+              className="h-48 sm:h-56 md:h-80 overflow-hidden">
               <Image
                 width={1920}
                 height={1080}
@@ -303,71 +235,70 @@ const MobileServicesSection = ({ services }: { services: Service[] }) => {
 };
 
 // Tablet version - grid layout
-const TabletServicesSection = ({ services }: { services: Service[] }) => {
-  return (
-    <div className="hidden md:block lg:hidden px-6 py-16 bg-gradient-to-br from-gray-50 to-white">
-      <div className="text-center mb-12">
-        <div className="flex items-center justify-center mb-6">
-          <div className="flex space-x-4">
-            <button className="px-4 py-2 text-sm font-medium text-gray-600 border border-gray-300 rounded-full">
-              What We Do
-            </button>
-            <button className="px-4 py-2 text-sm font-medium text-white bg-black rounded-full">
-              Our Services & Solutions
-            </button>
-          </div>
-        </div>
+// const TabletServicesSection = ({ services }: { services: Service[] }) => {
+//   return (
+//     <div className="hidden md:block lg:hidden px-6 py-16 bg-gradient-to-br from-gray-50 to-white">
+//       <div className="text-center mb-12">
+//         <div className="flex items-center justify-center mb-6">
+//           <div className="flex space-x-4">
+//             <button className="px-4 py-2 text-sm font-medium text-gray-600 border border-gray-300 rounded-full">
+//               What We Do
+//             </button>
+//             <button className="px-4 py-2 text-sm font-medium text-white bg-black rounded-full">
+//               Our Services & Solutions
+//             </button>
+//           </div>
+//         </div>
 
-        <h1 className="text-4xl md:text-5xl font-light tracking-tight text-gray-900 mb-4">
-          Transforming Ideas,
-          <br />
-          <span className="text-blue-600 font-normal">
-            Delivering Excellence
-          </span>
-        </h1>
+//         <h1 className="text-4xl md:text-5xl font-light tracking-tight text-gray-900 mb-4">
+//           Transforming Ideas,
+//           <br />
+//           <span className="text-blue-600 font-normal">
+//             Delivering Excellence
+//           </span>
+//         </h1>
 
-        <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-          Discover our comprehensive range of solutions designed to elevate your
-          business and deliver exceptional results.
-        </p>
-      </div>
+//         <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+//           Discover our comprehensive range of solutions designed to elevate your
+//           business and deliver exceptional results.
+//         </p>
+//       </div>
 
-      <div className="grid grid-cols-2 gap-6">
-        {services.map((service: Service, index: number) => (
-          <div
-            id={service.tag}
-            key={index}
-            className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-            {/* Image */}
-            <div className="h-48 overflow-hidden">
-              <Image
-                width={1920}
-                height={1080}
-                src={service.image}
-                className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                alt={service.title}
-              />
-            </div>
+//       <div className="grid grid-cols-2 gap-6">
+//         {services.map((service: Service, index: number) => (
+//           <div
+//             key={index}
+//             className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+//             {/* Image */}
+//             <div id={service.tag} className="h-48 overflow-hidden">
+//               <Image
+//                 width={1920}
+//                 height={1080}
+//                 src={service.image}
+//                 className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+//                 alt={service.title}
+//               />
+//             </div>
 
-            {/* Content */}
-            <div className="p-6">
-              <div className="flex items-center gap-3 mb-4">
-                {service.icon}
-                <h3 className="text-xl font-semibold text-gray-900">
-                  {service.title}
-                </h3>
-              </div>
+//             {/* Content */}
+//             <div className="p-6">
+//               <div className="flex items-center gap-3 mb-4">
+//                 {service.icon}
+//                 <h3 className="text-xl font-semibold text-gray-900">
+//                   {service.title}
+//                 </h3>
+//               </div>
 
-              <div className="text-gray-600 text-sm space-y-2">
-                {service.content}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+//               <div className="text-gray-600 text-sm space-y-2">
+//                 {service.content}
+//               </div>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
 
 export default function StickyScrollRevealDemo() {
   return (
@@ -408,7 +339,7 @@ export default function StickyScrollRevealDemo() {
       </div>
 
       {/* Tablet Services Section */}
-      <TabletServicesSection services={services} />
+      {/* <TabletServicesSection services={services} /> */}
 
       {/* Mobile Services Section */}
       <MobileServicesSection services={services} />

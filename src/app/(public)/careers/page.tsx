@@ -476,7 +476,7 @@ export default function CareersPage(): JSX.Element {
                     <label
                       htmlFor="portfolio"
                       className="block text-sm font-medium text-gray-700 mb-2">
-                      Portfolio/LinkedIn URL{" "}
+                      Portfolio/Resume Link
                       <span className="text-gray-400 font-normal">
                         (optional)
                       </span>

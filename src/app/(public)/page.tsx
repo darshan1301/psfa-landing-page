@@ -1,5 +1,5 @@
 import AllSports from "@/components/Allsports";
-import ContactForm from "@/components/ContactForm";
+import ContactForm from "@/components/SubscribeForm";
 import ServicesSection from "@/components/ServicesSection";
 import AnimatedTestimonials from "@/components/Testimonials";
 

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { Mail, MapPinned } from "lucide-react";
 
 interface FormData {
-  fullName: string;
+  name: string;
   email: string;
   phone?: string;
   message: string;
@@ -21,10 +21,25 @@ export default function ContactForm(): JSX.Element {
 
   const onSubmit = async (data: FormData): Promise<void> => {
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("Form submitted:", data);
-    alert("Message sent successfully!");
-    reset();
+    // console.log("Form submitted:", data);
+    try {
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Enquiry submitted successfully:", result);
+        alert("Message sent successfully!");
+        reset();
+      }
+    } catch (error) {
+      console.error("Error submitting enquiry:", error);
+      alert("Failed to send message. Please try again later.");
+    }
   };
 
   return (
@@ -120,14 +135,14 @@ export default function ContactForm(): JSX.Element {
               <div className="space-y-6">
                 <div>
                   <label
-                    htmlFor="fullName"
+                    htmlFor="name"
                     className="block text-sm font-medium text-gray-700 mb-2">
                     Full name
                   </label>
                   <input
-                    id="fullName"
+                    id="name"
                     type="text"
-                    {...register("fullName", {
+                    {...register("name", {
                       required: "Full name is required",
                       minLength: {
                         value: 2,
@@ -135,15 +150,15 @@ export default function ContactForm(): JSX.Element {
                       },
                     })}
                     className={`w-full px-4 py-3 rounded-lg border ${
-                      errors.fullName
+                      errors.name
                         ? "border-red-300 focus:ring-red-500"
                         : "border-gray-300 focus:ring-blue-500"
                     } focus:ring-2 focus:border-transparent transition-all duration-200 bg-white text-gray-900 placeholder-gray-500`}
                     placeholder="John Doe"
                   />
-                  {errors.fullName && (
+                  {errors.name && (
                     <p className="mt-2 text-sm text-red-600">
-                      {errors.fullName.message}
+                      {errors.name.message}
                     </p>
                   )}
                 </div>

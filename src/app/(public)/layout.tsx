@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Head from "next/head";
 
 const interTight = Inter({
   variable: "--font-tight",
@@ -21,6 +22,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <link
+          rel="preload"
+          as="image"
+          href="https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/nurdnjxqtg1ehcgne5it"
+        />
+      </Head>
       <body className={`${interTight.variable} antialiased bg-[#f4f4f4]`}>
         <Navbar />
         {children}

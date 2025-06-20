@@ -4,7 +4,7 @@
 import React, { FC, useRef, useState, useEffect } from "react";
 import Slider, { Settings } from "react-slick";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { sports } from "@/app/lib/sports";
+import { sports } from "@/lib/sports";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
