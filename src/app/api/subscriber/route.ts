@@ -23,7 +23,8 @@ export async function POST(request: Request) {
     };
 
     if (emailRegex.test(emailNumber)) {
-      subscriber = { email: emailNumber, phone: null };
+      // If it's a valid email make it lowercase
+      subscriber = { email: emailNumber.toLowercase(), phone: null };
     } else if (phoneRegex.test(emailNumber)) {
       subscriber = { phone: emailNumber, email: null };
     } else {

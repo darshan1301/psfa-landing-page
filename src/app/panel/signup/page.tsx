@@ -1,33 +1,41 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff, LogIn, Mail, Lock, Shield, Sparkles } from "lucide-react";
+import { Eye, EyeOff, UserPlus, Mail, Lock, Key, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [adminSecret, setAdminSecret] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
-    setIsLoading(true);
     try {
-      const res = await fetch("/api/panel-api/login", {
+      setIsLoading(true);
+      const res = await fetch("/api/panel-api/signup", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password, adminsecret: adminSecret }),
       });
-      if (res.ok) {
-        router.push("/panel");
+
+      const data = await res.json();
+      console.log(res, data);
+
+      if (!res.ok) {
+        alert(data.error || "Signup failed");
+        return;
       }
-    } catch (error) {
-      console.error("Login failed:", error);
+
+      alert("Signup successful! ✅");
+      // You might want to redirect or clear form here
+    } catch (err) {
+      console.error("Signup error:", err);
+      alert("An unexpected error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -35,7 +43,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-black via-gray-900 to-gray-800">
-      {/* Light animated background elements */}
+      {/* Animated background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gray-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
         <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-gray-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
@@ -59,39 +67,29 @@ export default function LoginPage() {
 
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
-          {/* Main card with subtle glassmorphism effect */}
+          {/* Main card with glassmorphism effect */}
           <div className="bg-black/40 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/10 p-8 space-y-8 transform hover:scale-105 transition-all duration-500 hover:shadow-white/10">
             {/* Header with animated icon */}
             <div className="text-center space-y-4">
-              <div className="mx-auto w-16 h-16 bg-gradient-to-r from-gray-600 to-gray-700 rounded-2xl flex items-center justify-center mb-4 transform hover:rotate-12 transition-transform duration-300 shadow-lg">
-                <Shield className="w-8 h-8 text-white" />
+              <div className="mx-auto w-16 h-16 bg-gradient-to-r from-gray-600 to-gray-700 rounded-2xl flex items-center justify-center mb-4 transform hover:rotate-12 transition-transform duration-300">
+                <UserPlus className="w-8 h-8 text-white" />
               </div>
               <div className="space-y-2">
                 <h2 className="text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  Pratigrham CMS
+                  Create Account
                 </h2>
-                <p className="text-gray-300 flex items-center justify-center gap-2">
+                <p className="text-gray-400 flex items-center justify-center gap-2">
                   <Sparkles className="w-4 h-4" />
-                  Sign in to your account
+                  Register to access admin features
                   <Sparkles className="w-4 h-4" />
                 </p>
               </div>
             </div>
 
-            {/* Error message with animation */}
-            {error && (
-              <div className="bg-red-900/30 backdrop-blur-sm border border-red-500/30 text-red-300 px-4 py-3 rounded-xl text-sm animate-in slide-in-from-top duration-300">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
-                  {error}
-                </div>
-              </div>
-            )}
-
             <div className="space-y-6">
               {/* Email field */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                <label className=" text-sm font-medium text-gray-300 flex items-center gap-2">
                   <Mail className="w-4 h-4" />
                   Email
                 </label>
@@ -101,7 +99,7 @@ export default function LoginPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-black/30 backdrop-blur-sm border border-white/10 px-4 py-3 rounded-xl text-white placeholder-gray-500 focus:ring-2 focus:ring-gray-400 focus:border-transparent outline-none transition-all duration-300 group-hover:bg-black/40 shadow-sm"
+                    className="w-full bg-black/30 backdrop-blur-sm border border-white/10 px-4 py-3 rounded-xl text-white placeholder-gray-500 focus:ring-2 focus:ring-gray-400 focus:border-transparent outline-none transition-all duration-300 group-hover:bg-black/40"
                     placeholder="Enter your email"
                   />
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-gray-500/20 to-gray-400/20 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
@@ -120,7 +118,7 @@ export default function LoginPage() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-black/30 backdrop-blur-sm border border-white/10 px-4 py-3 pr-12 rounded-xl text-white placeholder-gray-500 focus:ring-2 focus:ring-gray-400 focus:border-transparent outline-none transition-all duration-300 group-hover:bg-black/40 shadow-sm"
+                    className="w-full bg-black/30 backdrop-blur-sm border border-white/10 px-4 py-3 pr-12 rounded-xl text-white placeholder-gray-500 focus:ring-2 focus:ring-gray-400 focus:border-transparent outline-none transition-all duration-300 group-hover:bg-black/40"
                     placeholder="Enter your password"
                   />
                   <button
@@ -137,22 +135,41 @@ export default function LoginPage() {
                 </div>
               </div>
 
+              {/* Admin Secret field */}
+              <div className="space-y-2">
+                <label className=" text-sm font-medium text-gray-300 flex items-center gap-2">
+                  <Key className="w-4 h-4" />
+                  Admin Secret
+                </label>
+                <div className="relative group">
+                  <input
+                    type="text"
+                    required
+                    value={adminSecret}
+                    onChange={(e) => setAdminSecret(e.target.value)}
+                    placeholder="Enter admin access key"
+                    className="w-full bg-black/30 backdrop-blur-sm border border-white/10 px-4 py-3 rounded-xl text-white placeholder-gray-500 focus:ring-2 focus:ring-gray-400 focus:border-transparent outline-none transition-all duration-300 group-hover:bg-black/40"
+                  />
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-gray-500/20 to-gray-400/20 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                </div>
+              </div>
+
               {/* Submit button */}
               <button
                 type="button"
-                onClick={handleLogin}
+                onClick={handleRegister}
                 disabled={isLoading}
-                className="w-full relative overflow-hidden bg-gradient-to-r from-gray-700 to-gray-800 text-white font-semibold py-3 rounded-xl hover:from-gray-600 hover:to-gray-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-gray-800/25 disabled:opacity-50 disabled:cursor-not-allowed group shadow-lg">
+                className="w-full relative overflow-hidden bg-gradient-to-r from-gray-700 to-gray-800 text-white font-semibold py-3 rounded-xl hover:from-gray-600 hover:to-gray-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-gray-800/25 disabled:opacity-50 disabled:cursor-not-allowed group">
                 <div className="flex items-center justify-center gap-2">
                   {isLoading ? (
                     <>
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                      Signing In...
+                      Creating Account...
                     </>
                   ) : (
                     <>
-                      <LogIn className="w-5 h-5" />
-                      Sign In
+                      <UserPlus className="w-5 h-5" />
+                      Create Account
                     </>
                   )}
                 </div>
@@ -160,14 +177,14 @@ export default function LoginPage() {
               </button>
             </div>
 
-            {/* Register link */}
+            {/* Login link */}
             <div className="text-center">
-              <p className="text-gray-400 text-sm ">
-                Don&apos;t have an account?
+              <p className="text-gray-400 text-sm mx-1">
+                Already have an account?{" "}
                 <Link
-                  href="/panel/signup"
-                  className="text-gray-300 mx-1 hover:text-white font-medium hover:underline transition-colors duration-200 transform hover:scale-105 inline-block">
-                  Signup
+                  href="/panel/login"
+                  className="text-gray-300 hover:text-white font-medium hover:underline transition-colors duration-200 transform hover:scale-105 inline-block">
+                  Sign In
                 </Link>
               </p>
             </div>
@@ -177,7 +194,7 @@ export default function LoginPage() {
           <div className="mt-8 text-center">
             <div className="flex items-center justify-center gap-4 text-gray-500 text-xs">
               <div className="w-8 h-px bg-gradient-to-r from-transparent to-gray-600"></div>
-              <span>Secure Login</span>
+              <span>Secure Registration</span>
               <div className="w-8 h-px bg-gradient-to-l from-transparent to-gray-600"></div>
             </div>
           </div>
