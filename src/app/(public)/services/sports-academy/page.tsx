@@ -1,9 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import { Metadata } from "next";
+import { GET } from "@/app/api/public-api/sports-academy/route";
 
 export const metadata: Metadata = {
-  title: "Academy List | Pratigrham Sports",
+  title: "Sports Infrastructure | Pratigrham Sports",
+  description:
+    "Discover world-class sports facilities designed for excellence and performance",
 };
 
 export async function generateStaticParams() {
@@ -33,12 +36,7 @@ interface SportsAcademy {
 }
 
 export default async function Page() {
-  const res = await fetch(
-    `${process.env.BASE_URL}/api/public-api/sports-academy`,
-    {
-      next: { revalidate: 10 },
-    }
-  );
+  const res = await GET();
   const academies = await res.json();
 
   return (

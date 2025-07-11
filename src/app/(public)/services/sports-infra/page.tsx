@@ -1,6 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import { ImageGallery } from "@/components/ImageGallery";
+import { GET } from "@/app/api/public-api/sports-infra/route";
 
 export const metadata: Metadata = {
   title: "Sports Infrastructure | Pratigrham Sports",
@@ -21,12 +22,7 @@ interface SportsInfrastructure {
 
 export default async function Page() {
   // Fetch data from your API
-  const res = await fetch(
-    `${process.env.BASE_URL}/api/public-api/sports-infra`,
-    {
-      next: { revalidate: 10 },
-    }
-  );
+  const res = await GET();
   const infrastructures: SportsInfrastructure[] = await res.json();
 
   return (
