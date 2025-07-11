@@ -54,7 +54,11 @@ export default async function Page() {
                   } flex flex-col lg:flex`}>
                   {/* Image Section */}
                   <div className="lg:w-1/2 w-full p-2 lg:p-8">
-                    <ImageGallery infrastructure={infrastructure} />
+                    <ImageGallery
+                      images={infrastructure.images}
+                      responsiveHeights="h-64 sm:h-80 md:h-96 lg:h-[500px]"
+                      aspectRatio="aspect-w-10 aspect-h-9"
+                    />
                   </div>
 
                   {/* Content Section */}
