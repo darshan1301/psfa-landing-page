@@ -34,7 +34,7 @@ interface SportsAcademy {
 
 export default async function Page() {
   const res = await fetch(
-    "http://localhost:3000/api/public-api/sports-academy",
+    `${process.env.BASE_URL}/api/public-api/sports-academy`,
     {
       next: { revalidate: 10 },
     }

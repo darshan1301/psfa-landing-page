@@ -21,9 +21,12 @@ interface SportsInfrastructure {
 
 export default async function Page() {
   // Fetch data from your API
-  const res = await fetch("http://localhost:3000/api/public-api/sports-infra", {
-    next: { revalidate: 10 },
-  });
+  const res = await fetch(
+    `${process.env.BASE_URL}/api/public-api/sports-infra`,
+    {
+      next: { revalidate: 10 },
+    }
+  );
   const infrastructures: SportsInfrastructure[] = await res.json();
 
   return (
