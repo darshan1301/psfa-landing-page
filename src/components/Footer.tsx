@@ -69,7 +69,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services/#sports-academy"
+                  href="/services/sports-academy"
                   className="text-base hover:underline hover:text-gray-700 transition-colors duration-200">
                   Sports Academy
                 </Link>
@@ -83,7 +83,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services/#sports-infra"
+                  href="/services/sports-infra"
                   className="text-base hover:underline hover:text-gray-700 transition-colors duration-200">
                   Sports Infra
                 </Link>

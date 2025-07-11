@@ -67,6 +67,54 @@ model JobApplication {
   jobPosition      JobPosition @relation(fields: [jobPositionId], references: [id])
 }
 
+model Sport {
+  id    Int     @id @default(autoincrement())
+  name  String  
+  createdAt DateTime @default(now())
+  image String
+  status Boolean @default(true)
+}
+
+model SportsAcademy {
+id          String    @id @default(cuid())
+name        String
+description String
+location    String
+images      String[]
+createdAt   DateTime  @default(now())
+isActive    Boolean   @default(true)
+
+// Relation to batches
+batches     Batch[]
+}
+
+model Batch {
+id            String          @id @default(cuid())
+name          String
+startDate     DateTime
+endDate       DateTime
+sport         String
+headCoach     String
+description   String?
+startTime     String
+endTime       String
+
+// Relation back to academy
+sportsAcademy SportsAcademy  @relation(fields: [sportsAcademyId], references: [id], onDelete: Cascade)
+sportsAcademyId String
+}
+
+model SportsInfrastructure {
+  id        String   @id @default(cuid())
+  name      String
+  location  String
+  description String
+  Area       Int?
+  images     String[]
+  createdAt DateTime @default(now())
+  Amenities String[]
+}
+
 enum Role {
   USER
   ADMIN

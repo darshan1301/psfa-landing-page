@@ -2,7 +2,21 @@
 
 import { Edit, Eye, Filter, Plus, Search, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import Loading from "../Loader";
+import { useForm } from "react-hook-form";
 
 type EnquiryStatus = "NEW" | "CONTACTED" | "QUALIFIED" | "CLOSED";
 
@@ -16,15 +30,41 @@ interface Enquiry {
   status: EnquiryStatus;
 }
 
+interface LeadFormData {
+  name: string;
+  email: string;
+  phone?: string;
+  message: string;
+}
+
 export default function LeadsTab() {
   const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<LeadFormData>({
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
+  });
 
   const toggleMessage = (id: string) => {
     setExpandedRow((prev) => (prev === id ? null : id));
+  };
+
+  const onSubmit = (data: LeadFormData) => {
+    console.log("Submitting lead:", data);
+    // TODO: Replace with API call to save lead, server will generate ID
+    reset(); // reset form fields
   };
 
   // Fetch enquiries data
@@ -92,10 +132,91 @@ export default function LeadsTab() {
             Manage and track your lead inquiries ({enquiries.length} total)
           </p>
         </div>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl flex items-center space-x-2 transition-colors shadow-lg">
+        {/* <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl flex items-center space-x-2 transition-colors shadow-lg">
           <Plus className="w-5 h-5" />
           <span>Add Lead</span>
-        </button>
+        </button> */}
+        <Dialog>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <DialogTrigger asChild>
+              <Button
+                variant="outline"
+                className="bg-gray-900 py-5 px-5 hover:text-white hover:bg-gray-700 text-white rounded-xl flex items-center space-x-2 transition-colors shadow-lg">
+                <Plus className="w-5 h-5" />
+                <span>Add Lead</span>
+              </Button>
+            </DialogTrigger>
+
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Add New Lead</DialogTitle>
+                <DialogDescription>
+                  Fill in the lead details below and click save.
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="grid gap-4">
+                {/* Name field */}
+                <div className="grid gap-3">
+                  <Label htmlFor="name">Name</Label>
+                  <Input
+                    id="name"
+                    {...register("name", { required: "Name is required" })}
+                  />
+                  {errors.name && (
+                    <p className="text-red-600">{errors.name.message}</p>
+                  )}
+                </div>
+
+                {/* Email field */}
+                <div className="grid gap-3">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    {...register("email", {
+                      required: "Email is required",
+                      pattern: {
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        message: "Invalid email address",
+                      },
+                    })}
+                  />
+                  {errors.email && (
+                    <p className="text-red-600">{errors.email.message}</p>
+                  )}
+                </div>
+
+                {/* Phone field (optional) */}
+                <div className="grid gap-3">
+                  <Label htmlFor="phone">Phone</Label>
+                  <Input id="phone" type="tel" {...register("phone")} />
+                </div>
+
+                {/* Message field */}
+                <div className="grid gap-3">
+                  <Label htmlFor="message">Message</Label>
+                  <Input
+                    id="message"
+                    {...register("message", {
+                      required: "Message is required",
+                    })}
+                  />
+                  {errors.message && (
+                    <p className="text-red-600">{errors.message.message}</p>
+                  )}
+                </div>
+              </div>
+
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DialogClose>
+                <Button type="submit">Save Lead</Button>
+              </DialogFooter>
+            </DialogContent>
+          </form>
+        </Dialog>
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">

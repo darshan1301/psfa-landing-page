@@ -1,4 +1,4 @@
-import DashboardPage from "@/components/Dashboard";
+import DashboardPage from "@/components/DashboardPage";
 import PageLoader from "@/components/ui/PageLoader";
 import React, { Suspense } from "react";
 

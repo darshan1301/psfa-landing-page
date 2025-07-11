@@ -10,28 +10,43 @@ import {
   Settings,
   UserCheck,
   Map,
+  Building,
+  GraduationCap,
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import LeadsTab from "./Dashboard/LeadsTab";
-import NewsletterTab from "./Dashboard/SubscribersTab";
-import JobsTab from "./Dashboard/JobsTab";
-import SportsTab from "./Dashboard/SportsTab";
-import ServicesTab from "./Dashboard/ServiceTab";
-import { TeamTab } from "./Dashboard/TeamTab";
-import JourneyTab from "./Dashboard/JourneyTab";
-import TestimonialsTab from "./Dashboard/TestimonialsTab";
+import LeadsTab from "./DashboardPage/LeadsTab";
+import NewsletterTab from "./DashboardPage/SubscribersTab";
+import JobsTab from "./DashboardPage/JobsTab";
+import SportsTab from "./DashboardPage/SportsTab";
+import ServicesTab from "./DashboardPage/ServiceTab";
+import { TeamTab } from "./DashboardPage/TeamTab";
+import JourneyTab from "./DashboardPage/JourneyTab";
+import TestimonialsTab from "./DashboardPage/TestimonialsTab";
+import ApplicationsTab from "./DashboardPage/JobApplications";
+import SportsInfrastructureTab from "./DashboardPage/SportsInfraTab";
+import SportsAcademyTab from "./DashboardPage/SportsAcademyTab";
 
 type Tab =
   | "leads"
   | "newsletter"
   | "jobs"
+  | "job-applications"
   | "testimonials"
   | "sports"
   | "services"
   | "team"
-  | "journey";
+  | "journey"
+  | "sports-infra"
+  | "sports-for-all"
+  | "sports-academy";
 
+interface TabConfigEntry {
+  id: Tab;
+  label: string;
+  icon: React.ComponentType<{ size?: number }>;
+  color: string;
+}
 export default function DashboardPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -44,11 +59,15 @@ export default function DashboardPage() {
         "leads",
         "newsletter",
         "jobs",
+        "job-applications",
         "testimonials",
         "sports",
         "services",
         "team",
         "journey",
+        "sports-infra",
+        "sports-for-all",
+        "sports-academy",
       ].includes(tabFromUrl)
       ? tabFromUrl
       : "leads";
@@ -62,55 +81,54 @@ export default function DashboardPage() {
     router.push(`?${params.toString()}`, { scroll: false });
   };
 
-  const tabConfig = [
-    {
-      id: "leads",
-      label: "Leads Enquiry",
-      icon: Users,
-      color: "bg-slate-800", // Neutral & serious
-    },
+  const tabConfig: TabConfigEntry[] = [
+    { id: "leads", label: "Leads Enquiry", icon: Users, color: "bg-slate-800" },
     {
       id: "newsletter",
       label: "Subscribers",
       icon: Mail,
-      color: "bg-zinc-700", // Muted professional gray
+      color: "bg-zinc-700",
     },
+    { id: "jobs", label: "Jobs", icon: Briefcase, color: "bg-indigo-800" },
     {
-      id: "jobs",
+      id: "job-applications",
       label: "Job Applications",
       icon: Briefcase,
-      color: "bg-indigo-800", // Modern corporate blue
+      color: "bg-blue-800",
+    },
+    { id: "services", label: "Services", icon: Settings, color: "bg-cyan-800" },
+    {
+      id: "sports-infra",
+      label: "Sports Infra",
+      icon: Building,
+      color: "bg-emerald-800",
+    },
+    {
+      id: "sports-academy",
+      label: "Sports Academy",
+      icon: GraduationCap,
+      color: "bg-indigo-700",
+    },
+    {
+      id: "sports-for-all",
+      label: "Sports For All",
+      icon: Users,
+      color: "bg-teal-800",
     },
     {
       id: "testimonials",
       label: "Testimonials",
       icon: Star,
-      color: "bg-stone-600", // Warm neutral stone tone
+      color: "bg-stone-600",
     },
-    {
-      id: "sports",
-      label: "Sports",
-      icon: Trophy,
-      color: "bg-gray-700", // Mature neutral gray
-    },
-    {
-      id: "services",
-      label: "Services",
-      icon: Settings,
-      color: "bg-cyan-800", // Tech-focused & clean
-    },
+    { id: "sports", label: "Sports", icon: Trophy, color: "bg-gray-700" },
     {
       id: "team",
       label: "Team Members",
       icon: UserCheck,
-      color: "bg-neutral-700", // Clean and quiet
+      color: "bg-neutral-700",
     },
-    {
-      id: "journey",
-      label: "Journey Cards",
-      icon: Map,
-      color: "bg-blue-900", // Deep modern blue
-    },
+    { id: "journey", label: "Journey Cards", icon: Map, color: "bg-blue-900" },
   ];
 
   const renderContent = () => {
@@ -121,6 +139,8 @@ export default function DashboardPage() {
         return <NewsletterTab />;
       case "jobs":
         return <JobsTab />;
+      case "job-applications":
+        return <ApplicationsTab />;
       case "testimonials":
         return <TestimonialsTab />;
       case "sports":
@@ -131,6 +151,10 @@ export default function DashboardPage() {
         return <TeamTab />;
       case "journey":
         return <JourneyTab />;
+      case "sports-infra":
+        return <SportsInfrastructureTab />;
+      case "sports-academy":
+        return <SportsAcademyTab />;
       default:
         return null;
     }
@@ -139,7 +163,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex">
       {/* Sidebar */}
-      <aside className="w-72 bg-white shadow-xl border-r border-gray-200">
+      <aside className="w-72  bg-white shadow-xl border-r border-gray-200 ">
         <div className="p-8">
           <div className="flex flex-col items-center text-center mb-8">
             <div className="w-24 h-24 mb-4 rounded-xl flex items-center justify-center overflow-hidden">
@@ -159,7 +183,7 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <nav className="space-y-2">
+          <nav className="space-y-2 ">
             {tabConfig.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -172,11 +196,12 @@ export default function DashboardPage() {
                       ? `${tab.color} text-white shadow-lg transform scale-105`
                       : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                   }`}>
-                  <Icon
-                    className={`w-5 h-5 mr-3 ${
+                  <span
+                    className={`mr-3 ${
                       isActive ? "text-white" : "text-gray-400"
-                    }`}
-                  />
+                    }`}>
+                    <Icon size={20} />
+                  </span>
                   <span className="font-medium">{tab.label}</span>
                   {isActive && (
                     <div className="ml-auto w-2 h-2 bg-white rounded-full"></div>

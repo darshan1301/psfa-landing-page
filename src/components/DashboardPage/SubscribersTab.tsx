@@ -1,8 +1,9 @@
 "use client";
 
-import { Mail, MoreVertical, Plus, UserCheck, Users } from "lucide-react";
+import { Mail, MoreVertical, UserCheck, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import Loading from "../Loader";
+import { SendNewsletterModal } from "../SendNewsLetter";
 
 type Subscriber = {
   id: number;
@@ -49,14 +50,11 @@ export default function NewsletterTab() {
           </p>
         </div>
         <div className="flex space-x-3">
-          <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl flex items-center space-x-2 transition-colors shadow-lg">
-            <Mail className="w-5 h-5" />
-            <span>Send Newsletter</span>
-          </button>
-          <button className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-xl flex items-center space-x-2 transition-colors shadow-lg">
+          <SendNewsletterModal />
+          {/* <button className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-xl flex items-center space-x-2 transition-colors shadow-lg">
             <Plus className="w-5 h-5" />
             <span>Add Subscriber</span>
-          </button>
+          </button> */}
         </div>
       </div>
 

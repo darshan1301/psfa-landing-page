@@ -56,11 +56,14 @@ export const StickyScroll = ({
     "#f9fafb", // light gray
     "#f1f5f9", // slightly darker light
   ];
-  const linearGradients = [
-    "linear-gradient(to bottom right, #06b6d4, #e0f2fe)", // cyan to light blue
-    "linear-gradient(to bottom right, #a5b4fc, #fdf4ff)", // indigo to pink-100
-    "linear-gradient(to bottom right, #fde68a, #fff7ed)", // yellow to warm light
-  ];
+  const linearGradients = React.useMemo(
+    () => [
+      "linear-gradient(to bottom right, #06b6d4, #e0f2fe)", // cyan to light blue
+      "linear-gradient(to bottom right, #a5b4fc, #fdf4ff)", // indigo to pink-100
+      "linear-gradient(to bottom right, #fde68a, #fff7ed)", // yellow to warm light
+    ],
+    []
+  );
 
   const [backgroundGradient, setBackgroundGradient] = useState(
     linearGradients[0]
@@ -68,7 +71,7 @@ export const StickyScroll = ({
 
   useEffect(() => {
     setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
-  }, [activeCard]);
+  }, [activeCard, linearGradients]);
 
   return (
     <motion.div

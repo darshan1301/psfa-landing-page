@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
       {
         hostname: "www.regencychess.com",
       },
+      {
+        hostname: "my-s3-storage-prathmesh-nagpur.s3.amazonaws.com",
+      },
     ],
   },
 };
