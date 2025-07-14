@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Edit, GraduationCap, Loader2, Trash2 } from "lucide-react";
+import { Edit, GraduationCap, Loader2 } from "lucide-react";
 import { AddAcademyForm } from "../AddAcademyForm";
 import {
   Card,
@@ -8,19 +8,10 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-  DialogClose,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+
 import Image from "next/image";
 import Link from "next/link";
+import DeleteDialog from "../DeleteDialog";
 
 // Interface for academy data
 export interface Academy {
@@ -145,11 +136,11 @@ interface AcademyCardProps {
 }
 
 export function AcademyCard({ academy, onDelete }: AcademyCardProps) {
-  const [openDelete, setOpenDelete] = useState(false);
+  // const [openDelete, setOpenDelete] = useState(false);
 
   const handleDeleteConfirm = () => {
     onDelete(academy.id);
-    setOpenDelete(false);
+    // setOpenDelete(false);
   };
 
   return (
@@ -190,183 +181,13 @@ export function AcademyCard({ academy, onDelete }: AcademyCardProps) {
           <span>Edit</span>
         </Link>
 
-        <Dialog open={openDelete} onOpenChange={setOpenDelete}>
-          <DialogTrigger asChild>
-            <Button
-              variant="destructive"
-              size="sm"
-              className="flex items-center space-x-1">
-              <Trash2 className="w-4 h-4" />
-              <span>Delete</span>
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Confirm Delete</DialogTitle>
-              <DialogDescription>
-                Are you sure you want to delete <strong>{academy.name}</strong>?
-                This action cannot be undone.
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DialogClose>
-              <Button variant="destructive" onClick={handleDeleteConfirm}>
-                Delete
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        <DeleteDialog
+          triggerLabel="Delete"
+          confirmLabel="Confirm Delete"
+          description={`Are you sure you want to delete ${academy.name}? This action cannot be undone.`}
+          onConfirm={handleDeleteConfirm}
+        />
       </CardFooter>
     </Card>
   );
 }
-
-// export function AcademyCard({
-//   academy,
-//   onEdit,
-//   onDelete,
-//   onDeleteImage,
-// }: AcademyCardProps) {
-//   const [openEdit, setOpenEdit] = useState(false);
-//   const [editName, setEditName] = useState(academy.name);
-//   const [editLocation, setEditLocation] = useState(academy.location);
-//   const [editImage, setEditImage] = useState(academy.images[0] || "");
-
-//   const handleConfirmEdit = () => {
-//     onEdit({
-//       ...academy,
-//       name: editName,
-//       location: editLocation,
-//       images: [editImage, ...academy.images.slice(1)],
-//     });
-//     setOpenEdit(false);
-//   };
-
-//   return (
-//     <>
-//       <Card className="max-w-sm w-full mx-auto">
-//         <CardHeader>
-//           <CardTitle className="text-lg font-semibold">
-//             {academy.name}
-//           </CardTitle>
-//         </CardHeader>
-//         <CardContent>
-//           <div className="h-48 w-full overflow-hidden rounded-lg">
-//             <Image
-//               height={480}
-//               width={640}
-//               src={academy.images[0]}
-//               alt={academy.name}
-//               className="object-cover h-full w-full"
-//             />
-//           </div>
-//           <p className="mt-4 text-sm text-gray-600">
-//             Location: {academy.location}
-//           </p>
-//         </CardContent>
-//         <CardFooter className="flex justify-end space-x-2">
-//           <Dialog open={openEdit} onOpenChange={setOpenEdit}>
-//             <DialogTrigger asChild>
-//               <Button
-//                 variant="outline"
-//                 size="sm"
-//                 className="flex items-center space-x-1">
-//               </Button>
-//             </DialogTrigger>
-//             <DialogContent>
-//               <DialogHeader>
-//                 <DialogDescription>Update the details below</DialogDescription>
-//               </DialogHeader>
-//               <div className="space-y-4">
-//                 <div>
-//                   <label className="block text-sm font-medium mb-1">Name</label>
-//                   <Input
-//                     value={editName}
-//                     onChange={(e) => setEditName(e.target.value)}
-//                   />
-//                 </div>
-//                 <div>
-//                   <label className="block text-sm font-medium mb-1">
-//                     Location
-//                   </label>
-//                   <Input
-//                     value={editLocation}
-//                     onChange={(e) => setEditLocation(e.target.value)}
-//                   />
-//                 </div>
-
-//                 {/* Manage existing images */}
-//                 <div>
-//                   <label className="block text-sm font-medium mb-1">
-//                     Images
-//                   </label>
-//                   <div className="grid grid-cols-3 gap-2">
-//                     {academy.images.map((url, idx) => (
-//                       <div
-//                         key={idx}
-//                         className="relative border rounded overflow-hidden">
-//                         <Image
-//                           src={url}
-//                           alt={`${academy.name}-${idx}`}
-//                           width={120}
-//                           height={80}
-//                           className="object-cover w-full h-full"
-//                         />
-//                         <Button
-//                           variant="destructive"
-//                           size="sm"
-//                           className="absolute top-1 right-1 p-1"
-//                           onClick={() => onDeleteImage(academy.id, url)}>
-//                           <Trash2 className="w-4 h-4" />
-//                         </Button>
-//                       </div>
-//                     ))}
-//                   </div>
-//                 </div>
-//               </div>
-//               <DialogFooter>
-//                 <DialogClose asChild>
-//                   <Button variant="outline">Cancel</Button>
-//                 </DialogClose>
-//                 <Button onClick={handleConfirmEdit}>Save</Button>
-//               </DialogFooter>
-//             </DialogContent>
-//           </Dialog>
-
-//           <Dialog>
-//             <DialogTrigger asChild>
-//               <Button
-//                 variant="destructive"
-//                 size="sm"
-//                 className="flex items-center space-x-1">
-//                 <Trash2 className="w-4 h-4" />
-//                 <span>Delete</span>
-//               </Button>
-//             </DialogTrigger>
-//             <DialogContent>
-//               <DialogHeader>
-//                 <DialogTitle>Confirm Delete</DialogTitle>
-//                 <DialogDescription>
-//                   Are you sure you want to delete{" "}
-//                   <strong>{academy.name}</strong>? This action cannot be undone.
-//                 </DialogDescription>
-//               </DialogHeader>
-//               <DialogFooter>
-//                 <DialogClose asChild>
-//                   <Button variant="outline">Cancel</Button>
-//                 </DialogClose>
-//                 <Button
-//                   variant="destructive"
-//                   onClick={() => onDelete(academy.id)}>
-//                   Delete
-//                 </Button>
-//               </DialogFooter>
-//             </DialogContent>
-//           </Dialog>
-//         </CardFooter>
-//       </Card>
-//     </>
-//   );
-// }

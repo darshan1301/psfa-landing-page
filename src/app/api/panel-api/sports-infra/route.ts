@@ -1,4 +1,5 @@
 import prisma from "@/lib/db";
+import { deleteFromS3 } from "@/lib/generatePresignedUrl";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
@@ -100,9 +101,16 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    await prisma.sportsInfrastructure.delete({
+    const deletedInfra = await prisma.sportsInfrastructure.delete({
       where: { id },
     });
+
+    await Promise.all(
+      deletedInfra.images.map(async (image) => {
+        // Assuming deleteFromS3 is a function that deletes an image from S3
+        await deleteFromS3(image);
+      })
+    );
 
     return NextResponse.json(
       { message: "Infrastructure deleted successfully" },

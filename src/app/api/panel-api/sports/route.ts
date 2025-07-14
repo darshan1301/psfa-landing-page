@@ -1,4 +1,5 @@
 import prisma from "@/lib/db";
+import { deleteFromS3 } from "@/lib/generatePresignedUrl";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -52,18 +53,25 @@ export async function DELETE(request: Request) {
   try {
     const { id } = await request.json();
 
-    // Validate input
     if (!id) {
       return NextResponse.json({ error: "ID is required" }, { status: 400 });
     }
 
-    // Delete sport from the database
-    await prisma.sport.delete({
+    // Delete the sport and get its image in one step
+    const deletedSport = await prisma.sport.delete({
       where: { id },
     });
 
+    // Delete image from S3
+    if (deletedSport.image) {
+      const result = await deleteFromS3(deletedSport.image);
+      if (!result.success) {
+        return NextResponse.json({ error: result.message }, { status: 500 });
+      }
+    }
+
     return NextResponse.json(
-      { message: "Sport deleted successfully" },
+      { message: "Sport and associated image deleted successfully" },
       { status: 200 }
     );
   } catch (error) {

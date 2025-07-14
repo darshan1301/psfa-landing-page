@@ -1,8 +1,9 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 // S3 Configuration
-const s3Client = new S3Client({
+export const s3Client = new S3Client({
   region: process.env.AWS_REGION || "us-east-1",
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
@@ -78,4 +79,43 @@ export async function generatePresignedUrl(
   });
 
   return await getSignedUrl(s3Client, command, { expiresIn: 3600 }); // 1 hour expiry
+}
+
+export async function deleteFromS3(
+  imageUrl: string
+): Promise<{ success: boolean; message?: string }> {
+  const bucketName = process.env.S3_BUCKET_NAME!;
+  let key: string;
+
+  try {
+    const url = new URL(imageUrl);
+
+    if (url.hostname.includes(bucketName)) {
+      // Format: https://bucket-name.s3.region.amazonaws.com/folder/filename
+      key = url.pathname.substring(1);
+    } else if (url.hostname.startsWith("s3.")) {
+      // Format: https://s3.region.amazonaws.com/bucket-name/folder/filename
+      const pathParts = url.pathname.split("/");
+      key = pathParts.slice(2).join("/");
+    } else {
+      throw new Error("Invalid S3 URL format");
+    }
+
+    const deleteCommand = new DeleteObjectCommand({
+      Bucket: bucketName,
+      Key: key,
+    });
+
+    await s3Client.send(deleteCommand);
+
+    return { success: true, message: "Image deleted successfully" };
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("S3 Deletion Error:", error.message);
+      return { success: false, message: error.message };
+    } else {
+      console.error("Unknown error during S3 deletion:", error);
+      return { success: false, message: "Unknown error occurred" };
+    }
+  }
 }

@@ -47,7 +47,7 @@ export default function ContactForm(): JSX.Element {
       className="min-h-screen bg-cover bg-center bg-no-repeat relative pt-20"
       style={{
         backgroundImage:
-          "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
+          "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://my-s3-storage-prathmesh-nagpur.s3.ap-south-1.amazonaws.com/psfa/emilio-garcia-AWdCgDDedH0-unsplash+(1).jpg')",
       }}>
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/60"></div>
 

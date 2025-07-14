@@ -304,7 +304,7 @@ export default function StickyScrollRevealDemo() {
   return (
     <div className="w-full">
       {/* Services Heading Section - Desktop Only */}
-      <div className="relative hidden lg:block pt-24 pb-10 bg-white overflow-hidden">
+      <div className="relative hidden lg:block pt-24 bg-white overflow-hidden">
         <div className="text-center mb-16 px-0">
           <div className="flex items-center mt-14 justify-center mb-8">
             <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">

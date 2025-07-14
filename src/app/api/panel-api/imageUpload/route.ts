@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { DeleteObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
-import { uploadToS3 } from "@/lib/generatePresignedUrl";
+import { uploadToS3, deleteFromS3 } from "@/lib/generatePresignedUrl";
 
 export async function POST(request: NextRequest) {
   console.log("Received upload request");
@@ -40,15 +39,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Initialize S3 client
-const s3Client = new S3Client({
-  region: process.env.AWS_REGION || "us-east-1",
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-  },
-});
-
 export async function DELETE(request: NextRequest) {
   try {
     const body = await request.json();
@@ -60,40 +50,7 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    const bucketName = process.env.S3_BUCKET_NAME!;
-    let key: string;
-
-    try {
-      const url = new URL(imageUrl);
-
-      // Handle different S3 URL formats
-      if (url.hostname.includes(bucketName)) {
-        // Format: https://bucket-name.s3.region.amazonaws.com/folder/filename
-        key = url.pathname.substring(1); // Remove leading slash
-      } else if (url.hostname.startsWith("s3.")) {
-        // Format: https://s3.region.amazonaws.com/bucket-name/folder/filename
-        const pathParts = url.pathname.split("/");
-        key = pathParts.slice(2).join("/"); // Remove leading slash and bucket name
-      } else {
-        throw new Error("Invalid S3 URL format");
-      }
-      console.log("key:", key);
-    } catch {
-      return NextResponse.json(
-        { error: "Invalid image URL format" },
-        { status: 400 }
-      );
-    }
-
-    console.log(bucketName);
-
-    // Delete the object from S3
-    const deleteCommand = new DeleteObjectCommand({
-      Bucket: bucketName,
-      Key: key,
-    });
-
-    await s3Client.send(deleteCommand);
+    await deleteFromS3(imageUrl);
 
     return NextResponse.json({
       success: true,
@@ -110,13 +67,3 @@ export async function DELETE(request: NextRequest) {
     );
   }
 }
-
-// Client-side usage
-// const deleteImage = async (imageUrl) => {
-//   const response = await fetch(`/api/delete-image?url=${encodeURIComponent(imageUrl)}`, {
-//     method: 'DELETE',
-//   });
-
-//   const result = await response.json();
-//   console.log(result);
-// };

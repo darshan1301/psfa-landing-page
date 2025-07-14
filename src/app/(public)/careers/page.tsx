@@ -132,7 +132,7 @@ export default function CareersPage(): JSX.Element {
       className="min-h-screen bg-cover bg-center bg-no-repeat relative pt-20"
       style={{
         backgroundImage:
-          "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/nurdnjxqtg1ehcgne5it')",
+          "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://my-s3-storage-prathmesh-nagpur.s3.ap-south-1.amazonaws.com/psfa/austin-distel-_S7-KX8geL0-unsplash+(1)+(1).jpg')",
       }}>
       <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-black/50"></div>
 

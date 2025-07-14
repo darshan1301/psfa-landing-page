@@ -1,16 +1,21 @@
 // FacilitiesCarousel.tsx
 "use client";
 
-import React, { FC, useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Slider, { Settings } from "react-slick";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { sports } from "@/lib/sports";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
 
-const FacilitiesCarousel: FC = () => {
+type Sport = {
+  id: string;
+  name: string;
+  image: string;
+};
+//accept sports as a prop
+const FacilitiesCarousel = ({ sports }: { sports: Sport[] }) => {
   const sliderRef = useRef<Slider>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slidesToShow, setSlidesToShow] = useState(4);
@@ -74,12 +79,12 @@ const FacilitiesCarousel: FC = () => {
             Our Facilities
           </h2>
         </div>
-        <div className="items-end lg:gap-4 w-60 md:w-40">
+        {/* <div className="items-end lg:gap-4 w-60 md:w-40">
           <button className="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors flex items-center gap-2">
             View All
             <ArrowRight className="w-4 h-4" />
           </button>
-        </div>
+        </div> */}
       </div>
 
       {/* Carousel */}
@@ -107,6 +112,12 @@ const FacilitiesCarousel: FC = () => {
 
       {/* Custom Prev/Next Buttons */}
       <div className="lg:flex justify-between align-top lg:items-center my-8 lg:my-10 lg:space-x-4">
+        <div className="text-center px-4 lg:px-0 lg:text-left">
+          <p className="text-gray-600 tracking-tight mt-10 lg:mt-0 max-w-md mx-auto lg:ml-auto">
+            Book a court for focused practice, team drills, or private coaching,
+            and take your game to the next level.
+          </p>
+        </div>
         <div className="flex justify-center gap-4 ">
           <button
             onClick={() => sliderRef.current?.slickPrev()}
@@ -128,12 +139,6 @@ const FacilitiesCarousel: FC = () => {
             }`}>
             <ArrowRight className="w-6 h-6" />
           </button>
-        </div>
-        <div className="text-center px-4 lg:px-0 lg:text-right">
-          <p className="text-gray-600 tracking-tight mt-10 lg:mt-0 max-w-md mx-auto lg:ml-auto">
-            Book a court for focused practice, team drills, or private coaching,
-            and take your game to the next level.
-          </p>
         </div>
       </div>
     </div>

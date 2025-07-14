@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
+import { deleteFromS3 } from "@/lib/generatePresignedUrl";
 
 export async function POST(request: Request) {
   const { name, location, description, images } = await request.json();
@@ -100,7 +101,12 @@ export async function DELETE(request: Request) {
     const academy = await prisma.sportsAcademy.delete({
       where: { id },
     });
-
+    await Promise.all(
+      academy.images.map(async (image) => {
+        // Assuming deleteFromS3 is a function that deletes an image from S3
+        await deleteFromS3(image);
+      })
+    );
     return NextResponse.json(academy, { status: 200 });
   } catch (error) {
     console.error("Error deleting academy:", error);

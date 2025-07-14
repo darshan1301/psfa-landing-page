@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import Loading from "@/components/Loader";
 
 interface Milestone {
   id: number;
@@ -27,89 +28,11 @@ interface Milestone {
 interface TeamMember {
   id: number;
   name: string;
-  position: string;
+  role: string;
   image: string;
-  bio: string;
-  experience: string;
+  description: string;
+  yearsOfExperience: number;
 }
-
-const milestones: Milestone[] = [
-  {
-    id: 1,
-    year: "2018",
-    title: "Foundation",
-    description:
-      "Pratigrham Sports Academy was founded with a vision to create world-class sports facilities and training programs.",
-    image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/y316eyzrdsvig3mpskzb",
-  },
-  {
-    id: 2,
-    year: "2020",
-    title: "Expansion",
-    description:
-      "Opened our second facility with state-of-the-art indoor courts and professional training equipment.",
-    image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/zgobehvpmmgyepbmbol3",
-  },
-  {
-    id: 3,
-    year: "2022",
-    title: "Recognition",
-    description:
-      "Received the 'Excellence in Sports Training' award and certified as a premier sports academy.",
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    id: 4,
-    year: "2024",
-    title: "Innovation",
-    description:
-      "Launched our digital training platform and expanded to serve over 1000+ athletes annually.",
-    image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/gm1sbsufzwiv4offzu9k",
-  },
-];
-
-const teamMembers: TeamMember[] = [
-  {
-    id: 1,
-    name: "Sunny Bodwani",
-    position: "Founder & CEO",
-    image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/team/fqihs0yazgqy98xv0kjx",
-    bio: "Lorem Ipsum Is Simply Dummy Text Of The Printing and Typesetting Industry.",
-    experience: "15+ Years",
-  },
-  {
-    id: 2,
-    name: "Anubhav Gupta",
-    position: "Co-founder & COO",
-    image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/team/l8mqtly7yevshbw6ncuv",
-    bio: "Lorem Ipsum Is Simply Dummy Text Of The Printing and Typesetting Industry.",
-    experience: "12+ Years",
-  },
-  {
-    id: 3,
-    name: "Hitesh Bodwani",
-    position: "Chief Product Officer",
-    image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/team/oistlmbmqifher5asajd",
-    bio: "Lorem Ipsum Is Simply Dummy Text Of The Printing and Typesetting Industry.",
-    experience: "10+ Years",
-  },
-  {
-    id: 4,
-    name: "Nikhil Mahant",
-    position: "Assistant General Manager",
-    image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/team/zynerz8w4xae3vossdue",
-    bio: "Lorem Ipsum Is Simply Dummy Text Of The Printing and Typesetting Industry.",
-    experience: "8+ Years",
-  },
-];
 
 const containerVariants = {
   initial: { opacity: 0, y: 30 },
@@ -120,9 +43,35 @@ const containerVariants = {
 export default function AboutUsSection() {
   const [currentMilestone, setCurrentMilestone] = useState(0);
   const [currentTeamMember, setCurrentTeamMember] = useState(0);
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [milestones, setMilestones] = useState<Milestone[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/public-api/about-us");
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+
+        const { teamMembers, milestones } = await response.json();
+        setTeamMembers(teamMembers);
+        setMilestones(milestones);
+      } catch (error) {
+        console.error("Error fetching about us data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // Navigation handlers
   const nextMilestone = () => {
@@ -152,6 +101,22 @@ export default function AboutUsSection() {
       (prev) => (prev - 1 + teamMembers.length) % teamMembers.length
     );
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loading />
+      </div>
+    );
+  }
+
+  if (!milestones.length || !teamMembers.length) {
+    return (
+      <div className="text-center text-gray-500 py-20">
+        <p>No data available at the moment.</p>
+      </div>
+    );
+  }
 
   return (
     <section ref={sectionRef} className="py-1 mt-10 lg:mt-20 overflow-hidden">
@@ -369,129 +334,132 @@ export default function AboutUsSection() {
         </motion.div>
 
         {/* Team Section */}
-        <motion.div
-          id="our-team"
-          className="mb-20 lg:mx-24 px-4"
-          variants={containerVariants}
-          initial="initial"
-          animate="animate">
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center mb-6">
-              <Users className="w-8 h-8 text-green-600 mr-3" />
-              <h2 className="text-3xl md:text-4xl font-normal tracking-tight text-gray-900">
-                Meet Our Team
-              </h2>
-            </div>
-            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-              Dedicated professionals committed to your success
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 items-center">
-            {/* Team Member Image */}
-            <div className="md:order-2">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={teamMembers[currentTeamMember].id}
-                  variants={containerVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  className="relative h-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl">
-                  <Image
-                    src={teamMembers[currentTeamMember].image}
-                    alt={teamMembers[currentTeamMember].name}
-                    fill
-                    priority
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div className="absolute bottom-6 left-6">
-                    <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
-                      <span className="text-white text-sm">
-                        {teamMembers[currentTeamMember].experience}
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Previous Team Member Thumbnail */}
-            <div className="md:order-1 hidden md:flex justify-center">
-              <div className="w-24 h-24 rounded-xl overflow-hidden shadow-lg">
-                <Image
-                  priority
-                  src={
-                    teamMembers[
-                      (currentTeamMember - 1 + teamMembers.length) %
-                        teamMembers.length
-                    ].image
-                  }
-                  alt="Previous member"
-                  width={96}
-                  height={96}
-                  className="object-cover w-full h-full"
-                />
+        {teamMembers.length > 0 && (
+          <motion.div
+            id="our-team"
+            className="mb-20 lg:mx-24 px-4"
+            variants={containerVariants}
+            initial="initial"
+            animate="animate">
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center mb-6">
+                <Users className="w-8 h-8 text-green-600 mr-3" />
+                <h2 className="text-3xl md:text-4xl font-normal tracking-tight text-gray-900">
+                  Meet Our Team
+                </h2>
               </div>
+              <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+                Dedicated professionals committed to your success
+              </p>
             </div>
 
-            {/* Team Member Info */}
-            <div className="md:order-3 space-y-6">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={teamMembers[currentTeamMember].id}
-                  variants={containerVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit">
-                  <h3 className="text-2xl md:text-3xl font-medium text-gray-900 mb-2">
-                    {teamMembers[currentTeamMember].name}
-                  </h3>
-                  <p className="text-lg text-blue-600 font-medium mb-4">
-                    {teamMembers[currentTeamMember].position}
-                  </p>
-                  <p className="text-gray-700 leading-relaxed">
-                    {teamMembers[currentTeamMember].bio}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Team Navigation */}
-              <div className="flex items-center justify-between pt-6">
-                <div className="flex space-x-2">
-                  {teamMembers.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentTeamMember(index)}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        index === currentTeamMember
-                          ? "bg-gray-800 w-6"
-                          : "bg-gray-300 hover:bg-gray-400"
-                      }`}
+            <div className="grid md:grid-cols-3 gap-8 items-center">
+              {/* Team Member Image */}
+              <div className="md:order-2">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={teamMembers[currentTeamMember].id}
+                    variants={containerVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    className="relative h-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl">
+                    <Image
+                      src={teamMembers[currentTeamMember].image}
+                      alt={teamMembers[currentTeamMember].name}
+                      fill
+                      priority
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
-                  ))}
-                </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    <div className="absolute bottom-6 left-6">
+                      <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
+                        <span className="text-white text-sm">
+                          {teamMembers[currentTeamMember].yearsOfExperience}+
+                          years
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
 
-                <div className="flex space-x-2">
-                  <button
-                    onClick={prevTeamMember}
-                    className="bg-white p-2 rounded-full shadow-md hover:bg-gray-50 transition-all duration-200 border border-gray-200"
-                    aria-label="Previous team member">
-                    <ChevronLeft className="w-4 h-4 text-gray-800" />
-                  </button>
-                  <button
-                    onClick={nextTeamMember}
-                    className="bg-white p-2 rounded-full shadow-md hover:bg-gray-50 transition-all duration-200 border border-gray-200"
-                    aria-label="Next team member">
-                    <ChevronRight className="w-4 h-4 text-gray-800" />
-                  </button>
+              {/* Previous Team Member Thumbnail */}
+              <div className="md:order-1 hidden md:flex justify-center">
+                <div className="w-24 h-24 rounded-xl overflow-hidden shadow-lg">
+                  <Image
+                    priority
+                    src={
+                      teamMembers[
+                        (currentTeamMember - 1 + teamMembers.length) %
+                          teamMembers.length
+                      ].image
+                    }
+                    alt="Previous member"
+                    width={96}
+                    height={96}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+              </div>
+
+              {/* Team Member Info */}
+              <div className="md:order-3 space-y-6">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={teamMembers[currentTeamMember].id}
+                    variants={containerVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit">
+                    <h3 className="text-2xl md:text-3xl font-medium text-gray-900 mb-2">
+                      {teamMembers[currentTeamMember].name}
+                    </h3>
+                    <p className="text-lg text-blue-600 font-medium mb-4">
+                      {teamMembers[currentTeamMember].role}
+                    </p>
+                    <p className="text-gray-700 leading-relaxed">
+                      {teamMembers[currentTeamMember].description}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Team Navigation */}
+                <div className="flex items-center justify-between pt-6">
+                  <div className="flex space-x-2">
+                    {teamMembers.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentTeamMember(index)}
+                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                          index === currentTeamMember
+                            ? "bg-gray-800 w-6"
+                            : "bg-gray-300 hover:bg-gray-400"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={prevTeamMember}
+                      className="bg-white p-2 rounded-full shadow-md hover:bg-gray-50 transition-all duration-200 border border-gray-200"
+                      aria-label="Previous team member">
+                      <ChevronLeft className="w-4 h-4 text-gray-800" />
+                    </button>
+                    <button
+                      onClick={nextTeamMember}
+                      className="bg-white p-2 rounded-full shadow-md hover:bg-gray-50 transition-all duration-200 border border-gray-200"
+                      aria-label="Next team member">
+                      <ChevronRight className="w-4 h-4 text-gray-800" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        )}
 
         {/* CTA Section */}
         <motion.div

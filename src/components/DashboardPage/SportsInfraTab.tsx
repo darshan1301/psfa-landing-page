@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Building, Loader2 } from "lucide-react";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+
 import { AddInfrastructureForm } from "../AddInfrastructureForm";
 import Image from "next/image";
+import DeleteDialog from "../DeleteDialog";
 
 interface SportsInfrastructure {
   id: string;
@@ -213,32 +205,8 @@ export default function SportsInfrastructureTab() {
                     triggerLabel="Edit"
                     initialData={infra}
                   />
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <button className="px-4 py-2 rounded-lg bg-red-100 text-sm font-medium text-red-600 hover:bg-red-200 transition">
-                        Delete
-                      </button>
-                    </DialogTrigger>
 
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Are you absolutely sure?</DialogTitle>
-                        <DialogDescription>
-                          This action cannot be undone. It will permanently
-                          delete this infrastructure.
-                        </DialogDescription>
-                      </DialogHeader>
-
-                      <DialogFooter>
-                        <Button variant="outline">Cancel</Button>
-                        <Button
-                          className="bg-red-600 hover:bg-red-700 text-white"
-                          onClick={() => handleDeleteInfra(infra.id)}>
-                          Confirm Delete
-                        </Button>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
+                  <DeleteDialog onConfirm={() => handleDeleteInfra(infra.id)} />
                 </div>
               </div>
             </div>

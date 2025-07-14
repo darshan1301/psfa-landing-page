@@ -14,43 +14,17 @@ interface Testimonial {
   comment: string;
 }
 
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: "Barry Allen",
-    membership: "Premium Member",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    comment:
-      "I’ve been a member at Pratigrham for over a year now, and it’s hands down the best sports center I’ve ever been to!",
-  },
-  {
-    id: 2,
-    name: "Diana Prince",
-    membership: "Elite Member",
-    image:
-      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=500&h=500&fit=crop&crop=face",
-    comment:
-      "The facilities are top‐notch and the coaching staff is second to none. Pratigrham helped me reach my peak performance.",
-  },
-  {
-    id: 3,
-    name: "Clark Kent",
-    membership: "Gold Member",
-    image:
-      "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    comment:
-      "As a professional athlete, I demand the best. Pratigrham delivers world‐class training spaces and unparalleled support.",
-  },
-];
-
 const containerVariants = {
   initial: { opacity: 0, x: -30 },
   animate: { opacity: 1, x: 0, transition: { duration: 0.5 } },
   exit: { opacity: 0, x: 30, transition: { duration: 0.3 } },
 };
 
-export default function TestimonialSection() {
+export default function TestimonialSection({
+  testimonials = [],
+}: {
+  testimonials?: Testimonial[];
+}) {
   const [current, setCurrent] = useState(0);
   const total = testimonials.length;
 
