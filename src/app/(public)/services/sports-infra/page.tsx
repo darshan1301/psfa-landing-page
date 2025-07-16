@@ -4,7 +4,7 @@ import { ImageGallery } from "@/components/ImageGallery";
 import { GET } from "@/app/api/public-api/sports-infra/route";
 
 export const metadata: Metadata = {
-  title: "Sports Infrastructure | Pratigrham Sports",
+  title: "Sports Infrastructure | Pratigrham Sports For All",
   description:
     "Discover world-class sports facilities designed for excellence and performance",
 };
@@ -20,6 +20,8 @@ interface SportsInfrastructure {
   Amenities: string[];
 }
 
+export const revalidate = 60; // cache for 60 seconds (ISR)
+
 export default async function Page() {
   // Fetch data from your API
   const res = await GET();
@@ -32,7 +34,7 @@ export default async function Page() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header Section */}
           <div className="text-center mb-16 lg:pt-12">
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl sm:text-5xl tracking-tight text-blue-600 mb-4">
               Sports Infrastructure
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -82,7 +84,7 @@ export default async function Page() {
                           </span>
                         </div>
 
-                        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">
+                        <h2 className="text-3xl sm:text-4xl font-medium text-gray-900 leading-tight">
                           {infrastructure.name}
                         </h2>
                       </div>

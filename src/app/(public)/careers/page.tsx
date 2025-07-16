@@ -1,6 +1,6 @@
 "use client";
 
-import React, { JSX, useState } from "react";
+import React, { JSX, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Briefcase,
@@ -18,7 +18,7 @@ interface ApplicationData {
   position: string;
   experience: string;
   coverLetter: string;
-  portfolio?: string;
+  resume: string;
 }
 
 interface JobPosition {
@@ -33,78 +33,30 @@ interface JobPosition {
   benefits: string[];
 }
 
-const jobPositions: JobPosition[] = [
-  {
-    id: 1,
-    title: "Senior Frontend Developer",
-    department: "Engineering",
-    location: "Remote / San Francisco",
-    type: "Full-time",
-    experience: "5+ years",
-    description:
-      "Join our engineering team to build cutting-edge web applications using React, TypeScript, and modern web technologies.",
-    requirements: [
-      "5+ years React experience",
-      "TypeScript proficiency",
-      "Modern CSS frameworks",
-      "Git workflow",
-    ],
-    benefits: [
-      "Competitive salary",
-      "Health insurance",
-      "Flexible hours",
-      "Learning budget",
-    ],
-  },
-  {
-    id: 2,
-    title: "Product Manager",
-    department: "Product",
-    location: "New York / Remote",
-    type: "Full-time",
-    experience: "3+ years",
-    description:
-      "Lead product strategy and roadmap for our core platform, working closely with engineering and design teams.",
-    requirements: [
-      "Product management experience",
-      "Analytics tools knowledge",
-      "Agile methodologies",
-      "Strong communication",
-    ],
-    benefits: [
-      "Stock options",
-      "Health & dental",
-      "Unlimited PTO",
-      "Career development",
-    ],
-  },
-  {
-    id: 3,
-    title: "UX/UI Designer",
-    department: "Design",
-    location: "Los Angeles / Remote",
-    type: "Full-time",
-    experience: "3+ years",
-    description:
-      "Create intuitive and beautiful user experiences that delight our customers and drive business growth.",
-    requirements: [
-      "Design system experience",
-      "Figma expertise",
-      "User research skills",
-      "Prototyping abilities",
-    ],
-    benefits: [
-      "Creative freedom",
-      "Latest design tools",
-      "Conference attendance",
-      "Wellness programs",
-    ],
-  },
-];
-
 export default function CareersPage(): JSX.Element {
   const [selectedJob, setSelectedJob] = useState<JobPosition | null>(null);
   const [showApplication, setShowApplication] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [jobPositions, setJobPositions] = useState<JobPosition[]>([]);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch("/api/panel-api/jobs");
+        if (!response.ok) {
+          throw new Error("Failed to fetch job positions");
+        }
+        const data: JobPosition[] = await response.json();
+        setJobPositions(data);
+      } catch (error) {
+        console.error("Error fetching job positions:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchJobs();
+  }, []);
 
   const {
     register,
@@ -114,12 +66,26 @@ export default function CareersPage(): JSX.Element {
   } = useForm<ApplicationData>();
 
   const onSubmit = async (data: ApplicationData): Promise<void> => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("Application submitted:", data);
-    alert("Application submitted successfully! We'll be in touch soon.");
-    reset();
-    setShowApplication(false);
-    setSelectedJob(null);
+    try {
+      await fetch("/api/public-api/careers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, jobPositionId: selectedJob?.id }),
+      });
+
+      // console.log("Application submitted:", data);
+      alert("Application submitted successfully! We'll be in touch soon.");
+
+      // Reset form and close modal
+      reset();
+      setShowApplication(false);
+      setSelectedJob(null);
+    } catch (error) {
+      console.error("Error submitting application:", error);
+      alert(
+        "Something went wrong while submitting your application. Please try again."
+      );
+    }
   };
 
   const handleApplyClick = (job: JobPosition) => {
@@ -178,7 +144,7 @@ export default function CareersPage(): JSX.Element {
                     </div>
                     <h3 className="font-semibold text-white">Growth Rate</h3>
                   </div>
-                  <div className="text-2xl font-bold text-white mb-1">200%</div>
+                  <div className="text-2xl font-bold text-white mb-1">150%</div>
                   <div className="text-sm text-white/80">Year over year</div>
                 </div>
 
@@ -198,76 +164,84 @@ export default function CareersPage(): JSX.Element {
             </div>
 
             {/* Right Section - Job Listings */}
-            <div className="flex flex-col justify-center">
-              <div className="bg-white/95 backdrop-blur-md rounded-2xl p-8 lg:p-10 shadow-2xl border border-white/10 max-h-[90vh] overflow-y-auto">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                  Open Positions
-                </h2>
-
-                <div className="space-y-6">
-                  {jobPositions.map((job) => (
-                    <div
-                      key={job.id}
-                      className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-all duration-200">
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
-                        <div>
-                          <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                            {job.title}
-                          </h3>
-                          <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-                            <div className="flex items-center space-x-1">
-                              <Briefcase className="w-4 h-4" />
-                              <span>{job.department}</span>
-                            </div>
-                            <div className="flex items-center space-x-1">
-                              <MapPin className="w-4 h-4" />
-                              <span>{job.location}</span>
-                            </div>
-                            <div className="flex items-center space-x-1">
-                              <Clock className="w-4 h-4" />
-                              <span>{job.type}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <span className="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full mt-2 sm:mt-0">
-                          {job.experience}
-                        </span>
-                      </div>
-
-                      <p className="text-gray-700 mb-4 text-sm leading-relaxed">
-                        {job.description}
-                      </p>
-
-                      <div className="mb-4">
-                        <h4 className="font-medium text-gray-900 mb-2 text-sm">
-                          Key Requirements:
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {job.requirements.slice(0, 3).map((req, index) => (
-                            <span
-                              key={index}
-                              className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
-                              {req}
-                            </span>
-                          ))}
-                          {job.requirements.length > 3 && (
-                            <span className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
-                              +{job.requirements.length - 3} more
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      <button
-                        onClick={() => handleApplyClick(job)}
-                        className="w-full sm:w-auto bg-gray-900 hover:bg-gray-800 text-white font-medium py-2 px-6 rounded-lg transition-all duration-200 text-sm">
-                        Apply Now
-                      </button>
-                    </div>
-                  ))}
+            {isLoading ? (
+              <div className="flex items-center justify-center min-h-screen">
+                <div className="text-white text-lg">
+                  Loading job positions...
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="flex flex-col justify-center">
+                <div className="bg-white/95 backdrop-blur-md rounded-2xl p-8 lg:p-10 shadow-2xl border border-white/10 max-h-[90vh] overflow-y-auto">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                    Open Positions
+                  </h2>
+
+                  <div className="space-y-6">
+                    {jobPositions.map((job) => (
+                      <div
+                        key={job.id}
+                        className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-all duration-200">
+                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
+                          <div>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                              {job.title}
+                            </h3>
+                            <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                              <div className="flex items-center space-x-1">
+                                <Briefcase className="w-4 h-4" />
+                                <span>{job.department}</span>
+                              </div>
+                              <div className="flex items-center space-x-1">
+                                <MapPin className="w-4 h-4" />
+                                <span>{job.location}</span>
+                              </div>
+                              <div className="flex items-center space-x-1">
+                                <Clock className="w-4 h-4" />
+                                <span>{job.type}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <span className="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full mt-2 sm:mt-0">
+                            Exp: {job.experience}+ years
+                          </span>
+                        </div>
+
+                        <p className="text-gray-700 mb-4 text-sm leading-relaxed">
+                          {job.description}
+                        </p>
+
+                        <div className="mb-4">
+                          <h4 className="font-medium text-gray-900 mb-2 text-sm">
+                            Key Requirements:
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {job.requirements.slice(0, 3).map((req, index) => (
+                              <span
+                                key={index}
+                                className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
+                                {req}
+                              </span>
+                            ))}
+                            {job.requirements.length > 3 && (
+                              <span className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
+                                +{job.requirements.length - 3} more
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={() => handleApplyClick(job)}
+                          className="w-full sm:w-auto bg-gray-900 hover:bg-gray-800 text-white font-medium py-2 px-6 rounded-lg transition-all duration-200 text-sm">
+                          Apply Now
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           // Application Form
@@ -477,29 +451,31 @@ export default function CareersPage(): JSX.Element {
                       htmlFor="portfolio"
                       className="block text-sm font-medium text-gray-700 mb-2">
                       Portfolio/Resume Link
-                      <span className="text-gray-400 font-normal">
+                      {/* <span className="text-gray-400 font-normal">
                         (optional)
-                      </span>
+                      </span> */}
                     </label>
                     <input
-                      id="portfolio"
+                      id="resume"
                       type="url"
-                      {...register("portfolio", {
+                      {...register("resume", {
                         pattern: {
                           value: /^https?:\/\/.+/,
                           message: "Please enter a valid URL",
                         },
+                        required:
+                          "Resume Link is required. (gdrive, website, behance)",
                       })}
                       className={`w-full px-4 py-3 rounded-lg border ${
-                        errors.portfolio
+                        errors.resume
                           ? "border-red-300 focus:ring-red-500"
                           : "border-gray-300 focus:ring-blue-500"
                       } focus:ring-2 focus:border-transparent transition-all duration-200 bg-white text-gray-900 placeholder-gray-500`}
                       placeholder="https://yourportfolio.com"
                     />
-                    {errors.portfolio && (
+                    {errors.resume && (
                       <p className="mt-2 text-sm text-red-600">
-                        {errors.portfolio.message}
+                        {errors.resume.message}
                       </p>
                     )}
                   </div>
@@ -519,6 +495,10 @@ export default function CareersPage(): JSX.Element {
                           value: 50,
                           message:
                             "Cover letter must be at least 50 characters",
+                        },
+                        maxLength: {
+                          value: 10 * 150,
+                          message: "Cover letter must be under 1500 characters",
                         },
                       })}
                       className={`w-full px-4 py-3 rounded-lg border ${

@@ -34,6 +34,7 @@ interface SportsAcademy {
   isActive: boolean;
   batches: Batch[];
 }
+export const revalidate = 60;
 
 export default async function Page() {
   const res = await GET();
@@ -41,20 +42,18 @@ export default async function Page() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
-      {/* Enhanced Header */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-16 sm:pt-20 lg:pt-28 pb-8 sm:pb-12">
-        <div className="text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
-            Explore Our Sports Academies
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-2">
-            Discover world-class training facilities where champions are made.
-            Our academies offer
-            <br className="hidden sm:block" />
-            professional coaching, modern equipment, and an environment designed
-            for excellence.
-          </p>
-        </div>
+      {/* Hero Section */}
+      <div className="text-center mx-6 sm:mx-10 mb-16 px-0 pt-40">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-gray-900 mb-6">
+          Building Champions,
+          <br />
+          <span className="text-blue-600 font-normal">Creating Futures</span>
+        </h1>
+
+        <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+          At Pratigrham Sports Academy, we believe in nurturing talent, building
+          character, and creating champions both on and off the field.
+        </p>
       </div>
 
       {/* Academies List */}
@@ -68,7 +67,7 @@ export default async function Page() {
               <div className="px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-4 sm:pb-6 border-b border-gray-100">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="flex-1">
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 sm:mb-3">
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl text-gray-900 mb-2 sm:mb-3">
                       {academy.name}
                     </h2>
                     <div className="flex items-center text-gray-600">
@@ -90,7 +89,7 @@ export default async function Page() {
                           d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                         />
                       </svg>
-                      <span className="text-sm sm:text-base lg:text-lg font-medium">
+                      <span className="text-sm sm:text-base lg:text-lg">
                         {academy.location}
                       </span>
                     </div>
@@ -127,7 +126,7 @@ export default async function Page() {
                     <div className="space-y-6 sm:space-y-8">
                       {/* Academy Description */}
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
+                        <h3 className="text-xl sm:text-2xl font-medium text-gray-900 mb-3 sm:mb-4">
                           About This Academy
                         </h3>
                         <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
@@ -137,7 +136,7 @@ export default async function Page() {
 
                       {/* Academy Features */}
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
+                        <h3 className="text-xl sm:text-2xl font-medium text-gray-900 mb-3 sm:mb-4">
                           Facilities & Features
                         </h3>
                         <div className="grid grid-cols-1 gap-3 sm:gap-4">
@@ -222,7 +221,7 @@ export default async function Page() {
 
                       {/* Quick Stats */}
                       <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-100">
-                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
+                        <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-3 sm:mb-4">
                           Quick Overview
                         </h3>
                         <div className="grid grid-cols-2 gap-4 sm:gap-6">
@@ -311,7 +310,7 @@ export default async function Page() {
                             className="bg-white border-2 border-gray-100 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:border-blue-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                             <div className="flex items-start justify-between mb-3 sm:mb-4">
                               <div className="flex-1">
-                                <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
+                                <h4 className="text-lg sm:text-xl uppercase font-bold text-gray-900 mb-2 sm:mb-3">
                                   {batch.name}
                                 </h4>
                                 <span className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800">

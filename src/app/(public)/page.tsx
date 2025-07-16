@@ -2,18 +2,51 @@ import AllSports from "@/components/Allsports";
 import ContactForm from "@/components/SubscribeForm";
 import ServicesSection from "@/components/ServicesSection";
 import AnimatedTestimonials from "@/components/Testimonials";
+import prisma from "@/lib/db";
+
+export const metadata = {
+  title: "Pratigrham Sports For All",
+  description: "Welcome to our sports community",
+  keywords: "sports, community, testimonials, services",
+  openGraph: {
+    title: "Home",
+    description: "Welcome to our sports community",
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/`,
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/apple-touch-icon.png`,
+        width: 1200,
+        height: 630,
+        alt: "Home Page Image",
+      },
+    ],
+  },
+};
+
+export const revalidate = 60; // cache for 60 seconds (ISR)
 
 export default async function Home() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/public-api/home`,
-    {
-      next: {
-        revalidate: 60, // cache for 60 seconds
+  const [sports, testimonials] = await Promise.all([
+    prisma.sport.findMany({
+      orderBy: { createdAt: "asc" },
+      select: {
+        id: true,
+        name: true,
+        image: true,
       },
-    }
-  );
+    }),
+    prisma.testimonial.findMany({
+      orderBy: { createdAt: "asc" },
+      select: {
+        id: true,
+        name: true,
+        comment: true,
+        image: true,
+        membership: true,
+      },
+    }),
+  ]);
 
-  const data = await res.json();
   return (
     <div className="">
       <main className="">
@@ -30,8 +63,8 @@ export default async function Home() {
         </div>
         <ServicesSection />
         {/* <hr className="border-t border-2 border-gray-300 mx-8" /> */}
-        <AllSports sports={data.sports || []} />
-        <AnimatedTestimonials testimonials={data.testimonials || []} />
+        <AllSports sports={sports || []} />
+        <AnimatedTestimonials testimonials={testimonials || []} />
         <ContactForm />
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center"></footer>

@@ -139,15 +139,18 @@ export default function AboutUsSection() {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-gray-900 mb-6">
-            Building Champions,
+            Empowering Every Player,
             <br />
-            <span className="text-blue-600 font-normal">Creating Futures</span>
+            <span className="text-blue-600 font-normal">
+              Inspiring Every Journey
+            </span>
           </h1>
 
           <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            At Pratigrham Sports Academy, we believe in nurturing talent,
-            building character, and creating champions both on and off the
-            field.
+            Pratigrham Sports For All is a sports management company dedicated
+            to promoting fitness and sports for all age groups. Through
+            expert-led training programs and inclusive initiatives, we aim to
+            make sports accessible, engaging, and a way of life for everyone.
           </p>
         </motion.div>
 
@@ -190,14 +193,11 @@ export default function AboutUsSection() {
               </h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-6">
-              To be India&apos;s leading sports academy, recognized for
-              developing world-class athletes while fostering values of
-              discipline, teamwork, and excellence.
+              Our vision is to make India fit by nurturing world-class athletes
+              and instilling values of discipline, teamwork, and excellence.
             </p>
             <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6">
-              <div className="text-3xl font-bold text-green-600 mb-2">
-                1000+
-              </div>
+              <div className="text-3xl font-bold text-green-600 mb-2">500+</div>
               <div className="text-sm text-gray-600">Athletes Trained</div>
             </div>
           </motion.div>
@@ -215,12 +215,14 @@ export default function AboutUsSection() {
               </h2>
             </div>
             <p className="text-gray-700 leading-relaxed mb-6">
-              To provide comprehensive sports training, state-of-the-art
-              facilities, and holistic development programs that empower
-              athletes to achieve their full potential.
+              Pratigrham Sports For All Pvt Ltd is a sports management company
+              committed to making sports and fitness a way of life. Through
+              structured training programs and expert-led sessions, we aim to
+              make sports accessible, inclusive, and impactful for all age
+              groups.
             </p>
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-6">
-              <div className="text-3xl font-bold text-orange-600 mb-2">50+</div>
+              <div className="text-3xl font-bold text-orange-600 mb-2">10+</div>
               <div className="text-sm text-gray-600">Awards & Recognition</div>
             </div>
           </motion.div>

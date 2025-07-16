@@ -13,6 +13,8 @@ import {
   Trophy,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 type Service = {
   title: string;
@@ -21,6 +23,7 @@ type Service = {
   content: React.JSX.Element;
   image: string;
   color: string;
+  link?: React.JSX.Element;
 };
 
 const services: Service[] = [
@@ -56,6 +59,7 @@ const services: Service[] = [
     title: "Pratigrham Sports Academy",
     tag: "sports-academy",
     icon: <Dumbbell className="w-5 h-5 text-emerald-400" />,
+    link: <Link href="/services/sports-academy">Learn More</Link>,
     content: (
       <ul className="space-y-2">
         <li className="flex items-start gap-2">
@@ -84,6 +88,7 @@ const services: Service[] = [
     title: "Sports Infra",
     tag: "sports-infra",
     icon: <Building2 className="w-5 h-5 text-orange-400" />,
+    link: <Link href="/services/sports-infra">Learn More</Link>,
     content: (
       <ul className="space-y-2">
         <li className="flex items-start gap-2">
@@ -112,6 +117,14 @@ const services: Service[] = [
     title: "Sports Space",
     tag: "sports-space",
     icon: <MapPin className="w-5 h-5 text-pink-400" />,
+    link: (
+      <a
+        href="https://sportsspace.in"
+        target="_blank"
+        rel="noopener noreferrer">
+        Visit Sportsspace
+      </a>
+    ),
     content: (
       <ul className="space-y-2">
         <li className="flex items-start gap-2">
@@ -226,6 +239,11 @@ const MobileServicesSection = ({ services }: { services: Service[] }) => {
               <div className="text-gray-600 text-sm sm:text-base space-y-2">
                 {service.content}
               </div>
+              {service.link && (
+                <Button className="text-black mt-4 flex  bg-white hover:bg-gray-100 border-blue-600 border">
+                  {service.link}
+                </Button>
+              )}
             </div>
           </div>
         ))}

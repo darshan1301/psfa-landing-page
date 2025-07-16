@@ -17,9 +17,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Plus, Edit, Trash } from "lucide-react";
+import Loading from "../Loader";
 
 // Define job position without id and timestamps
 export interface JobPosition {
+  id?: string;
   title: string;
   department: string;
   location: string;
@@ -31,6 +33,7 @@ export interface JobPosition {
 }
 
 interface JobFormValues {
+  id?: string;
   title: string;
   department: string;
   location: string;
@@ -41,12 +44,159 @@ interface JobFormValues {
   benefits: string;
 }
 
+export default function JobsTab() {
+  const [jobs, setJobs] = useState<JobPosition[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchJobs = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch("/api/panel-api/jobs");
+      if (!response.ok) {
+        throw new Error("Failed to fetch jobs");
+      }
+      const data = await response.json();
+      setJobs(data);
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Fetch jobs on component mount
+  React.useEffect(() => {
+    fetchJobs();
+  }, []);
+
+  const handleAddJob = async (job: JobPosition) => {
+    try {
+      const response = await fetch("/api/panel-api/jobs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(job),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to create job");
+      }
+      const newJob = await response.json();
+      setJobs((prev) => [...prev, newJob]);
+    } catch (error) {
+      console.error("Error adding job:", error);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      const res = await fetch("/api/panel-api/jobs", {
+        headers: {
+          "content-type": "application/json",
+        },
+        method: "DELETE",
+        body: JSON.stringify({ id }),
+      });
+      if (res.ok) {
+      }
+    } catch (error) {
+      console.log("Error deleting job:", error);
+    }
+    fetchJobs();
+  };
+
+  const handleUpdateJob = async (job: JobPosition) => {
+    try {
+      const res = await fetch("/api/panel-api/jobs", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(job),
+      });
+      if (res.ok) {
+        fetchJobs();
+      }
+    } catch (err) {
+      console.error("error updating Job:", err);
+    }
+  };
+
+  if (isLoading) return <Loading />;
+
+  return (
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <div>
+          <h2 className="text-3xl font-bold text-gray-900">Job Openings</h2>
+          <p className="text-gray-600 mt-1">Manage your job openings</p>
+        </div>
+        <AddEditJobModal onSubmit={handleAddJob} />
+      </div>
+
+      {jobs.length ? (
+        <div className="overflow-x-auto bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
+          <table className="w-full table-auto">
+            <thead>
+              <tr className="text-left text-gray-700">
+                <th className="px-4 py-2">Title</th>
+                <th className="px-4 py-2">Department</th>
+                <th className="px-4 py-2">Location</th>
+                <th className="px-4 py-2">Type</th>
+                <th className="px-4 py-2">Experience</th>
+                <th className="px-4 py-2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {jobs.map((job, idx) => (
+                <tr key={idx} className="border-t">
+                  <td className="px-4 py-2">{job.title}</td>
+                  <td className="px-4 py-2">{job.department}</td>
+                  <td className="px-4 py-2">{job.location}</td>
+                  <td className="px-4 py-2">{job.type}</td>
+                  <td className="px-4 py-2">{job.experience} yrs</td>
+                  <td className="px-4 py-2 flex space-x-2">
+                    <AddEditJobModal
+                      job={job}
+                      index={idx}
+                      onSubmit={handleUpdateJob}
+                    />
+                    <DeleteJobDialog
+                      index={idx}
+                      title={job.title}
+                      onConfirm={() => {
+                        if (job.id) {
+                          handleDelete(job?.id);
+                        }
+                      }}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center">
+          <Trash className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+            No Job Openings Yet
+          </h3>
+          <p className="text-gray-600">
+            Add new positions using the button above.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // Modal for adding or editing jobs
 const AddEditJobModal: React.FC<{
   job?: JobPosition;
   index?: number;
   onSubmit: (data: JobPosition, index?: number) => void;
-}> = ({ job, index, onSubmit }) => {
+}> = ({ job, onSubmit }) => {
   const {
     register,
     handleSubmit,
@@ -55,6 +205,7 @@ const AddEditJobModal: React.FC<{
   } = useForm<JobFormValues>({
     defaultValues: job
       ? {
+          id: job.id,
           title: job.title,
           department: job.department,
           location: job.location,
@@ -78,6 +229,7 @@ const AddEditJobModal: React.FC<{
 
   const handleOnSubmit = (values: JobFormValues) => {
     const newJob: JobPosition = {
+      id: job?.id,
       title: values.title,
       department: values.department,
       location: values.location,
@@ -87,7 +239,7 @@ const AddEditJobModal: React.FC<{
       requirements: values.requirements.split(",").map((r) => r.trim()),
       benefits: values.benefits.split(",").map((b) => b.trim()),
     };
-    onSubmit(newJob, index);
+    onSubmit(newJob);
     reset();
   };
 
@@ -267,84 +419,3 @@ const DeleteJobDialog: React.FC<{
     </DialogContent>
   </Dialog>
 );
-
-export default function JobsTab() {
-  const [jobs, setJobs] = useState<JobPosition[]>([]);
-
-  const handleSave = (job: JobPosition, index?: number) => {
-    setJobs((prev) => {
-      if (typeof index === "number") {
-        const updated = [...prev];
-        updated[index] = job;
-        return updated;
-      }
-      return [job, ...prev];
-    });
-  };
-
-  const handleDelete = (index: number) => {
-    setJobs((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h2 className="text-3xl font-bold text-gray-900">Job Openings</h2>
-          <p className="text-gray-600 mt-1">Manage your job openings</p>
-        </div>
-        <AddEditJobModal onSubmit={handleSave} />
-      </div>
-
-      {jobs.length ? (
-        <div className="overflow-x-auto bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
-          <table className="w-full table-auto">
-            <thead>
-              <tr className="text-left text-gray-700">
-                <th className="px-4 py-2">Title</th>
-                <th className="px-4 py-2">Department</th>
-                <th className="px-4 py-2">Location</th>
-                <th className="px-4 py-2">Type</th>
-                <th className="px-4 py-2">Experience</th>
-                <th className="px-4 py-2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {jobs.map((job, idx) => (
-                <tr key={idx} className="border-t">
-                  <td className="px-4 py-2">{job.title}</td>
-                  <td className="px-4 py-2">{job.department}</td>
-                  <td className="px-4 py-2">{job.location}</td>
-                  <td className="px-4 py-2">{job.type}</td>
-                  <td className="px-4 py-2">{job.experience} yrs</td>
-                  <td className="px-4 py-2 flex space-x-2">
-                    <AddEditJobModal
-                      job={job}
-                      index={idx}
-                      onSubmit={handleSave}
-                    />
-                    <DeleteJobDialog
-                      index={idx}
-                      title={job.title}
-                      onConfirm={handleDelete}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center">
-          <Trash className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            No Job Openings Yet
-          </h3>
-          <p className="text-gray-600">
-            Add new positions using the button above.
-          </p>
-        </div>
-      )}
-    </div>
-  );
-}

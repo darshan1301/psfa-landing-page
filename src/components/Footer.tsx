@@ -9,8 +9,7 @@ export default function Footer() {
         {/* Left Section: Company Slogan */}
         <div className=" mb-10 md:mb-0">
           <p className="text-4xl font-normal tracking-tigh">
-            Lorem Ipsum Is Simply Dummy Text Of The Printing and Typesetting
-            Industry.
+            Redefining sports and fitness culture!
           </p>
           <button className="my-6 bg-white px-4 py-1  font-normal  rounded-full">
             {" "}
@@ -99,7 +98,7 @@ export default function Footer() {
           </div>
 
           {/* Column 3 */}
-          <div className=" tracking-tighter">
+          {/* <div className=" tracking-tighter">
             <h3 className="text-2xl font-semibold mb-4">Resources</h3>
             <ul className="space-y-3">
               <li>
@@ -131,7 +130,7 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
 

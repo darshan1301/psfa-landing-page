@@ -13,6 +13,11 @@ const interTight = Inter({
 export const metadata: Metadata = {
   title: "Pratigrham Sports For All",
   description: "Redefining sports and fitness culture",
+  icons: {
+    icon: "/favicon.ico", // for most browsers
+    shortcut: "/favicon.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({

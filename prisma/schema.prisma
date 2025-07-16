@@ -61,7 +61,7 @@ model JobApplication {
   email            String
   phone            String?
   fullName         String
-  yearOfExperience String
+  experience String
   status           String      @default("APPLIED")
   createdAt        DateTime    @default(now())
   jobPosition      JobPosition @relation(fields: [jobPositionId], references: [id])

@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
 
 type Sport = {
-  id: string;
+  id: number;
   name: string;
   image: string;
 };
@@ -114,8 +114,9 @@ const FacilitiesCarousel = ({ sports }: { sports: Sport[] }) => {
       <div className="lg:flex justify-between align-top lg:items-center my-8 lg:my-10 lg:space-x-4">
         <div className="text-center px-4 lg:px-0 lg:text-left">
           <p className="text-gray-600 tracking-tight mt-10 lg:mt-0 max-w-md mx-auto lg:ml-auto">
-            Book a court for focused practice, team drills, or private coaching,
-            and take your game to the next level.
+            With our wide range of sports facilities, you can pick and choose
+            the sport you love — be it football, cricket, pickleball, or more —
+            and train your way, at your pace.
           </p>
         </div>
         <div className="flex justify-center gap-4 ">

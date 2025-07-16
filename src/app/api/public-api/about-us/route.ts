@@ -21,6 +21,8 @@ export async function GET() {
           name: true,
           role: true,
           image: true,
+          yearsOfExperience: true,
+          description: true,
         },
       }),
     ]);

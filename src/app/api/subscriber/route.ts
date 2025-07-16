@@ -4,43 +4,51 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+
     const { emailNumber } = body;
 
-    // Require at least one contact method
-    if (!emailNumber) {
+    if (!emailNumber || typeof emailNumber !== "string") {
       return NextResponse.json(
-        { success: false, message: "Either email or phone number is required" },
+        { success: false, message: "Email or phone number is required" },
         { status: 400 }
       );
     }
 
+    // Trim and normalize input
+    const input = emailNumber.trim();
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^\+?\d{10,15}$/;
 
-    let subscriber: {
-      email: string | null;
-      phone: string | null;
-    };
+    const isEmail = emailRegex.test(input);
+    const isPhone = phoneRegex.test(input);
 
-    if (emailRegex.test(emailNumber)) {
-      // If it's a valid email make it lowercase
-      subscriber = { email: emailNumber.toLowercase(), phone: null };
-    } else if (phoneRegex.test(emailNumber)) {
-      subscriber = { phone: emailNumber, email: null };
-    } else {
+    if (!isEmail && !isPhone) {
       return NextResponse.json(
         { success: false, message: "Invalid email or phone number format" },
         { status: 400 }
       );
     }
 
-    // Check if subscriber already exists
+    const subscriber = {
+      email: isEmail ? input.toLowerCase() : null,
+      phone: isPhone ? input : null,
+    };
+
+    // Check if already subscribed
+    const whereConditions = [];
+
+    if (subscriber.email) {
+      whereConditions.push({ email: subscriber.email });
+    }
+
+    if (subscriber.phone) {
+      whereConditions.push({ phone: subscriber.phone });
+    }
+
     const existingSubscriber = await prisma.subscriber.findFirst({
       where: {
-        OR: [
-          ...(subscriber.email ? [{ email: subscriber.email }] : []),
-          ...(subscriber.phone ? [{ phone: subscriber.phone }] : []),
-        ],
+        OR: whereConditions,
       },
     });
 
@@ -51,16 +59,17 @@ export async function POST(request: Request) {
       );
     }
 
-    const newsubscriber = await prisma.subscriber.create({
+    const newSubscriber = await prisma.subscriber.create({
       data: subscriber,
     });
 
     return NextResponse.json(
-      { success: true, subscriber: newsubscriber },
+      { success: true, subscriber: newSubscriber },
       { status: 201 }
     );
   } catch (error: unknown) {
     console.error("Error creating subscriber:", error);
+
     return NextResponse.json(
       {
         success: false,

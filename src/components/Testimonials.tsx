@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 interface Testimonial {
-  id: number;
+  id: string;
   name: string;
   membership: string;
   image: string;

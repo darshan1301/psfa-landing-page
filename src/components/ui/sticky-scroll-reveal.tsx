@@ -4,6 +4,7 @@ import { useMotionValueEvent, useScroll } from "motion/react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { Button } from "./button";
 
 export const StickyScroll = ({
   content,
@@ -16,6 +17,7 @@ export const StickyScroll = ({
     content?: React.ReactNode;
     icon?: React.ReactNode;
     image: string;
+    link?: React.ReactNode;
   }[];
   contentClassName?: string;
 }) => {
@@ -97,6 +99,18 @@ export const StickyScroll = ({
                 className="text-kg mt-10 max-w-sm text-sky-600">
                 {item.content}
               </motion.p>
+              {item.link && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: activeCard === index ? 1 : 0.3,
+                  }}
+                  className="mt-4 text-black hover:underline">
+                  <Button className="text-black bg-white hover:bg-gray-100 border-blue-600 border">
+                    {item.link}
+                  </Button>
+                </motion.div>
+              )}
             </div>
           ))}
           <div className="h-96" />
