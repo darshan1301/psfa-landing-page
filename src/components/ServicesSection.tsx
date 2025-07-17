@@ -283,7 +283,10 @@ export default function ServicesShowcase(): JSX.Element {
           <div className="relative w-full h-100 px-4">
             <div
               className="h-full bg-cover bg-center rounded-3xl overflow-hidden shadow-2xl"
-              style={{ backgroundImage: "url('/basketball-a.jpg')" }}
+              style={{
+                backgroundImage:
+                  "url('https://res.cloudinary.com/hotel-booking-1301/image/upload/v1752744246/psfa-landing-page/IMG_2763_1_1_lpf7uw.jpg')",
+              }}
               ref={mainCardRef}>
               {/* Floating Element (mirrors desktop) */}
               <div className="absolute bottom-4 left-4 mx-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
