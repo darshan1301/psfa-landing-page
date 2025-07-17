@@ -53,7 +53,9 @@ const ContactForm = () => {
       <div className="md:w-80 h-88 rounded-2xl overflow-hidden">
         <Image
           alt="sports"
-          src={"/soccer.jpg"}
+          src={
+            "https://res.cloudinary.com/hotel-booking-1301/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1749104766/psfa-landing-page/wwkdqhs4pig5yww8iq2j.jpg"
+          }
           width={500}
           height={400}
           className=" w-80 h-88 object-cover"

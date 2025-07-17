@@ -1,4 +1,4 @@
-import { Map } from "lucide-react";
+import { Loader2, Map } from "lucide-react";
 import { AddMilestoneForm } from "../AddMilestoneForm";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -22,10 +22,12 @@ interface MilestonePayload {
 
 export default function JourneyTab() {
   const [milestones, setMilestones] = useState<Milestone[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchMilestones = async () => {
       try {
+        setIsLoading(true);
         const response = await fetch("/api/panel-api/milestones");
         if (!response.ok) {
           throw new Error("Failed to fetch milestones");
@@ -34,6 +36,8 @@ export default function JourneyTab() {
         setMilestones(data);
       } catch (error) {
         console.error("Error fetching milestones:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchMilestones();
@@ -102,6 +106,14 @@ export default function JourneyTab() {
       console.error("Error editing milestone:", error);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex mt-40 items-center justify-center h-full">
+        <Loader2 className="animate-spin w-8 h-8 text-blue-800" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">

@@ -122,7 +122,12 @@ export default function JobsTab() {
     }
   };
 
-  if (isLoading) return <Loading />;
+  if (isLoading)
+    return (
+      <div className="mt-52 flex-col justify-center">
+        <Loading size="md" />
+      </div>
+    );
 
   return (
     <div className="space-y-6">

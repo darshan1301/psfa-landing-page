@@ -1,4 +1,4 @@
-import { Plus, Trophy } from "lucide-react";
+import { Loader2, Plus, Trophy } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -26,11 +26,12 @@ interface Sport {
 }
 export default function SportsTab() {
   const [sports, setSports] = useState<Sport[]>([]);
-  //write handler for add sport button
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    // Fetch initial sports data from backend API
     const fetchSports = async () => {
       try {
+        setIsLoading(true);
         const response = await fetch("/api/panel-api/sports");
         if (!response.ok) {
           throw new Error("Failed to fetch sports");
@@ -40,6 +41,8 @@ export default function SportsTab() {
       } catch (error) {
         console.error("Error fetching sports:", error);
         // Handle error (e.g., show notification)
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchSports();
@@ -107,6 +110,14 @@ export default function SportsTab() {
       console.error("Error editing sport:", error);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex mt-40 items-center justify-center h-full">
+        <Loader2 className="animate-spin w-8 h-8 text-gray-800" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">

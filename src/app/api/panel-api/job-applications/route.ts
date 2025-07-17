@@ -26,10 +26,38 @@ export async function GET() {
   }
 }
 
+export async function DELETE(request: Request) {
+  let body: { id?: string };
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
+
+  const { id } = body;
+  if (!id) {
+    return NextResponse.json(
+      { error: "`id` is required to delete a job application" },
+      { status: 400 }
+    );
+  }
+
+  try {
+    const deleted = await prisma.jobApplication.delete({
+      where: { id },
+    });
+    return NextResponse.json(deleted);
+  } catch (error) {
+    console.error("Error deleting job application:", error);
+    return NextResponse.json(
+      { error: "Failed to delete job application" },
+      { status: 500 }
+    );
+  }
+}
+
 export async function PATCH(request: Request) {
   try {
-    // Extract the ID from the URL path
-    // Parse the request body
     const body = await request.json();
     const { status, applicationId } = body;
 

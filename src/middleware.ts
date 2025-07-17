@@ -37,7 +37,7 @@ export async function middleware(request: NextRequest) {
 
   // Get token from cookies
   const token = request.cookies.get("token")?.value;
-  console.log(`Token found: ${token ? "Yes" : "No"}`);
+  // console.log(`Token found: ${token ? "Yes" : "No"}`);
 
   if (!token) {
     console.log("No token found, redirecting to login");

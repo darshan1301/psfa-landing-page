@@ -39,7 +39,6 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
   try {
     const { id } = await request.json();
-    console.log(id);
     if (!id) {
       return NextResponse.json(
         { error: "Job ID is required" },
@@ -65,7 +64,6 @@ export async function PUT(request: Request) {
   try {
     const jobData = await request.json();
     const { id, ...updateFields } = jobData;
-    console.log(updateFields);
     if (!id || typeof id !== "string") {
       return NextResponse.json(
         { error: "Valid Job ID is required" },

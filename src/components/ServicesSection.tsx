@@ -410,9 +410,12 @@ export default function ServicesShowcase(): JSX.Element {
           <div className="desktop-animate" ref={mainCardRef}>
             <div
               className="relative h-88 mx-4 md:h-[35rem] lg:h-[500px] bg-cover bg-center rounded-3xl overflow-hidden shadow-2xl"
-              style={{ backgroundImage: "url('/basketball-a.jpg')" }}>
+              style={{
+                backgroundImage:
+                  "url('https://res.cloudinary.com/hotel-booking-1301/image/upload/v1752744246/psfa-landing-page/IMG_2763_1_1_lpf7uw.jpg')",
+              }}>
               {/* Floating Elements */}
-              <div className="absolute bottom-4 mx-4 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
+              <div className="absolute bottom-4 mx-4 bg-black/15 backdrop-blur-sm rounded-full px-4 py-2">
                 <span className="text-white">Premium Sports Services</span>
               </div>
             </div>

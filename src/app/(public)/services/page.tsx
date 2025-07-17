@@ -366,16 +366,19 @@ export default function StickyScrollRevealDemo() {
       <div className="text-center bg-gradient-to-br mx-4 from-gray-900 to-black shadow-md rounded-3xl p-8 md:p-12 my-8">
         <Trophy className="w-12 h-12 text-red-400 mx-auto mb-6" />
         <h2 className="text-2xl md:text-3xl font-light tracking-tight text-white mb-4">
-          Ready to Join Our Community?
+          Tell us your needs
         </h2>
         <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-          Become part of the Pratigrham family and start your journey towards
-          excellence in sports and life.
+          whether it’s sports infrastructure development, academy enrollment,
+          facility rentals, or equipment orders—and fill out the form below to
+          connect with our team.
         </p>
-        <button className="inline-flex items-center bg-gradient-to-r from-white to-gray-300 text-black font-light px-8 py-4 rounded-full hover:from-gray-100 hover:to-white transition-all duration-200 shadow-lg text-lg">
-          Get Started Today
+        <Link
+          href={"/contact"}
+          className="inline-flex items-center bg-gradient-to-r from-white to-gray-300 text-black font-light px-8 py-4 rounded-full hover:from-gray-100 hover:to-white transition-all duration-200 shadow-lg text-lg">
+          Contact Us
           <ArrowRight className="ml-2 w-5 h-5" />
-        </button>
+        </Link>
       </div>
     </div>
   );

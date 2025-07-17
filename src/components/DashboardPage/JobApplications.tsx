@@ -14,8 +14,9 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Select } from "@/components/ui/select";
-import { Eye, Trash } from "lucide-react";
+import { Eye } from "lucide-react";
+import DeleteDialog from "../DeleteDialog";
+import Loading from "../Loader";
 
 // Define application interface
 export interface JobApplication {
@@ -39,9 +40,11 @@ interface StatusFormValues {
 
 export default function ApplicationsTab() {
   const [applications, setApplications] = useState<JobApplication[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   async function fetchApplications() {
     try {
+      setIsLoading(true);
       const res = await fetch("/api/panel-api/job-applications");
       if (res.ok) {
         const data = await res.json();
@@ -49,6 +52,8 @@ export default function ApplicationsTab() {
       }
     } catch (error) {
       console.error("Error fetching the job applications", error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -64,9 +69,35 @@ export default function ApplicationsTab() {
     });
   };
 
-  const handleDelete = (idx: number) => {
-    setApplications((prev) => prev.filter((_, i) => i !== idx));
+  const handleDelete = async (id: string) => {
+    if (!id) return;
+
+    try {
+      const res = await fetch("/api/panel-api/job-applications", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Delete failed: ${res.statusText}`);
+      }
+
+      // Remove from local state
+      setApplications((prev) => prev.filter((app) => app.id !== id));
+    } catch (err) {
+      console.error("Failed to delete application", err);
+      // you might show a toast/error banner here
+    }
   };
+
+  if (isLoading) {
+    return (
+      <div className="mt-52 flex-col justify-center">
+        <Loading size="md" />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-6xl mx-auto p-4">
@@ -141,10 +172,11 @@ export default function ApplicationsTab() {
                           index={idx}
                           onUpdate={handleUpdate}
                         />
-                        <DeleteApplicationDialog
-                          index={idx}
-                          applicantName={app.fullName}
-                          onConfirm={handleDelete}
+                        <DeleteDialog
+                          description={`Do you want to delete job application of ${app.fullName}?`}
+                          onConfirm={() => {
+                            handleDelete(app.id);
+                          }}
                         />
                       </div>
                     </td>
@@ -187,6 +219,7 @@ const JobApplications: React.FC<{
   const { register, handleSubmit, reset } = useForm<StatusFormValues>({
     defaultValues: { status: application.status },
   });
+  const [statusValue, setStatusValue] = useState(application.status);
 
   const submitStatus = async (values: StatusFormValues) => {
     setIsUpdating(true);
@@ -319,15 +352,22 @@ const JobApplications: React.FC<{
             )}
 
             <div className="pt-4 border-t">
-              <Label className="text-xs font-medium text-gray-500 uppercase mb-2 block">
+              <Label className="text-xs font-medium text-gray-500 uppercase mb-2">
                 Update Status
               </Label>
-              <Select {...register("status")}>
+              <select
+                {...register("status")}
+                value={statusValue}
+                onChange={(e) => {
+                  setStatusValue(e.target.value as StatusFormValues["status"]);
+                }}
+                className="w-full border rounded p-2"
+                disabled={isUpdating}>
                 <option value="APPLIED">Applied</option>
                 <option value="REVIEWED">Reviewed</option>
                 <option value="ACCEPTED">Accepted</option>
                 <option value="REJECTED">Rejected</option>
-              </Select>
+              </select>
             </div>
           </div>
 
@@ -346,35 +386,3 @@ const JobApplications: React.FC<{
     </Dialog>
   );
 };
-
-// Confirmation dialog to delete application
-const DeleteApplicationDialog: React.FC<{
-  index: number;
-  applicantName: string;
-  onConfirm: (index: number) => void;
-}> = ({ index, applicantName, onConfirm }) => (
-  <Dialog>
-    <DialogTrigger asChild>
-      <Button variant="ghost" className="text-red-600">
-        <Trash className="w-4 h-4" />
-      </Button>
-    </DialogTrigger>
-    <DialogContent className="sm:max-w-xs">
-      <DialogHeader>
-        <DialogTitle>Delete Application</DialogTitle>
-        <DialogDescription>
-          Are you sure you want to delete the application of{" "}
-          <b>{applicantName}</b>? This cannot be undone.
-        </DialogDescription>
-      </DialogHeader>
-      <DialogFooter>
-        <DialogClose asChild>
-          <Button variant="outline">Cancel</Button>
-        </DialogClose>
-        <Button variant="destructive" onClick={() => onConfirm(index)}>
-          Delete
-        </Button>
-      </DialogFooter>
-    </DialogContent>
-  </Dialog>
-);
