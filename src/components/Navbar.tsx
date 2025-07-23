@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const LEFT_NAV_ITEMS = [
   { label: "Home", href: "/" },
@@ -86,7 +87,13 @@ export default function Navbar() {
               <Link
                 href="/"
                 className="text-xl lg:text-2xl font-semibold text-white uppercase hover:text-gray-200 transition-colors duration-300">
-                Pratigrham
+                <Image
+                  src={"/pgm-logo.png"}
+                  height={100}
+                  width={100}
+                  alt="Pratigrham Logo"
+                  className="w-fit h-12"
+                />
               </Link>
             </div>
           </div>

@@ -289,7 +289,7 @@ export default function ServicesShowcase(): JSX.Element {
               }}
               ref={mainCardRef}>
               {/* Floating Element (mirrors desktop) */}
-              <div className="absolute bottom-4 left-4 mx-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
+              <div className="absolute bottom-4 left-4 mx-4 bg-black/15 backdrop-blur-sm rounded-full px-3 py-1">
                 <span className="text-white text-xs">
                   Premium Sports Services
                 </span>
