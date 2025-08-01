@@ -16,6 +16,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import Loading from "@/components/Loader";
+import TeamMemberCard from "@/components/TeamMemberCard";
 
 interface Milestone {
   id: number;
@@ -26,7 +27,7 @@ interface Milestone {
 }
 
 interface TeamMember {
-  id: number;
+  id: string;
   name: string;
   role: string;
   image: string;
@@ -40,9 +41,14 @@ const containerVariants = {
   exit: { opacity: 0, y: -30, transition: { duration: 0.4 } },
 };
 
+const YearsOfExcellence = () => {
+  const startYear = 2018;
+  const currentYear = new Date().getFullYear(); // e.g. 2025
+  return currentYear - startYear;
+};
+
 export default function AboutUsSection() {
   const [currentMilestone, setCurrentMilestone] = useState(0);
-  const [currentTeamMember, setCurrentTeamMember] = useState(0);
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
   const [isAnimating, setIsAnimating] = useState(false);
   const [milestones, setMilestones] = useState<Milestone[]>([]);
@@ -90,16 +96,6 @@ export default function AboutUsSection() {
       );
       setTimeout(() => setIsAnimating(false), 500);
     }
-  };
-
-  const nextTeamMember = () => {
-    setCurrentTeamMember((prev) => (prev + 1) % teamMembers.length);
-  };
-
-  const prevTeamMember = () => {
-    setCurrentTeamMember(
-      (prev) => (prev - 1 + teamMembers.length) % teamMembers.length
-    );
   };
 
   if (isLoading) {
@@ -175,7 +171,9 @@ export default function AboutUsSection() {
               annually.
             </p>
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6">
-              <div className="text-3xl font-bold text-blue-600 mb-2">6+</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">
+                {YearsOfExcellence()}+
+              </div>
               <div className="text-sm text-gray-600">Years of Excellence</div>
             </div>
           </motion.div>
@@ -197,7 +195,9 @@ export default function AboutUsSection() {
               and instilling values of discipline, teamwork, and excellence.
             </p>
             <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6">
-              <div className="text-3xl font-bold text-green-600 mb-2">500+</div>
+              <div className="text-3xl font-bold text-green-600 mb-2">
+                10,000+
+              </div>
               <div className="text-sm text-gray-600">Athletes Trained</div>
             </div>
           </motion.div>
@@ -262,6 +262,7 @@ export default function AboutUsSection() {
                     src={milestones[currentMilestone].image}
                     alt={milestones[currentMilestone].title}
                     fill
+                    fetchPriority="high"
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
@@ -356,109 +357,9 @@ export default function AboutUsSection() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 items-center">
-              {/* Team Member Image */}
-              <div className="md:order-2">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={teamMembers[currentTeamMember].id}
-                    variants={containerVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    className="relative h-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl">
-                    <Image
-                      src={teamMembers[currentTeamMember].image}
-                      alt={teamMembers[currentTeamMember].name}
-                      fill
-                      priority
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                    <div className="absolute bottom-6 left-6">
-                      <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
-                        <span className="text-white text-sm">
-                          {teamMembers[currentTeamMember].yearsOfExperience}+
-                          years
-                        </span>
-                      </div>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* Previous Team Member Thumbnail */}
-              <div className="md:order-1 hidden md:flex justify-center">
-                <div className="w-24 h-24 rounded-xl overflow-hidden shadow-lg">
-                  <Image
-                    priority
-                    src={
-                      teamMembers[
-                        (currentTeamMember - 1 + teamMembers.length) %
-                          teamMembers.length
-                      ].image
-                    }
-                    alt="Previous member"
-                    width={96}
-                    height={96}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
-              </div>
-
-              {/* Team Member Info */}
-              <div className="md:order-3 space-y-6">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={teamMembers[currentTeamMember].id}
-                    variants={containerVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit">
-                    <h3 className="text-2xl md:text-3xl font-medium text-gray-900 mb-2">
-                      {teamMembers[currentTeamMember].name}
-                    </h3>
-                    <p className="text-lg text-blue-600 font-medium mb-4">
-                      {teamMembers[currentTeamMember].role}
-                    </p>
-                    <p className="text-gray-700 leading-relaxed">
-                      {teamMembers[currentTeamMember].description}
-                    </p>
-                  </motion.div>
-                </AnimatePresence>
-
-                {/* Team Navigation */}
-                <div className="flex items-center justify-between pt-6">
-                  <div className="flex space-x-2">
-                    {teamMembers.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentTeamMember(index)}
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                          index === currentTeamMember
-                            ? "bg-gray-800 w-6"
-                            : "bg-gray-300 hover:bg-gray-400"
-                        }`}
-                      />
-                    ))}
-                  </div>
-
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={prevTeamMember}
-                      className="bg-white p-2 rounded-full shadow-md hover:bg-gray-50 transition-all duration-200 border border-gray-200"
-                      aria-label="Previous team member">
-                      <ChevronLeft className="w-4 h-4 text-gray-800" />
-                    </button>
-                    <button
-                      onClick={nextTeamMember}
-                      className="bg-white p-2 rounded-full shadow-md hover:bg-gray-50 transition-all duration-200 border border-gray-200"
-                      aria-label="Next team member">
-                      <ChevronRight className="w-4 h-4 text-gray-800" />
-                    </button>
-                  </div>
-                </div>
-              </div>
+              {teamMembers.map((member) => {
+                return <TeamMemberCard key={member.id} member={member} />;
+              })}
             </div>
           </motion.div>
         )}

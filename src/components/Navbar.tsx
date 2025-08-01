@@ -7,7 +7,7 @@ import Image from "next/image";
 const LEFT_NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
+  { label: "Verticals", href: "/services" },
 ];
 
 const RIGHT_BUTTON = { label: "Contact Us", href: "/contact" };
@@ -72,7 +72,7 @@ export default function Navbar() {
           </div>
 
           {/* Logo */}
-          <div className="flex-1 lg:flex-none flex justify-start lg:justify-center">
+          <div className="flex-1 lg:hidden flex justify-start lg:justify-center">
             <div
               className={`transition-all duration-600 ease-out ${
                 isVisible

@@ -272,7 +272,7 @@ export default function ServicesShowcase(): JSX.Element {
                   onMouseLeave={(e) =>
                     handleButtonHover(e.currentTarget, false)
                   }>
-                  Our Services
+                  Our Verticals
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </button>
               </Link>
@@ -402,7 +402,7 @@ export default function ServicesShowcase(): JSX.Element {
                   onMouseLeave={(e) =>
                     handleButtonHover(e.currentTarget, false)
                   }>
-                  Our Services
+                  Our Verticals
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </button>
               </Link>

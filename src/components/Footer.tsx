@@ -1,4 +1,3 @@
-// components/Footer.tsx
 import Link from "next/link";
 import React from "react";
 
@@ -57,7 +56,7 @@ export default function Footer() {
 
           {/* Column 2 */}
           <div className=" tracking-tighter">
-            <h3 className="text-2xl font-semibold mb-4">Services</h3>
+            <h3 className="text-2xl font-semibold mb-4">Verticals</h3>
             <ul className="space-y-3">
               <li>
                 <Link

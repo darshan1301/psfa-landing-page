@@ -213,7 +213,7 @@ export default async function Page() {
                               </svg>
                             </div>
                             <span className="text-gray-700 font-medium text-sm sm:text-base">
-                              All Age Groups
+                              Age Group: 3-20 years
                             </span>
                           </div>
                         </div>
