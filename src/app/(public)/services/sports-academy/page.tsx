@@ -2,6 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import { GET } from "@/app/api/public-api/sports-academy/route";
 import { ImageGallery } from "@/components/ImageGallery";
+import BatchCard from "@/components/BatchCard";
 
 export const metadata: Metadata = {
   title: "Sports Infrastructure | Pratigrham Sports",
@@ -305,107 +306,7 @@ export default async function Page() {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
                         {academy.batches.map((batch: Batch) => (
-                          <div
-                            key={batch.id}
-                            className="bg-white border-2 border-gray-100 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:border-blue-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                            <div className="flex items-start justify-between mb-3 sm:mb-4">
-                              <div className="flex-1">
-                                <h4 className="text-lg sm:text-xl uppercase font-bold text-gray-900 mb-2 sm:mb-3">
-                                  {batch.name}
-                                </h4>
-                                <span className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800">
-                                  {batch.sport}
-                                </span>
-                              </div>
-                            </div>
-
-                            <div className="space-y-3 sm:space-y-4">
-                              <div className="flex items-center text-gray-600">
-                                <svg
-                                  className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-green-500 flex-shrink-0"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24">
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                  />
-                                </svg>
-                                <div>
-                                  <div className="font-semibold text-gray-900 text-sm sm:text-base">
-                                    Duration
-                                  </div>
-                                  <div className="text-xs sm:text-sm">
-                                    {new Date(
-                                      batch.startDate
-                                    ).toLocaleDateString()}{" "}
-                                    -{" "}
-                                    {new Date(
-                                      batch.endDate
-                                    ).toLocaleDateString()}
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div className="flex items-center text-gray-600">
-                                <svg
-                                  className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-purple-500 flex-shrink-0"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24">
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                  />
-                                </svg>
-                                <div>
-                                  <div className="font-semibold text-gray-900 text-sm sm:text-base">
-                                    Head Coach
-                                  </div>
-                                  <div className="text-xs sm:text-sm">
-                                    {batch.headCoach}
-                                  </div>
-                                </div>
-                              </div>
-
-                              {batch.startTime && batch.endTime && (
-                                <div className="flex items-center text-gray-600">
-                                  <svg
-                                    className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-orange-500 flex-shrink-0"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    />
-                                  </svg>
-                                  <div>
-                                    <div className="font-semibold text-gray-900 text-sm sm:text-base">
-                                      Training Hours
-                                    </div>
-                                    <div className="text-xs sm:text-sm">
-                                      {batch.startTime} - {batch.endTime}
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-
-                            {batch.description && (
-                              <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100">
-                                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                                  {batch.description}
-                                </p>
-                              </div>
-                            )}
-                          </div>
+                          <BatchCard key={batch.id} batch={batch} />
                         ))}
                       </div>
                     </details>

@@ -15,8 +15,8 @@ export const metadata = {
     images: [
       {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/apple-touch-icon.png`,
-        width: 1200,
-        height: 630,
+        width: 108,
+        height: 108,
         alt: "Home Page Image",
       },
     ],

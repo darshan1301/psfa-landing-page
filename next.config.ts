@@ -13,6 +13,9 @@ const nextConfig: NextConfig = {
       {
         hostname: "my-s3-storage-prathmesh-nagpur.s3.amazonaws.com",
       },
+      {
+        hostname: "source.unsplash.com",
+      },
     ],
   },
 };

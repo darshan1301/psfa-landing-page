@@ -63,7 +63,7 @@ export default function Navbar() {
                 }}>
                 <Link
                   href={item.href}
-                  className="relative text-white/90 hover:text-white font-light tracking-wide transition-all duration-300 group">
+                  className="relative text-white/90  hover:text-white font-light tracking-wide transition-all duration-300 group">
                   {item.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
