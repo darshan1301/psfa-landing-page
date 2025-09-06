@@ -2,6 +2,9 @@ import React from "react";
 import { Metadata } from "next";
 import { ImageGallery } from "@/components/ImageGallery";
 import { GET } from "@/app/api/public-api/sports-infra/route";
+import { ArrowRight, Trophy } from "lucide-react";
+import Link from "next/link";
+import InfraPage from "@/components/InfraPage";
 
 export const metadata: Metadata = {
   title: "Sports Infrastructure | Pratigrham Sports For All",
@@ -44,8 +47,24 @@ export default async function Page() {
             <div className="mt-8 w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
           </div>
 
+          <InfraPage />
+
           {/* Infrastructure Grid */}
           <div className="space-y-16">
+            <section className="text-center max-w-4xl mx-auto  sm:px-10 py-16">
+              <h2 className="text-3xl sm:text-4xl font-normal text-gray-900 mb-4">
+                Our Previous &{" "}
+                <span className="font-medium text-blue-600">
+                  Ongoing Infrastructure Work
+                </span>
+              </h2>
+              <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+                A look at the world-class sports facilities we’ve already built
+                and the projects currently in progress — from multi-sport turfs
+                and cricket nets to full-scale academies.
+              </p>
+            </section>
+
             {infrastructures.map((infrastructure, index) => (
               <div
                 key={infrastructure.id}
@@ -84,7 +103,7 @@ export default async function Page() {
                           </span>
                         </div>
 
-                        <h2 className="text-3xl sm:text-4xl font-medium text-gray-900 leading-tight">
+                        <h2 className="text-2xl sm:text-4xl uppercase font-medium text-gray-900 leading-tight">
                           {infrastructure.name}
                         </h2>
                       </div>
@@ -177,6 +196,22 @@ export default async function Page() {
               </div>
             </div>
           )}
+          <div className="text-center bg-gradient-to-br mt-10 from-gray-900 to-black shadow-md rounded-3xl p-8 md:p-12 mx-4 lg:mx-0">
+            <Trophy className="w-12 h-12 text-red-400 mx-auto mb-6" />
+            <h2 className="text-2xl md:text-3xl font-light tracking-tight text-white mb-4">
+              Interested in collaborating?
+            </h2>
+            <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+              Visit our Contact page to connect with our team and kick things
+              off.
+            </p>
+            <Link href="/contact">
+              <button className="inline-flex items-center bg-gradient-to-r from-white to-gray-300 text-black font-light px-8 py-4 rounded-full hover:from-gray-100 hover:to-white transition-all duration-200 shadow-lg text-lg">
+                Let&apos;s Connect
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

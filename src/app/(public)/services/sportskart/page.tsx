@@ -1,6 +1,20 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
+import {
+  Building2,
+  Calculator,
+  Users,
+  Wrench,
+  Shield,
+  ShoppingCart,
+  FileCheck,
+  CreditCard,
+  CheckCircle,
+  Package,
+  Truck,
+} from "lucide-react";
 
 interface Product {
   id: number;
@@ -10,34 +24,51 @@ interface Product {
   image: string;
 }
 
+export const metadata: Metadata = {
+  title: "SportsKart - Premium Sports Equipment Online in India | PSFA",
+  description:
+    "Shop high-quality sports equipment for all levels. Fast delivery across India. Equip yourself with the best gear from SportsKart by PSFA.",
+  keywords: [
+    "sports equipment online",
+    "buy sports gear India",
+    "premium sports products",
+    "sports gear delivery",
+    "athletic equipment India",
+  ],
+};
+
 const products: Product[] = [
   {
     id: 1,
     name: "Professional Football",
     description: "Premium-grade football for training and matches.",
     price: "₹1,200",
-    image: "https://source.unsplash.com/featured/400x300/?football",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1757153313/61RpRYFb2wL._SX569__afsxlz.jpg",
   },
   {
     id: 2,
     name: "Cricket Bat",
     description: "Lightweight willow bat for powerful shots.",
     price: "₹2,500",
-    image: "https://source.unsplash.com/featured/400x300/?cricket-bat",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1757153313/61Q7yRX-xmL._SY879__hktkwz.jpg",
   },
   {
     id: 3,
     name: "Badminton Racket",
     description: "Carbon fiber racket with excellent shuttle control.",
     price: "₹1,800",
-    image: "https://source.unsplash.com/featured/400x300/?badminton-racket",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1757153313/51Gzr2GK5QL_zw88st.jpg",
   },
   {
     id: 4,
     name: "Yoga & Pilates Mat",
     description: "Non-slip mat for yoga and floor exercises.",
     price: "₹800",
-    image: "https://source.unsplash.com/featured/400x300/?yoga-mat",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1757153312/1000785167_iszd23.jpg",
   },
 ];
 
@@ -68,7 +99,7 @@ export default function SportsKartPage() {
             <span className="text-gray-900">SportsKart</span>
             <br />
             <span className="text-3xl md:text-4xl lg:text-5xl font-normal text-blue-600">
-              Gear Up for Greatness
+              Quality Sports Gear. Fast Delivery.
             </span>
           </h1>
 
@@ -193,7 +224,7 @@ export default function SportsKartPage() {
       </section>
 
       {/* Products Grid */}
-      <section className="relative py-20 bg-white">
+      <section className="relative py-20 ">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-gray-900">
@@ -207,7 +238,7 @@ export default function SportsKartPage() {
               <div key={product.id} className="group relative">
                 <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2">
                   {/* Product Image */}
-                  <div className="relative w-full h-48 mb-6 overflow-hidden rounded-2xl bg-gray-100">
+                  <div className="relative w-full h-56 mb-6 overflow-hidden rounded-2xl bg-gray-100">
                     <Image
                       src={product.image}
                       alt={product.name}
@@ -228,9 +259,9 @@ export default function SportsKartPage() {
 
                     {/* Price and Button */}
                     <div className="flex items-center justify-between pt-4">
-                      <span className="text-2xl font-bold text-gray-900">
+                      {/* <span className="text-2xl font-bold text-gray-900">
                         {product.price}
-                      </span>
+                      </span> */}
                       <Link href="/contact" className="inline-block">
                         <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm">
                           Enquire
@@ -248,47 +279,256 @@ export default function SportsKartPage() {
         </div>
       </section>
 
-      {/* Call To Action */}
-      <section className="bg-black py-20 text-white text-center relative overflow-hidden">
-        {/* Background pattern */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-gray-900 to-black"></div>
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.3),transparent_70%)]"></div>
-
-        <div className="relative max-w-5xl mx-auto px-6 lg:px-8">
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-white">
-              Need More Gear?
-            </h2>
-            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-              Browse our full catalog or get in touch for specialized orders and
-              bulk inquiries.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Link href="/contact" className="inline-block">
-                <button className="group relative px-10 py-4 bg-white text-black font-bold rounded-2xl shadow-2xl hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:-translate-y-1">
-                  <span className="relative z-10">Contact SportsKart</span>
-                </button>
-              </Link>
-              <button className="px-10 py-4 border-2 border-white/30 rounded-2xl font-semibold text-white hover:bg-white/10 transition-all duration-300 hover:scale-105">
-                View All Products
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="relative py-12 bg-gray-50 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <div className="text-2xl font-bold mb-4 text-blue-600">
-            SportsKart
-          </div>
-          <p className="text-gray-600">
-            Empowering athletes with premium sports equipment since day one.
-          </p>
-        </div>
-      </footer>
+      <ValueAddsSection />
+      <HowOrderingWorksSection />
     </div>
   );
 }
+
+// Value Adds Section
+const ValueAddsSection = () => {
+  return (
+    <section className=" py-20">
+      <div className="max-w-6xl mx-auto px-6 sm:px-10">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-light text-gray-900 mb-4">
+            Why Choose{" "}
+            <span className="font-medium text-blue-600">SportsKart</span>
+          </h2>
+          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+            Professional sports procurement made simple — from bulk orders to
+            complete installation services.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            {
+              title: "Institutional Procurement",
+              desc: "Streamlined procurement process with dedicated PO handling for schools, clubs & organizations",
+              icon: Building2,
+              gradient: "from-blue-500 to-indigo-500",
+              bgAccent: "from-blue-50 to-blue-100",
+            },
+            {
+              title: "Bulk Discounts & GST",
+              desc: "Competitive bulk pricing with proper GST invoicing for business purchases",
+              icon: Calculator,
+              gradient: "from-green-500 to-emerald-500",
+              bgAccent: "from-green-50 to-green-100",
+            },
+            {
+              title: "Event Kits & Apparel",
+              desc: "Custom event kits, team uniforms and staff apparel with branding options",
+              icon: Users,
+              gradient: "from-purple-500 to-violet-500",
+              bgAccent: "from-purple-50 to-purple-100",
+            },
+            {
+              title: "On-Site Installation",
+              desc: "Professional installation services for equipment and infrastructure items",
+              icon: Wrench,
+              gradient: "from-orange-500 to-amber-500",
+              bgAccent: "from-orange-50 to-orange-100",
+            },
+            {
+              title: "After-Sales Support",
+              desc: "Comprehensive warranties and dedicated support for all your purchases",
+              icon: Shield,
+              gradient: "from-pink-500 to-rose-500",
+              bgAccent: "from-pink-50 to-pink-100",
+            },
+            {
+              title: "Fast Delivery",
+              desc: "Quick turnaround times with reliable logistics for urgent requirements",
+              icon: Truck,
+              gradient: "from-yellow-500 to-orange-400",
+              bgAccent: "from-yellow-50 to-yellow-100",
+            },
+          ].map((item, idx) => (
+            <div key={idx} className="group relative">
+              {/* Background Accent */}
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${item.bgAccent} rounded-3xl transform rotate-2 group-hover:rotate-3 transition-transform duration-300 opacity-40`}></div>
+
+              {/* Main Card */}
+              <div className="relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 text-center transform group-hover:-translate-y-2">
+                {/* Icon */}
+                <div
+                  className={`w-20 h-20 bg-gradient-to-r ${item.gradient} text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                  <item.icon className="w-10 h-10" />
+                </div>
+
+                {/* Content */}
+                <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {item.desc}
+                </p>
+
+                {/* Bottom Accent */}
+                <div
+                  className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r ${item.gradient} rounded-t-full`}></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// How Ordering Works Section
+const HowOrderingWorksSection = () => {
+  return (
+    <section className="max-w-6xl mx-auto px-6 sm:px-10 py-20">
+      <div className="text-center mb-16">
+        <h2 className="text-3xl sm:text-4xl font-light text-gray-900 mb-4">
+          How <span className="font-medium text-blue-600">Ordering</span> Works
+        </h2>
+        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          Simple, streamlined process from cart to delivery — designed for both
+          individual and bulk orders.
+        </p>
+      </div>
+
+      <div className="relative">
+        {/* Connection Lines */}
+        <div className="hidden md:block">
+          <div className="absolute top-20 left-1/6 right-1/6 h-0.5 bg-gradient-to-r from-blue-300 via-green-300 to-purple-300"></div>
+          <div className="absolute top-20 left-1/2 transform -translate-x-1/2 w-0.5 h-12 bg-gradient-to-b from-purple-300 to-orange-300"></div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
+          {[
+            {
+              step: "1",
+              title: "Add to Cart",
+              desc: "Browse products and add to cart, or submit your bulk requirement list for custom quotes",
+              icon: ShoppingCart,
+              gradient: "from-blue-500 to-blue-600",
+              bgAccent: "from-blue-50 to-blue-100",
+              options: [
+                "Individual Items",
+                "Bulk List Upload",
+                "Custom Requirements",
+              ],
+            },
+            {
+              step: "2",
+              title: "Confirm Quote",
+              desc: "Review pricing, confirm delivery timelines and finalize your order details",
+              icon: FileCheck,
+              gradient: "from-green-500 to-green-600",
+              bgAccent: "from-green-50 to-green-100",
+              options: [
+                "Price Confirmation",
+                "Delivery Timeline",
+                "Order Finalization",
+              ],
+            },
+            {
+              step: "3",
+              title: "Payment & Delivery",
+              desc: "Choose between online payment or Purchase Order route for institutional buyers",
+              icon: CreditCard,
+              gradient: "from-purple-500 to-purple-600",
+              bgAccent: "from-purple-50 to-purple-100",
+              options: ["Online Payment", "PO Route", "GST Invoice"],
+            },
+          ].map((step, idx) => (
+            <div key={idx} className="group relative">
+              {/* Background Card */}
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${step.bgAccent} rounded-3xl transform rotate-1 group-hover:rotate-2 transition-transform duration-300 opacity-50`}></div>
+
+              {/* Main Card */}
+              <div className="relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 text-center transform group-hover:-translate-y-2">
+                {/* Step Number Badge */}
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <div className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center border-4 border-gray-100">
+                    <span className="text-xl font-bold text-gray-700">
+                      {step.step}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Icon */}
+                <div
+                  className={`w-20 h-20 bg-gradient-to-r ${step.gradient} text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                  <step.icon className="w-10 h-10" />
+                </div>
+
+                {/* Content */}
+                <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+                  {step.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                  {step.desc}
+                </p>
+
+                {/* Options List */}
+                <div className="space-y-2">
+                  {step.options.map((option, optIdx) => (
+                    <div
+                      key={optIdx}
+                      className="flex items-center justify-center text-xs text-gray-500">
+                      <CheckCircle className="w-3 h-3 mr-2 text-green-500" />
+                      {option}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Bottom Accent */}
+                <div
+                  className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r ${step.gradient} rounded-t-full`}></div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Final Step - Delivery */}
+        <div className="flex justify-center">
+          <div className="group relative max-w-md">
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-orange-100 rounded-3xl transform -rotate-1 group-hover:-rotate-2 transition-transform duration-300 opacity-50"></div>
+            <div className="relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 text-center transform group-hover:-translate-y-2">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <div className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center border-4 border-gray-100">
+                  <Package className="w-6 h-6 text-orange-600" />
+                </div>
+              </div>
+
+              <div className="w-20 h-20 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <Truck className="w-10 h-10" />
+              </div>
+
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-orange-600 transition-colors">
+                Delivery & Installation
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Fast, reliable delivery with optional installation services and
+                after-sales support
+              </p>
+
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-orange-500 to-orange-600 rounded-t-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom CTA */}
+      <div className="text-center mt-16">
+        <p className="text-gray-600 mb-6">Ready to place your order?</p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">
+            Browse Products
+          </button>
+          <button className="px-8 py-4 border-2 border-blue-600 text-blue-600 font-semibold rounded-full hover:bg-blue-50 transition-all duration-300">
+            Submit Bulk Inquiry
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
