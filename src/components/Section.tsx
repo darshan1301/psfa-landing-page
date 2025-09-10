@@ -48,8 +48,8 @@ export function Section({ title, items, variant = "default" }: SectionProps) {
                     item.color || "from-blue-500 to-indigo-600"
                   } rounded-2xl p-8 text-white shadow-lg`}>
                   <item.icon className="w-12 h-12 mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                  <p className="text-sm opacity-90">{item.desc}</p>
+                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                  <p className="font-light opacity-90">{item.desc}</p>
                 </div>
               );
 

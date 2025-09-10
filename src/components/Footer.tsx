@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -6,12 +7,19 @@ export default function Footer() {
     <footer className="bg-[#a4def7] m-4 rounded-2xl text-gray-800 py-20">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-3">
         {/* Left Section: Company Slogan */}
-        <div className=" mb-10 md:mb-0">
-          <p className="text-4xl font-normal tracking-tigh">
+
+        <div className=" items-center mb-10 md:mb-0">
+          <Image
+            className="pb-8"
+            src={"/footer-logo.png"}
+            height={150}
+            width={150}
+            alt="pratigrham logo"
+          />
+          <p className="text-2xl font-normal tracking-tigh">
             Redefining sports and fitness culture!
           </p>
           <button className="my-6 bg-white px-4 py-1  font-normal  rounded-full">
-            {" "}
             Some Button
           </button>
         </div>

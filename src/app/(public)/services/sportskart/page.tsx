@@ -120,6 +120,60 @@ export default function SportsKartPage() {
         </div>
       </section>
 
+      {/* Products Grid */}
+      <section className="relative py-20 ">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl mb-4 text-gray-900">Our Top Products</h2>
+            <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {products.map((product) => (
+              <div key={product.id} className="group relative">
+                <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2">
+                  {/* Product Image */}
+                  <div className="relative w-full h-56 mb-6 overflow-hidden rounded-2xl bg-gray-100">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+
+                  {/* Product Info */}
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-blue-600 group-hover:text-blue-700 transition-colors duration-300">
+                      {product.name}
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed text-sm">
+                      {product.description}
+                    </p>
+
+                    {/* Price and Button */}
+                    <div className="flex items-center justify-between pt-4">
+                      {/* <span className="text-2xl font-bold text-gray-900">
+                        {product.price}
+                      </span> */}
+                      <Link href="/contact" className="inline-block">
+                        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm">
+                          Enquire
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Subtle glow effect */}
+                <div className="absolute inset-0 bg-blue-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="relative py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -223,62 +277,6 @@ export default function SportsKartPage() {
         </div>
       </section>
 
-      {/* Products Grid */}
-      <section className="relative py-20 ">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 text-gray-900">
-              Our Top Products
-            </h2>
-            <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.map((product) => (
-              <div key={product.id} className="group relative">
-                <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2">
-                  {/* Product Image */}
-                  <div className="relative w-full h-56 mb-6 overflow-hidden rounded-2xl bg-gray-100">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-
-                  {/* Product Info */}
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-blue-600 group-hover:text-blue-700 transition-colors duration-300">
-                      {product.name}
-                    </h3>
-                    <p className="text-gray-700 leading-relaxed text-sm">
-                      {product.description}
-                    </p>
-
-                    {/* Price and Button */}
-                    <div className="flex items-center justify-between pt-4">
-                      {/* <span className="text-2xl font-bold text-gray-900">
-                        {product.price}
-                      </span> */}
-                      <Link href="/contact" className="inline-block">
-                        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm">
-                          Enquire
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Subtle glow effect */}
-                <div className="absolute inset-0 bg-blue-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl"></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <ValueAddsSection />
       <HowOrderingWorksSection />
     </div>
@@ -352,7 +350,7 @@ const ValueAddsSection = () => {
                 className={`absolute inset-0 bg-gradient-to-br ${item.bgAccent} rounded-3xl transform rotate-2 group-hover:rotate-3 transition-transform duration-300 opacity-40`}></div>
 
               {/* Main Card */}
-              <div className="relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 text-center transform group-hover:-translate-y-2">
+              <div className="relative h-full bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 text-center transform group-hover:-translate-y-2">
                 {/* Icon */}
                 <div
                   className={`w-20 h-20 bg-gradient-to-r ${item.gradient} text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
@@ -444,7 +442,7 @@ const HowOrderingWorksSection = () => {
                 className={`absolute inset-0 bg-gradient-to-br ${step.bgAccent} rounded-3xl transform rotate-1 group-hover:rotate-2 transition-transform duration-300 opacity-50`}></div>
 
               {/* Main Card */}
-              <div className="relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 text-center transform group-hover:-translate-y-2">
+              <div className="relative h-full bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 text-center transform group-hover:-translate-y-2">
                 {/* Step Number Badge */}
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                   <div className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center border-4 border-gray-100">

@@ -18,6 +18,7 @@ import {
   HeartPulse,
 } from "lucide-react";
 import { Section } from "@/components/Section";
+import FAQItem from "@/components/FAQItem";
 
 export const metadata: Metadata = {
   title: "Annual Sports Training Program for Schools & Colleges | PSFA ASTP",
@@ -190,44 +191,72 @@ export default async function ASTPPage() {
             },
           ]}
         />
-
-        {/* Outcomes & KPIs */}
-        {/* <Section
-          title="Outcomes & KPIs"
-          items={[
-            {
-              title: "Participation",
-              desc: "Attendance %, engagement & retention.",
-              icon: Users,
-              color: "from-blue-500 to-indigo-600",
-            },
-            {
-              title: "Fitness Gains",
-              desc: "Improvement vs baseline benchmarks.",
-              icon: Activity,
-              color: "from-green-500 to-emerald-600",
-            },
-            {
-              title: "Skill Attainment",
-              desc: "Progress by sport & grade levels.",
-              icon: ClipboardCheck,
-              color: "from-orange-500 to-amber-600",
-            },
-            {
-              title: "Tournaments",
-              desc: "Participation rates & medals won.",
-              icon: Trophy,
-              color: "from-purple-500 to-violet-600",
-            },
-            {
-              title: "Satisfaction",
-              desc: "Parent & admin feedback scores.",
-              icon: BarChart3,
-              color: "from-pink-500 to-rose-500",
-            },
-          ]}
-        /> */}
+        {/* FAQ Section */}
+        <section className="max-w-4xl mx-auto px-6 sm:px-10 py-20">
+          <h2 className="text-3xl sm:text-4xl font-light text-gray-900 mb-12 text-center">
+            Frequently Asked{" "}
+            <span className="font-medium text-blue-600">Questions</span>
+          </h2>
+          <div className="space-y-4">
+            {faqs.map((faq, idx) => (
+              <FAQItem key={idx} question={faq.question} answer={faq.answer} />
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
 }
+
+const faqs = [
+  {
+    question: "How does ASTP fit into our school timetable?",
+    answer:
+      "The Annual Sports Training Program (ASTP) is aligned with the school’s existing sports periods. Sessions are conducted during regular timetable slots to ensure no academic disruption while promoting fitness and skill development.",
+  },
+  {
+    question: "What benefits will students get apart from playing sports?",
+    answer:
+      "ASTP blends practical drills, theory, and visual learning with AI-driven analytics. Students receive fitness tests, progress dashboards, skill reports, and even live match streaming for better exposure and engagement.",
+  },
+  {
+    question: "Do you provide qualified coaches?",
+    answer:
+      "Yes, we provide expert coaches trained in multiple sports who follow a structured curriculum. The coaching module ensures consistency, discipline, and measurable outcomes across all participating schools.",
+  },
+  {
+    question: "How will parents stay updated on their child’s progress?",
+    answer:
+      "Parents can access a dedicated portal with fitness tracker results, AI skill reports, attendance records, and live streaming of tournaments. They also receive auto-generated participation certificates for their child.",
+  },
+  {
+    question: "Will there be additional costs for equipment and kits?",
+    answer:
+      "No hidden costs. The program includes annual training equipment, sports kits, and tournament participation as part of the service package, ensuring complete coverage for every student.",
+  },
+  {
+    question: "Is ASTP aligned with the National Education Policy (NEP)?",
+    answer:
+      "Yes, ASTP is designed to meet the revised NEP guidelines, ensuring physical education and sports become an integral part of holistic student development.",
+  },
+  {
+    question: "How is student safety and fitness monitored?",
+    answer:
+      "ASTP integrates fitness tests, family fitness check-ups, and AI-based monitoring like motion tracking, overtraining alerts, and wellness dashboards to ensure student health and safety.",
+  },
+  {
+    question: "Can schools host tournaments under this program?",
+    answer:
+      "Yes, ASTP includes tournament participation, intra-school event management, and sports day coordination. We also offer live streaming of tournaments for parents and community engagement.",
+  },
+  {
+    question: "What role do parents have in this program?",
+    answer:
+      "Parents are engaged through fitness check-ups, live streaming of matches, and regular updates via dashboards. This ensures families stay connected to the child’s sports journey.",
+  },
+  {
+    question: "How many sports are covered in ASTP?",
+    answer:
+      "The curriculum covers a wide range of team and individual sports including cricket, football, basketball, badminton, skating, martial arts, athletics, yoga, swimming, and many more — ensuring holistic multi-sport training.",
+  },
+];

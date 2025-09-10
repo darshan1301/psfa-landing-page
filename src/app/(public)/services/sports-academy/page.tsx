@@ -16,6 +16,8 @@ import {
 } from "lucide-react";
 // Sports icons
 import Image from "next/image";
+import { Section } from "@/components/Section";
+import FAQItem from "@/components/FAQItem";
 
 export const metadata: Metadata = {
   title:
@@ -194,12 +196,15 @@ export default async function Page() {
       </section>
 
       {/* How It Works */}
-      <section className="max-w-6xl mx-auto px-6 sm:px-10 py-20">
-        <h2 className="text-3xl sm:text-4xl  text-gray-900 mb-12 text-center">
+      <section className="max-w-6xl mx-auto px-6 sm:px-10 py-10">
+        <h2 className="text-3xl sm:text-4xl  text-gray-900 mb-4 text-center">
           How It Works ?
         </h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
+
+        <Section
+          title=""
+          variant="gradient"
+          items={[
             {
               title: "Assessment",
               desc: "Free trial & baseline skills test",
@@ -210,7 +215,7 @@ export default async function Page() {
               title: "Placement",
               desc: "Batch allocation by age & level",
               icon: Users,
-              color: "bg-green-500",
+              color: "bg-green-600",
             },
             {
               title: "Plan",
@@ -236,22 +241,59 @@ export default async function Page() {
               icon: Flag,
               color: "bg-yellow-500",
             },
-          ].map((step, idx) => (
-            <div
-              key={idx}
-              className="bg-white rounded-2xl shadow-md p-8 hover:shadow-xl transition">
-              <div
-                className={`w-12 h-12 ${step.color} text-white rounded-xl flex items-center justify-center mb-4`}>
-                <step.icon className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">
-                {step.title}
-              </h3>
-              <p className="text-gray-600 text-sm sm:text-base">{step.desc}</p>
-            </div>
+          ]}
+        />
+      </section>
+      {/* FAQ Section */}
+      <section className="max-w-4xl mx-auto px-6 sm:px-10 py-20">
+        <h2 className="text-3xl sm:text-4xl font-light text-gray-900 mb-12 text-center">
+          Frequently Asked{" "}
+          <span className="font-medium text-blue-600">Questions</span>
+        </h2>
+        <div className="space-y-4">
+          {faqs.map((faq, idx) => (
+            <FAQItem key={idx} question={faq.question} answer={faq.answer} />
           ))}
         </div>
       </section>
     </div>
   );
 }
+
+const faqs = [
+  {
+    question: "What age groups can join the Pratigrham Sports Academy?",
+    answer:
+      "We welcome children of all age groups, from beginners to advanced athletes. Our structured programs are tailored to each age and skill level to ensure steady growth and enjoyment.",
+  },
+  {
+    question: "Which sports are offered at the academy?",
+    answer:
+      "We offer a wide range of indoor and outdoor sports including football, cricket, badminton, basketball, volleyball, hockey, kabaddi, swimming, martial arts, gymnastics, yoga, skating, and many more.",
+  },
+  {
+    question: "How do you ensure the quality of coaching?",
+    answer:
+      "Our programs are led by expert coaches and professional mentors who follow structured, progressive training methods focused on discipline, fitness, skill development, and goal-oriented performance.",
+  },
+  {
+    question: "Will my child’s fitness and health be monitored?",
+    answer:
+      "Yes, we provide regular fitness activities, quarterly fitness reports, endurance training, and advanced health analytics. Our trainers also design nutrition guidance and injury-prevention assessments for holistic development.",
+  },
+  {
+    question: "Do you provide opportunities for competitions?",
+    answer:
+      "Yes, apart from regular training, we prepare students for tournaments and provide platforms to showcase their talent at intra-academy and external competitions.",
+  },
+  {
+    question: "Where are your academies located?",
+    answer:
+      "Our academies are spread across multiple locations in Nagpur including Narendra Nagar, Isasani, Hingna Road, and Kamptee Road, offering football, cricket, yoga, and pickleball programs.",
+  },
+  {
+    question: "How do you keep parents involved?",
+    answer:
+      "Parents receive regular updates through fitness reports, progress tracking, and event participation details. Live events and tournament updates also keep families engaged in their child’s sports journey.",
+  },
+];
