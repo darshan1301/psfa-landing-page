@@ -38,6 +38,16 @@ export default async function Page() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       {/* Hero */}
       <section className="relative text-center mx-6 sm:mx-10 px-0 pt-32 pb-20">
+        <div className="mb-6 flex justify-center overflow-hidden">
+          <Image
+            alt="Pratigrham Sports Academy Logo"
+            width={200}
+            height={200}
+            src={
+              "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758277715/psfa-landing-page/logo/sports_academy_ftogln.png"
+            }
+          />
+        </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-gray-900 mb-6">
           Train Like a Pro.
           <br />

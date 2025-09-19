@@ -46,7 +46,7 @@ const serviceCards: ServiceCard[] = [
     capacity: "Full Squad",
     availability: "Day & Night",
     image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/gm1sbsufzwiv4offzu9k",
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/c_scale,h_1181/v1758272329/psfa-landing-page/IMG_1449_2_i6mmks.jpg",
   },
   {
     id: 4,
@@ -58,7 +58,7 @@ const serviceCards: ServiceCard[] = [
     capacity: "30 Members",
     availability: "6AM - 11PM",
     image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/esldfd5vn6esxriidf2o",
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758275301/psfa-landing-page/IMG-20250829-WA0050_kld75s.jpg",
   },
   {
     id: 5,
@@ -82,9 +82,12 @@ const serviceCards: ServiceCard[] = [
     capacity: "50+ Athletes",
     availability: "24/7 Access",
     image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/zgobehvpmmgyepbmbol3",
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1758275499/psfa-landing-page/IMG_20250806_180625833_ystvzx.jpg",
   },
 ];
+
+const backgroundImage =
+  "url('https://res.cloudinary.com/hotel-booking-1301/image/upload/c_scale,w_1630/v1758279727/psfa-landing-page/IMG_1451_pztjuj.jpg')";
 
 export default function ServicesShowcase(): JSX.Element {
   const [currentCard, setCurrentCard] = useState<number>(0);
@@ -287,8 +290,7 @@ export default function ServicesShowcase(): JSX.Element {
             <div
               className="h-full bg-cover bg-center rounded-3xl overflow-hidden shadow-2xl"
               style={{
-                backgroundImage:
-                  "url('https://res.cloudinary.com/hotel-booking-1301/image/upload/v1752744246/psfa-landing-page/IMG_2763_1_1_lpf7uw.jpg')",
+                backgroundImage: `${backgroundImage}`,
               }}
               ref={mainCardRef}>
               {/* Floating Element (mirrors desktop) */}
@@ -418,8 +420,7 @@ export default function ServicesShowcase(): JSX.Element {
             <div
               className="relative h-88 mx-4 md:h-[35rem] lg:h-[500px] bg-cover bg-center rounded-3xl overflow-hidden shadow-2xl"
               style={{
-                backgroundImage:
-                  "url('https://res.cloudinary.com/hotel-booking-1301/image/upload/v1752744246/psfa-landing-page/IMG_2763_1_1_lpf7uw.jpg')",
+                backgroundImage: `${backgroundImage}`,
               }}>
               {/* Floating Elements */}
               <div className="absolute bottom-4 mx-4 bg-black/15 backdrop-blur-sm rounded-full px-4 py-2">

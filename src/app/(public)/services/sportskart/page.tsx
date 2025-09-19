@@ -142,6 +142,16 @@ export default function SportsKartPage() {
 
       {/* Hero Section */}
       <section className="relative text-center mx-6 sm:mx-10 mb-20 px-0 pt-32">
+        <div className=" my-6 md:my-4 flex justify-center">
+          <Image
+            alt="Pratigrham Sports Space Logo"
+            width={200}
+            height={200}
+            src={
+              "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758277714/psfa-landing-page/logo/sportskart_npr9x1.png"
+            }
+          />
+        </div>
         <div className="relative z-10">
           <div className="inline-block mb-8">
             <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-1 rounded-2xl shadow-lg">
@@ -167,14 +177,14 @@ export default function SportsKartPage() {
           </p>
 
           {/* Hero CTA */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          {/* <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button className="group relative px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-2xl font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-1">
               <span className="relative z-10">Shop Now</span>
             </button>
             <button className="px-8 py-4 border-2 border-blue-600 rounded-2xl font-semibold text-blue-600 hover:bg-blue-50 transition-all duration-300 hover:scale-105">
               View Catalog
             </button>
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -579,12 +589,14 @@ const HowOrderingWorksSection = () => {
       <div className="text-center mt-16">
         <p className="text-gray-600 mb-6">Ready to place your order?</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">
+          {/* <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">
             Browse Products
-          </button>
-          <button className="px-8 py-4 border-2 border-blue-600 text-blue-600 font-semibold rounded-full hover:bg-blue-50 transition-all duration-300">
+          </button> */}
+          <Link
+            href={"/contact"}
+            className="px-8 py-4 border-2 border-blue-600 text-blue-600 font-semibold rounded-full hover:bg-blue-50 transition-all duration-300">
             Submit Bulk Inquiry
-          </button>
+          </Link>
         </div>
       </div>
     </section>

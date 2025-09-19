@@ -61,15 +61,25 @@ export default function page() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center">
+      <section className="relative min-h-[80vh] flex items-center justify-center">
         <Image
-          src="https://my-s3-storage-prathmesh-nagpur.s3.ap-south-1.amazonaws.com/psfa/emilio-garcia-AWdCgDDedH0-unsplash+(1).jpg"
+          src="https://res.cloudinary.com/hotel-booking-1301/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1749796301/psfa-landing-page/gli2bkv9qoph2kza7fzh.jpg"
           alt="Sportsspace background"
           fill
           className="object-cover object-center brightness-75"
           priority
         />
         <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
+          <div className="mb-2 mt-20 flex justify-center">
+            <Image
+              alt="Pratigrham Sports Space Logo"
+              width={200}
+              height={200}
+              src={
+                "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758278385/psfa-landing-page/logo/png_sportspace-white_ihck5j.png"
+              }
+            />
+          </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">
             Play more. <span className="text-blue-200">Book Faster.</span>
           </h1>
@@ -109,37 +119,50 @@ export default function page() {
         <div className="grid md:grid-cols-3 gap-8 mb-16">
           {[
             {
-              name: "Premier Football Turf",
-              location: "Sadar, Nagpur",
-              image: "🏟️",
-              sports: ["Football", "Cricket"],
+              name: "Sportshub@LMH",
+              location: "Lata Mangeshkar Hospital campus, Hingna Road, Nagpur",
+              image:
+                "https://res.cloudinary.com/hotel-booking-1301/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1758272329/psfa-landing-page/IMG_1449_2_i6mmks.jpg",
+              sports: ["Football", "Cricket", "Pickleball"],
               rating: 4.8,
-              price: "₹800/hour",
+              price: "₹900/hour",
+              link: "https://sportsspace.in/grounds/nagpur/sports-hub-lmh",
             },
             {
-              name: "Elite Pickleball Courts",
-              location: "Civil Lines, Nagpur",
-              image: "🎾",
-              sports: ["Pickleball", "Badminton"],
+              name: "H-Sports Park",
+              location: "Isasani, Nagpur",
+              image:
+                "https://res.cloudinary.com/hotel-booking-1301/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1758272599/psfa-landing-page/IMG_20250411_183723197_2_urritk.jpg",
+              sports: ["Cricket", "Football", "Cricket Nets"],
               rating: 4.9,
               price: "₹400/hour",
+              link: "https://sportsspace.in/grounds/nagpur/h-sports-park",
             },
             {
-              name: "Multi-Sport Arena",
-              location: "Dharampeth, Nagpur",
-              image: "🏀",
-              sports: ["Basketball", "Volleyball"],
+              name: "Pohewala Sports Cafe",
+              location: "Tiranga Square, Nagpur",
+              image:
+                "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758272142/psfa-landing-page/1755853982411-WhatsApp202025-08-22202_t8qbr6.webp",
+              sports: ["Playstation5", "Pool", "Scnooker"],
               rating: 4.7,
-              price: "₹600/hour",
+              price: "₹400/hour",
+              link: "https://sportsspace.in/grounds/nagpur/pohewala-sports-cafe",
             },
           ].map((venue, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition">
-              <div className="h-48 bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center text-6xl">
-                {venue.image}
+              className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition flex flex-col">
+              <div className="h-60 bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
+                <Image
+                  height={192}
+                  width={192}
+                  src={venue.image}
+                  alt={venue.name}
+                  className="w-full h-60 object-cover"
+                />
               </div>
-              <div className="p-6">
+
+              <div className="flex flex-col flex-1 p-6">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="text-xl font-medium text-gray-900">
                     {venue.name}
@@ -149,10 +172,12 @@ export default function page() {
                     {venue.rating}
                   </div>
                 </div>
+
                 <div className="flex items-center text-gray-600 text-sm mb-3">
                   <MapPin className="w-4 h-4 mr-1" />
                   {venue.location}
                 </div>
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {venue.sports.map((sport, i) => (
                     <span
@@ -162,13 +187,20 @@ export default function page() {
                     </span>
                   ))}
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-lg font-medium text-gray-900">
-                    {venue.price}
+
+                {/* Spacer pushes the bottom section down */}
+                <div className="flex-1"></div>
+
+                {/* Bottom section */}
+                <div className="pt-4 border-t border-gray-100">
+                  <span className="block text-lg font-medium text-gray-900 mb-3">
+                    Starting From {venue.price}
                   </span>
-                  <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition">
+                  <Link
+                    href={venue.link}
+                    className="w-full inline-block text-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-lg shadow-md hover:from-blue-700 hover:to-indigo-700 transition transform hover:scale-[1.02] active:scale-[0.98]">
                     Book Now
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -366,7 +398,7 @@ export default function page() {
               ))}
             </div>
             <Link
-              href="#contact"
+              href="/contact"
               className="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold rounded-full shadow-lg transition transform hover:scale-105">
               Partner With Us
             </Link>
@@ -386,30 +418,6 @@ export default function page() {
           ))}
         </div>
       </section>
-
-      {/* CTA Section */}
-      {/* <section className="bg-gradient-to-r from-blue-600 to-indigo-600 py-20">
-        <div className="max-w-4xl mx-auto px-6 sm:px-10 text-center text-white">
-          <h2 className="text-3xl sm:text-4xl font-light mb-6">
-            Ready to <span className="font-medium">Get Started?</span>
-          </h2>
-          <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-            Book your next game or explore partnership opportunities.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="#booking"
-              className="px-8 py-4 bg-white text-blue-600 font-semibold rounded-full shadow-lg hover:shadow-xl transition transform hover:scale-105">
-              Book a Slot
-            </Link>
-            <Link
-              href="#partner"
-              className="px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-blue-600 transition">
-              Become a Partner
-            </Link>
-          </div>
-        </div>
-      </section> */}
     </div>
   );
 }

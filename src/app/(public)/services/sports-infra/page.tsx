@@ -5,6 +5,7 @@ import { GET } from "@/app/api/public-api/sports-infra/route";
 import { ArrowRight, DraftingCompass } from "lucide-react";
 import Link from "next/link";
 import InfraPage from "@/components/InfraPage";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Sports Infrastructure | Pratigrham Sports For All",
@@ -36,7 +37,17 @@ export default async function Page() {
       <div className="pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header Section */}
-          <div className="text-center mb-16 lg:pt-12">
+          <div className=" mt-6 md:mt-10 flex justify-center">
+            <Image
+              alt="Pratigrham Sports Space Logo"
+              width={200}
+              height={200}
+              src={
+                "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758277716/psfa-landing-page/logo/sports_infra_wppewq.png"
+              }
+            />
+          </div>
+          <div className="text-center mb-12 lg:pt-8 pt-4">
             <h1 className="text-4xl sm:text-5xl tracking-tight text-blue-600 mb-4">
               Sports Infrastructure
             </h1>

@@ -19,9 +19,9 @@ export default function Footer() {
           <p className="text-2xl font-normal tracking-tigh">
             Redefining sports and fitness culture!
           </p>
-          <button className="my-6 bg-white px-4 py-1  font-normal  rounded-full">
+          {/* <button className="my-6 bg-white px-4 py-1  font-normal  rounded-full">
             Some Button
-          </button>
+          </button> */}
         </div>
         <div></div>
 

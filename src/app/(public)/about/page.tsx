@@ -154,23 +154,30 @@ export default function AboutUsSection() {
         <div className="grid px-4 lg:mx-20 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {/* History */}
           <motion.div
-            className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100"
+            className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 flex flex-col"
             variants={containerVariants}
             initial="initial"
             animate="animate">
-            <div className="flex items-center mb-6">
-              <Calendar className="w-8 h-8 text-blue-600 mr-3" />
-              <h2 className="lg:font-normal tracking-tighter text-2xl lg:text-3xl text-gray-900">
-                Our History
-              </h2>
+            <div>
+              <div className="flex items-center mb-6">
+                <Calendar className="w-8 h-8 text-blue-600 mr-3" />
+                <h2 className="lg:font-normal tracking-tighter text-2xl lg:text-3xl text-gray-900">
+                  Our History
+                </h2>
+              </div>
+              <p className="text-gray-700 leading-relaxed mb-6">
+                Founded in 2018, Pratigrham Sports Academy began as a small
+                community initiative to provide quality sports training. Today,
+                we stand as a premier sports facility serving over 1000+
+                athletes annually.
+              </p>
             </div>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              Founded in 2018, Pratigrham Sports Academy began as a small
-              community initiative to provide quality sports training. Today, we
-              stand as a premier sports facility serving over 1000+ athletes
-              annually.
-            </p>
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6">
+
+            {/* Spacer pushes the stats div to the bottom */}
+            <div className="flex-1" />
+
+            {/* Bottom Section */}
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 mt-6">
               <div className="text-3xl font-bold text-blue-600 mb-2">
                 {YearsOfExcellence()}+
               </div>
@@ -180,7 +187,7 @@ export default function AboutUsSection() {
 
           {/* Vision */}
           <motion.div
-            className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100"
+            className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 flex flex-col"
             variants={containerVariants}
             initial="initial"
             animate="animate">
@@ -194,6 +201,7 @@ export default function AboutUsSection() {
               Our vision is to make India fit by nurturing world-class athletes
               and instilling values of discipline, teamwork, and excellence.
             </p>
+            <div className="flex-1" />
             <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6">
               <div className="text-3xl font-bold text-green-600 mb-2">
                 10,000+
@@ -204,7 +212,7 @@ export default function AboutUsSection() {
 
           {/* Mission */}
           <motion.div
-            className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 md:col-span-2 lg:col-span-1"
+            className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 md:col-span-2 lg:col-span-1 flex flex-col"
             variants={containerVariants}
             initial="initial"
             animate="animate">

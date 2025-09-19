@@ -19,6 +19,7 @@ import {
 import { Section } from "@/components/Section";
 import FAQItem from "@/components/FAQItem";
 import Astpvid from "@/components/Astpvid";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Annual Sports Training Program for Schools & Colleges | PSFA ASTP",
@@ -37,6 +38,16 @@ export default async function ASTPPage() {
     <div className="min-h-screen ">
       {/* Hero */}
       <section className="text-center mx-6 sm:mx-10 px-0 pt-32 pb-16">
+        <div className=" my-4 flex justify-center">
+          <Image
+            alt="Pratigrham Sports Space Logo"
+            width={200}
+            height={200}
+            src={
+              "https://res.cloudinary.com/hotel-booking-1301/image/upload/c_scale,h_2449/v1758277716/psfa-landing-page/logo/pgm_logo_navy_title_hhrqvk.png"
+            }
+          />
+        </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-gray-900 mb-6">
           Year-Round Sports Education
           <br />
