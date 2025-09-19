@@ -5,7 +5,6 @@ interface TeamMember {
   id: string;
   name: string;
   role: string;
-  description: string;
   image: string;
   yearsOfExperience: number;
 }
@@ -16,16 +15,16 @@ interface TeamMemberCardProps {
 
 const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
   return (
-    <div className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
+    <div className="group relative h-full bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       {/* Card content */}
-      <div className="relative p-6">
+      <div className="relative p-3 md:p-6">
         {/* Profile image */}
         <div className="flex justify-center mb-6">
           <div className="relative">
-            <div className="w-48 h-48 rounded-full overflow-hidden ring-4 ring-white shadow-lg group-hover:ring-blue-100 transition-all duration-300">
+            <div className="md:w-48 md:h-48 w-24 h-24 rounded-full overflow-hidden ring-4 ring-white shadow-lg group-hover:ring-blue-100 transition-all duration-300">
               <Image
                 width={360}
                 height={360}
@@ -42,18 +41,13 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         </div>
 
         {/* Name */}
-        <h3 className="text-xl font-bold text-black text-center mb-2 group-hover:text-gray-800 transition-colors duration-200">
+        <h3 className=" md:text-xl md:font-bold text-black text-center mb-2 group-hover:text-gray-800 transition-colors duration-200">
           {member.name}
         </h3>
 
         {/* Role */}
-        <p className="text-blue-600 font-semibold text-center mb-4 text-sm uppercase tracking-wide group-hover:text-blue-700 transition-colors duration-200">
+        <p className="text-blue-600 font-semibold text-center mb-2 md:mb-4 text-sm uppercase tracking-wide group-hover:text-blue-700 transition-colors duration-200">
           {member.role}
-        </p>
-
-        {/* Description */}
-        <p className="text-black text-sm leading-relaxed text-center opacity-80 group-hover:opacity-100 transition-opacity duration-200">
-          {member.description}
         </p>
 
         {/* Decorative bottom border */}

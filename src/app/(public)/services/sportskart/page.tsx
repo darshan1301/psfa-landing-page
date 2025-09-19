@@ -16,14 +16,6 @@ import {
   Truck,
 } from "lucide-react";
 
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: string;
-  image: string;
-}
-
 export const metadata: Metadata = {
   title: "SportsKart - Premium Sports Equipment Online in India | PSFA",
   description:
@@ -37,38 +29,104 @@ export const metadata: Metadata = {
   ],
 };
 
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: string;
+  image: string;
+}
+
 const products: Product[] = [
   {
     id: 1,
-    name: "Professional Football",
-    description: "Premium-grade football for training and matches.",
-    price: "₹1,200",
+    name: "SS TON Silver Edition EW Bat",
+    description:
+      "Premium English Willow cricket bat by SS TON – Silver Edition with massive edges and great pickup.",
+    price: "₹33,000",
     image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1757153313/61RpRYFb2wL._SX569__afsxlz.jpg",
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758114701/Products/5-7_1_a8lk2i.jpg", // example from Cricketer Shop :contentReference[oaicite:0]{index=0}
   },
   {
     id: 2,
-    name: "Cricket Bat",
-    description: "Lightweight willow bat for powerful shots.",
-    price: "₹2,500",
+    name: "SG RSD Xtreme Cricket Bat",
+    description:
+      "SG RSD Xtreme bat: aggressive profile, mid to low sweet spot, suited for power hitters.",
+    price: "₹12,500",
     image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1757153313/61Q7yRX-xmL._SY879__hktkwz.jpg",
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758114754/Products/4_464508c4-4681-460b-8b85-e1784521d874_kbaygi.webp", // placeholder
   },
   {
     id: 3,
-    name: "Badminton Racket",
-    description: "Carbon fiber racket with excellent shuttle control.",
-    price: "₹1,800",
+    name: "Nivia Dominator 2.0 Football Shoes",
+    description:
+      "Unisex Nivia Dominator 2.0 – high performance football shoes with durable outsole.",
+    price: "₹4,200",
     image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1757153313/51Gzr2GK5QL_zw88st.jpg",
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758114829/Products/FB-1157BK_Dominator_2.0_1_opcqeu.webp", // placeholder
   },
   {
     id: 4,
-    name: "Yoga & Pilates Mat",
-    description: "Non-slip mat for yoga and floor exercises.",
-    price: "₹800",
+    name: "Adidas Predator Club FG Soccer Cleats",
+    description:
+      "Adidas Predator Club Firm Ground cleats – classic Predator control, good grip on FG surfaces.",
+    price: "₹6,999",
     image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1757153312/1000785167_iszd23.jpg",
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758114944/Products/Predator_Club_Flexible_Ground_Football_Boots_Black_IG7760_01_standard_hover_fkdmlz.avif", // placeholder
+  },
+  {
+    id: 5,
+    name: "COSCO Brazil Intl Match Standard Football",
+    description:
+      "COSCO Brazil – International Match Standard size 5 football, durable stitched panels.",
+    price: "₹1,600",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758115014/Products/5bc3mNQ8S8sW2bn59eGT7134IObDqkg4BGhn8l84_mzy4vh.webp", // placeholder
+  },
+  {
+    id: 6,
+    name: "Yonex Badminton Racket",
+    description:
+      "Yonex badminton racket – lightweight, great for control and power.",
+    price: "₹3,499",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758115080/Products/yonex_nanoflare_speed_7_black_orange._1_1024x1024_2x_gwafqy.webp", // placeholder
+  },
+  {
+    id: 7,
+    name: "SLICE T700 Raw Carbon Fibre Paddle",
+    description:
+      "Slice T700 Paddle with raw carbon fibre – designed for superior strength and responsiveness.",
+    price: "₹7,499",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758115157/Products/51JmMZB-sBL._UF894_1000_QL80__vnyhrt.jpg", // placeholder
+  },
+  {
+    id: 8,
+    name: "PowerMax Adjustable Dumbbells Set",
+    description:
+      "PowerMax Dumbbell set – adjustable, steel/iron plates, suitable for home gym.",
+    price: "₹8,549",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758115291/Products/m22157900_d9e6wf.jpg", // from Flipkart for PDS-30C set :contentReference[oaicite:1]{index=1}
+  },
+  {
+    id: 9,
+    name: "Wilson Tennis Balls (Can of 3)",
+    description:
+      "Wilson premium tennis balls – pressurized can of three, ideal for club/play sessions.",
+    price: "₹850",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758115345/Products/a730a651-e43b-4db1-b101-897b7c5bb3c3_64528_1_pxaios.avif", // placeholder
+  },
+  {
+    id: 10,
+    name: "Nivia Warrior Basketball",
+    description:
+      "Nivia Warrior basketball – indoor/outdoor resin surface, great grip and rebound.",
+    price: "₹1,900",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758115407/Products/81dDP81aKrL_bapdbe.jpg", // placeholder
   },
 ];
 
@@ -131,7 +189,7 @@ export default function SportsKartPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {products.map((product) => (
               <div key={product.id} className="group relative">
-                <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2">
+                <div className="bg-white border h-full border-gray-200 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2">
                   {/* Product Image */}
                   <div className="relative w-full h-56 mb-6 overflow-hidden rounded-2xl bg-gray-100">
                     <Image
@@ -153,12 +211,14 @@ export default function SportsKartPage() {
                     </p>
 
                     {/* Price and Button */}
-                    <div className="flex items-center justify-between pt-4">
+                    <div className="flex items-center justify-between pt-10">
                       {/* <span className="text-2xl font-bold text-gray-900">
                         {product.price}
                       </span> */}
-                      <Link href="/contact" className="inline-block">
-                        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm">
+                      <Link
+                        href="/contact"
+                        className="inline-block absolute bottom-4 mt-4">
+                        <button className="bg-blue-600  hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm">
                           Enquire
                         </button>
                       </Link>

@@ -67,12 +67,12 @@ const ContactForm = () => {
             Subscribe
           </p>
           <p className="px-3 text-black bg-gray-300 tracking-tight py-1 border border-gray-300 rounded-full">
-            Exclusive Offers!
+            Sports News
           </p>
         </div>
         <div className="">
           <h3 className=" text-4xl lg:text-6xl leading">
-            Get the Latest Updates, Special Offers and Exclusive Event
+            Get the Latest Sports News, Special Offers and Exclusive Event
             Invitations!
           </h3>
         </div>
@@ -83,7 +83,7 @@ const ContactForm = () => {
             className=" w-full font-thin outline-0"
             type="text"
             name="emailNumber"
-            placeholder="Enter your email or number "
+            placeholder="Enter your emai "
             disabled={isLoading}
           />
           <button

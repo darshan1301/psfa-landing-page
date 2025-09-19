@@ -12,7 +12,6 @@ export async function GET() {
         id: true,
         name: true,
         role: true,
-        description: true,
         image: true,
         yearsOfExperience: true,
       },
@@ -44,7 +43,6 @@ export async function POST(request: Request) {
       data: {
         name,
         role,
-        description,
         image: image || "",
         yearsOfExperience: parseInt(yearsOfExperience) || 0,
       },

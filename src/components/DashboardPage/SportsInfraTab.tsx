@@ -19,7 +19,6 @@ type InfrastructurePayload = {
   id?: string;
   name: string;
   location: string;
-  description: string;
   Area?: number;
   images: string[];
   Amenities: string[];

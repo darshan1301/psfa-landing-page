@@ -1,4 +1,3 @@
-// app/astp/page.tsx
 import React from "react";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -19,6 +18,7 @@ import {
 } from "lucide-react";
 import { Section } from "@/components/Section";
 import FAQItem from "@/components/FAQItem";
+import Astpvid from "@/components/Astpvid";
 
 export const metadata: Metadata = {
   title: "Annual Sports Training Program for Schools & Colleges | PSFA ASTP",
@@ -48,7 +48,7 @@ export default async function ASTPPage() {
         </p>
         <Link href="/contact">
           <button className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-4 rounded-full shadow-lg transition transform hover:scale-105 text-lg">
-            Book a Campus Demo
+            Program Insights
           </button>
         </Link>
       </section>
@@ -61,7 +61,7 @@ export default async function ASTPPage() {
           items={[
             {
               title: "Custom Sports Mix",
-              desc: "1–3 sports per institute, customizable to your needs.",
+              desc: "3-5 sports per institute, customizable to your needs.",
               icon: Layers,
               color: "from-blue-500 to-indigo-600",
             },
@@ -94,7 +94,7 @@ export default async function ASTPPage() {
 
         {/* Tech Enablement */}
         <Section
-          title="Tech Enablement (Optional)"
+          title="Ai/Tech Enablement "
           items={[
             {
               title: "Fitness Trackers",
@@ -191,6 +191,7 @@ export default async function ASTPPage() {
             },
           ]}
         />
+        <Astpvid heading="Take A Look At ASTP" />
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 sm:px-10 py-20">
           <h2 className="text-3xl sm:text-4xl font-light text-gray-900 mb-12 text-center">

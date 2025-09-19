@@ -11,7 +11,6 @@ export async function GET() {
         id: true,
         name: true,
         role: true,
-        description: true,
         image: true,
         yearsOfExperience: true,
       },

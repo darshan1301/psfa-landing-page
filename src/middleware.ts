@@ -15,7 +15,6 @@ export async function middleware(request: NextRequest) {
     pathname === "/panel/signup" ||
     pathname === "/panel/login/"
   ) {
-    console.log("Allowing access to login page");
     return NextResponse.next();
   }
 
@@ -47,8 +46,7 @@ export async function middleware(request: NextRequest) {
 
   try {
     // Actually verify the token - this was commented out!
-    const { payload } = await jwtVerify(token, secret);
-    console.log("Token verified successfully", payload);
+    await jwtVerify(token, secret);
     return NextResponse.next();
   } catch (err) {
     console.warn("Invalid token:", err);

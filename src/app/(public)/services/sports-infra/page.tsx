@@ -2,7 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import { ImageGallery } from "@/components/ImageGallery";
 import { GET } from "@/app/api/public-api/sports-infra/route";
-import { ArrowRight, Trophy } from "lucide-react";
+import { ArrowRight, DraftingCompass } from "lucide-react";
 import Link from "next/link";
 import InfraPage from "@/components/InfraPage";
 
@@ -64,109 +64,14 @@ export default async function Page() {
                 and cricket nets to full-scale academies.
               </p>
             </section>
-
-            {infrastructures.map((infrastructure, index) => (
-              <div
-                key={infrastructure.id}
-                className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.02]">
-                <div
-                  className={`${
-                    index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                  } flex flex-col lg:flex`}>
-                  {/* Image Section */}
-                  <div className="lg:w-1/2 w-full p-2 lg:p-8">
-                    <ImageGallery
-                      images={infrastructure.images}
-                      responsiveHeights="h-64 sm:h-80 md:h-96 lg:h-[500px]"
-                      aspectRatio="aspect-w-10 aspect-h-9"
-                    />
-                  </div>
-
-                  {/* Content Section */}
-                  <div className="lg:w-1/2 w-full p-8 lg:p-12 flex flex-col justify-between">
-                    <div className="space-y-6">
-                      {/* Header */}
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-2 text-blue-600">
-                          <svg
-                            className="w-5 h-5"
-                            fill="currentColor"
-                            viewBox="0 0 20 20">
-                            <path
-                              fillRule="evenodd"
-                              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          <span className="font-medium text-base">
-                            {infrastructure.location}
-                          </span>
-                        </div>
-
-                        <h2 className="text-2xl sm:text-4xl uppercase font-medium text-gray-900 leading-tight">
-                          {infrastructure.name}
-                        </h2>
-                      </div>
-
-                      {/* Description */}
-                      <div className="prose prose-lg max-w-none">
-                        <p className="text-gray-600 leading-relaxed text-base">
-                          {infrastructure.description}
-                        </p>
-                      </div>
-
-                      {/* Stats */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {infrastructure.Area && (
-                          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 text-center border border-blue-200">
-                            <div className="text-2xl font-bold text-blue-600">
-                              {infrastructure.Area.toLocaleString()}
-                            </div>
-                            <div className="text-sm text-blue-700 font-medium">
-                              Sq Feet
-                            </div>
-                          </div>
-                        )}
-                        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 text-center border border-green-200">
-                          <div className="text-2xl font-bold text-green-600">
-                            {infrastructure.Amenities.length}
-                          </div>
-                          <div className="text-sm text-green-700 font-medium">
-                            Amenities
-                          </div>
-                        </div>
-                        <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 text-center border border-purple-200">
-                          <div className="text-2xl font-bold text-purple-600">
-                            {infrastructure.images.length}
-                          </div>
-                          <div className="text-sm text-purple-700 font-medium">
-                            Photos
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Amenities */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-semibold text-gray-900">
-                          Key Amenities
-                        </h3>
-                        <div className="flex flex-wrap gap-2">
-                          {infrastructure.Amenities.map(
-                            (amenity, amenityIndex) => (
-                              <span
-                                key={amenityIndex}
-                                className="px-3 py-1.5 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 rounded-full text-sm font-medium hover:from-blue-200 hover:to-purple-200 transition-all duration-300 cursor-default border border-blue-200">
-                                {amenity}
-                              </span>
-                            )
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+              {infrastructures.map((infrastructure) => (
+                <InfrastructureCard
+                  key={infrastructure.id}
+                  infrastructure={infrastructure}
+                />
+              ))}
+            </div>
           </div>
 
           {/* Empty State */}
@@ -197,9 +102,9 @@ export default async function Page() {
             </div>
           )}
           <div className="text-center bg-gradient-to-br mt-10 from-gray-900 to-black shadow-md rounded-3xl p-8 md:p-12 mx-4 lg:mx-0">
-            <Trophy className="w-12 h-12 text-red-400 mx-auto mb-6" />
+            <DraftingCompass className="w-12 h-12 text-red-400 mx-auto mb-6" />
             <h2 className="text-2xl md:text-3xl font-light tracking-tight text-white mb-4">
-              Interested in collaborating?
+              Get 3d Models of your 2d infra layouts
             </h2>
             <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
               Visit our Contact page to connect with our team and kick things
@@ -217,3 +122,77 @@ export default async function Page() {
     </div>
   );
 }
+
+const InfrastructureCard = ({
+  infrastructure,
+}: {
+  infrastructure: SportsInfrastructure;
+}) => (
+  <div className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.02] h-full">
+    {/* Image Section - Full width on top */}
+    <div className="w-full p-4">
+      <ImageGallery
+        images={infrastructure.images}
+        responsiveHeights="h-56 sm:h-64 md:h-[30rem]"
+        aspectRatio="aspect-w-16 aspect-h-10"
+      />
+    </div>
+
+    {/* Content Section - Below images */}
+    <div className="p-6 space-y-6">
+      {/* Header */}
+      <div className="space-y-4">
+        <div className="flex items-center gap-2 text-blue-600">
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fillRule="evenodd"
+              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <span className="font-medium uppercase text-base">
+            {infrastructure.location}
+          </span>
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-3 gap-3">
+        {infrastructure.Area && (
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-3 text-center border border-blue-200">
+            <div className="text-lg font-bold text-blue-600">
+              {infrastructure.Area.toLocaleString()}
+            </div>
+            <div className="text-xs text-blue-700 font-medium">Sq Feet</div>
+          </div>
+        )}
+        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-3 text-center border border-green-200">
+          <div className="text-lg font-bold text-green-600">
+            {infrastructure.Amenities.length}
+          </div>
+          <div className="text-xs text-green-700 font-medium">Amenities</div>
+        </div>
+        <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-3 text-center border border-purple-200">
+          <div className="text-lg font-bold text-purple-600">
+            {infrastructure.images.length}
+          </div>
+          <div className="text-xs text-purple-700 font-medium">Photos</div>
+        </div>
+      </div>
+
+      {/* Amenities */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold text-gray-900">Key Amenities</h3>
+        <div className="flex flex-wrap gap-2">
+          {infrastructure.Amenities.map((amenity, amenityIndex) => (
+            <span
+              key={amenityIndex}
+              className="px-3 py-1.5 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 rounded-full text-sm font-medium hover:from-blue-200 hover:to-purple-200 transition-all duration-300 cursor-default border border-blue-200">
+              {amenity}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+);

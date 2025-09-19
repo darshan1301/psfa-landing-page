@@ -21,7 +21,6 @@ type Member = {
   id?: string;
   name: string;
   role: string;
-  description: string;
   image: string;
   yearsOfExperience: number;
 };
@@ -173,7 +172,6 @@ export function TeamTab() {
                   </p>
                 </div>
               </div>
-              <p className="mt-4 text-gray-700">{member.description}</p>
 
               <div className="mt-4 flex items-center gap-3">
                 <label className="cursor-pointer text-sm text-blue-600 hover:underline">

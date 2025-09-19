@@ -1,7 +1,6 @@
 import AllSports from "@/components/Allsports";
 import ContactForm from "@/components/SubscribeForm";
 import ServicesSection from "@/components/ServicesSection";
-import AnimatedTestimonials from "@/components/Testimonials";
 import prisma from "@/lib/db";
 
 export const metadata = {
@@ -23,26 +22,14 @@ export const metadata = {
   },
 };
 
-export const revalidate = 60; // cache for 60 seconds (ISR)
-
 export default async function Home() {
-  const [sports, testimonials] = await Promise.all([
+  const [sports] = await Promise.all([
     prisma.sport.findMany({
       orderBy: { createdAt: "asc" },
       select: {
         id: true,
         name: true,
         image: true,
-      },
-    }),
-    prisma.testimonial.findMany({
-      orderBy: { createdAt: "asc" },
-      select: {
-        id: true,
-        name: true,
-        comment: true,
-        image: true,
-        membership: true,
       },
     }),
   ]);
@@ -52,7 +39,7 @@ export default async function Home() {
       <main className="">
         <div className="lg:w-full lg:h-fit h-screen overflow-hidden">
           <video
-            src={"/webvideo-compressed.mp4"}
+            src={"/psfa-vid.mp4"}
             width={1920}
             height={1080}
             autoPlay
@@ -64,7 +51,7 @@ export default async function Home() {
         <ServicesSection />
         {/* <hr className="border-t border-2 border-gray-300 mx-8" /> */}
         <AllSports sports={sports || []} />
-        <AnimatedTestimonials testimonials={testimonials || []} />
+        {/* <AnimatedTestimonials testimonials={testimonials || []} /> */}
         <ContactForm />
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center"></footer>

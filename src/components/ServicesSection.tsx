@@ -15,10 +15,8 @@ if (typeof window !== "undefined") {
 interface ServiceCard {
   id: number;
   title: string;
-  description: string;
   shortDescription: string;
   tag: string;
-  bgColor: string;
   features: string[];
   capacity?: string;
   availability?: string;
@@ -27,27 +25,11 @@ interface ServiceCard {
 
 const serviceCards: ServiceCard[] = [
   {
-    id: 1,
-    title: "Sports Academy",
-    description: "Versatile space for a wide range of activities",
-    shortDescription:
-      "Multi-purpose outdoor facility with natural turf and professional lighting for various sports and training activities.",
-    tag: "Outdoor Area",
-    bgColor: "bg-gradient-to-br from-green-400 via-green-500 to-blue-500",
-    features: ["Natural Turf", "Pro Lighting", "Multi-Sport"],
-    capacity: "50+ Athletes",
-    availability: "24/7 Access",
-    image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/zgobehvpmmgyepbmbol3",
-  },
-  {
     id: 2,
     title: "Sports Space",
-    description: "Professional indoor futsal court with premium flooring",
     shortDescription:
-      "FIFA-standard indoor futsal court with shock-absorbing flooring, perfect for year-round training and matches.",
+      "Multi-sports commercial centres, membership for all ages. Events and tournaments hosting.",
     tag: "Indoor",
-    bgColor: "bg-gradient-to-br from-blue-400 via-blue-500 to-purple-500",
     features: ["FIFA Standard", "Shock Absorption", "Climate Controlled"],
     capacity: "10v10 Games",
     availability: "All Weather",
@@ -57,11 +39,9 @@ const serviceCards: ServiceCard[] = [
   {
     id: 3,
     title: "Sports Infra",
-    description: "Open field perfect for team training and drills",
     shortDescription:
-      "Spacious training facility with marked zones for tactical drills, fitness training, and team practice sessions.",
+      "Design: Smart, compliant layouts, Develop: Precision-built facilities, Maintain: Safety and durability focus, Manage: Efficient daily operations",
     tag: "Training",
-    bgColor: "bg-gradient-to-br from-orange-400 via-orange-500 to-red-500",
     features: ["Tactical Zones", "Fitness Area", "Team Sessions"],
     capacity: "Full Squad",
     availability: "Day & Night",
@@ -70,17 +50,39 @@ const serviceCards: ServiceCard[] = [
   },
   {
     id: 4,
-    title: "Sportskart",
-    description: "State-of-the-art equipment for strength training",
+    title: "Annual Sports Training Programs",
     shortDescription:
-      "Modern gym with professional-grade equipment, personal training services, and recovery facilities for athletes.",
+      "Delivering a structured international sports training program across educational institutions.",
     tag: "Fitness",
-    bgColor: "bg-gradient-to-br from-purple-400 via-purple-500 to-pink-500",
     features: ["Pro Equipment", "Personal Training", "Recovery Zone"],
     capacity: "30 Members",
     availability: "6AM - 11PM",
     image:
       "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/esldfd5vn6esxriidf2o",
+  },
+  {
+    id: 5,
+    title: "Sportskart",
+    shortDescription:
+      "Sportskart is one-stop destination for premium sports gear and equipment, trusted by athletes and delivered to your door.",
+    tag: "Fitness",
+    features: ["Pro Equipment", "Personal Training", "Recovery Zone"],
+    capacity: "30 Members",
+    availability: "6AM - 11PM",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/esldfd5vn6esxriidf2o",
+  },
+  {
+    id: 1,
+    title: "Sports Academy",
+    shortDescription:
+      "The Sports Academy provides progressive training with expert coaching, strategic development, and tailored nutrition.",
+    tag: "Outdoor Area",
+    features: ["Natural Turf", "Pro Lighting", "Multi-Sport"],
+    capacity: "50+ Athletes",
+    availability: "24/7 Access",
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/zgobehvpmmgyepbmbol3",
   },
 ];
 
@@ -258,10 +260,11 @@ export default function ServicesShowcase(): JSX.Element {
         <div className="flex flex-col h-full md:hidden space-y-6">
           {/* 1. Text + CTA (same as desktop’s left column) */}
           <div ref={headerRef} className="px-4 space-y-4">
-            <p className="text-gray-700 leading-relaxed text-base">
-              From structured school programs to corporate wellness, our
-              comprehensive services ensure a seamless experience—whether you’re
-              training, competing, or just staying fit.
+            <p className="text-gray-700 leading-relaxed text-lg">
+              Pratigrham Sports For All Pvt Ltd is a sports management company
+              committed to making sports and fitness a way of life. Through
+              structured training programs and expert-led sessions, we aim to
+              make sports accessible and impactful for all age groups.
             </p>
 
             <div ref={ctaRef} className="w-full">
@@ -389,9 +392,10 @@ export default function ServicesShowcase(): JSX.Element {
             className="space-y-6 md:my-4 md:col-span-2 lg:col-span-1 lg:h-max flex flex-col  justify-between desktop-animate"
             ref={headerRef}>
             <p className="text-black md:text-2xl px-4 leading-tight text-base lg:font-normal tracking-tighter lg:text-3xl">
-              From structured school programs to corporate wellness, our
-              comprehensive services ensure a seamless experience—whether you’re
-              training, competing, or just staying fit.
+              Pratigrham Sports For All Pvt Ltd is a sports management company
+              committed to making sports and fitness a way of life. Through
+              structured training programs and expert-led sessions, we aim to
+              make sports accessible and impactful for all age groups.
             </p>
 
             <div ref={ctaRef}>

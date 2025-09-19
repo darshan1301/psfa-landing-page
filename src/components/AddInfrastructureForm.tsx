@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { useImageUpload } from "@/hooks/useImageUpload";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
@@ -20,7 +19,6 @@ type InfrastructurePayload = {
   id?: string;
   name: string;
   location: string;
-  description: string;
   Area?: number;
   images: string[];
   Amenities: string[];
@@ -35,7 +33,6 @@ type Props = {
 type FormData = {
   name: string;
   location: string;
-  description: string;
   Area?: number;
   Amenities: string;
 };
@@ -82,7 +79,6 @@ export function AddInfrastructureForm({
     if (initialData) {
       setValue("name", initialData.name);
       setValue("location", initialData.location);
-      setValue("description", initialData.description);
       setValue("Area", initialData.Area);
       setValue("Amenities", initialData.Amenities.join(", "));
       const filled = initialData.images.slice(0, 5);
@@ -214,14 +210,6 @@ export function AddInfrastructureForm({
             error={errors.location?.message}
           />
 
-          <TextareaBlock
-            label="Description"
-            register={register("description", {
-              required: "Description is required",
-            })}
-            error={errors.description?.message}
-          />
-
           <InputBlock
             label="Area (sqft)"
             register={register("Area")}
@@ -311,24 +299,6 @@ function InputBlock({
     <div>
       <label className="block text-sm font-medium mb-1">{label}</label>
       <Input type={type} {...register} placeholder={placeholder} />
-      {error && <p className="text-sm text-red-600">{error}</p>}
-    </div>
-  );
-}
-
-function TextareaBlock({
-  label,
-  register,
-  error,
-}: {
-  label: string;
-  register: import("react-hook-form").UseFormRegisterReturn;
-  error?: string;
-}) {
-  return (
-    <div>
-      <label className="block text-sm font-medium mb-1">{label}</label>
-      <Textarea {...register} />
       {error && <p className="text-sm text-red-600">{error}</p>}
     </div>
   );

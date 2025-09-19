@@ -26,9 +26,9 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const { name, location, description, Area, images, Amenities } = body;
+    const { name, location, Area, images, Amenities } = body;
 
-    if (!name || !location || !description || !images?.length) {
+    if (!name || !location || !images?.length) {
       return NextResponse.json(
         { error: "Missing required fields or images" },
         { status: 400 }
@@ -39,7 +39,6 @@ export async function POST(req: NextRequest) {
       data: {
         name,
         location,
-        description,
         Area: Area || null,
         images,
         Amenities,
@@ -59,9 +58,9 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
-    const { id, name, location, description, Area, images, Amenities } = body;
+    const { id, name, location, Area, images, Amenities } = body;
 
-    if (!id || !name || !location || !description || !images?.length) {
+    if (!id || !name || !location || !images?.length) {
       return NextResponse.json(
         { error: "Missing required fields or images" },
         { status: 400 }
@@ -73,7 +72,6 @@ export async function PUT(req: NextRequest) {
       data: {
         name,
         location,
-        description,
         Area: Area || null,
         images,
         Amenities,

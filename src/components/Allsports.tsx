@@ -68,7 +68,7 @@ const FacilitiesCarousel = ({ sports }: { sports: Sport[] }) => {
   const canGoNext = currentSlide < maxIndex;
 
   return (
-    <div className="lg:max-w-fit bg-white lg:rounded-4xl lg:mx-4 px-6 py-4 pt-10 lg:px-16 lg:py-8">
+    <div className="lg:max-w-fit bg-white lg:rounded-4xl lg:mx-4 px-6 py-4 pt-10 lg:px-16 lg:py-4 my-4">
       {/* Header / Search / View All */}
       <div className="flex lg:flex-row justify-between md:justify-center lg:justify-between mb-6 items-center md:my-10 gap-4">
         <div className="md:flex w-full md:gap-4 lg:items-center ">
@@ -76,7 +76,7 @@ const FacilitiesCarousel = ({ sports }: { sports: Sport[] }) => {
             Sports
           </span>
           <h2 className="text-black text-xl max-w-fit md:max-w-full lg:px-4 leading-tight lg:font-normal tracking-tighter md:text-2xl lg:text-3xl">
-            Our Facilities
+            Sports We Deal In
           </h2>
         </div>
         {/* <div className="items-end lg:gap-4 w-60 md:w-40">

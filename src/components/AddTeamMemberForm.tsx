@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { useImageUpload } from "@/hooks/useImageUpload";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
@@ -21,7 +20,6 @@ import { Plus, Upload, Loader2, X } from "lucide-react";
 interface MemberPayload {
   name: string;
   role: string;
-  description: string;
   image: string;
   yearsOfExperience: number;
 }
@@ -130,14 +128,6 @@ export default function AddMemberForm({ onSubmit }: Props) {
             error={errors.yearsOfExperience?.message}
           />
 
-          <TextareaBlock
-            label="Description"
-            register={register("description", {
-              required: "Description is required",
-            })}
-            error={errors.description?.message}
-          />
-
           <div>
             <label className="block text-sm font-medium mb-1">
               Profile Image
@@ -224,24 +214,6 @@ function InputBlock({
     <div>
       <label className="block text-sm font-medium mb-1">{label}</label>
       <Input type={type} {...register} placeholder={placeholder} />
-      {error && <p className="text-sm text-red-600">{error}</p>}
-    </div>
-  );
-}
-
-function TextareaBlock({
-  label,
-  register,
-  error,
-}: {
-  label: string;
-  register: import("react-hook-form").UseFormRegisterReturn;
-  error?: string;
-}) {
-  return (
-    <div>
-      <label className="block text-sm font-medium mb-1">{label}</label>
-      <Textarea {...register} />
       {error && <p className="text-sm text-red-600">{error}</p>}
     </div>
   );

@@ -22,7 +22,6 @@ export async function GET() {
           role: true,
           image: true,
           yearsOfExperience: true,
-          description: true,
         },
       }),
     ]);

@@ -8,7 +8,7 @@ const LEFT_NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   {
-    label: "Verticals",
+    label: "Offerings",
     href: "/services",
     dropdown: [
       { label: "Sports For All", href: "/services/sports-for-all" },
@@ -34,7 +34,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const showNavbar = () => {
-      const delay = window.innerWidth >= 1024 ? 4000 : 3000;
+      const delay = window.innerWidth >= 1024 ? 3000 : 2000;
       const t = setTimeout(() => setIsVisible(true), delay);
       return () => clearTimeout(t);
     };
