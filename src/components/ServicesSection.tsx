@@ -58,7 +58,7 @@ const serviceCards: ServiceCard[] = [
     capacity: "30 Members",
     availability: "6AM - 11PM",
     image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758275301/psfa-landing-page/IMG-20250829-WA0050_kld75s.jpg",
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/c_scale,h_1175/v1758617529/psfa-landing-page/WhatsApp_Image_2025-09-23_at_2.04.26_PM_smo6i8.jpg",
   },
   {
     id: 5,
@@ -70,7 +70,7 @@ const serviceCards: ServiceCard[] = [
     capacity: "30 Members",
     availability: "6AM - 11PM",
     image:
-      "https://res.cloudinary.com/hotel-booking-1301/image/upload/f_auto,q_auto/v1/psfa-landing-page/esldfd5vn6esxriidf2o",
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/c_scale,h_1134/v1758620622/psfa-landing-page/sample_img_knjp6l.jpg",
   },
   {
     id: 1,
@@ -292,14 +292,7 @@ export default function ServicesShowcase(): JSX.Element {
               style={{
                 backgroundImage: `${backgroundImage}`,
               }}
-              ref={mainCardRef}>
-              {/* Floating Element (mirrors desktop) */}
-              <div className="absolute bottom-4 left-4 mx-4 bg-black/15 backdrop-blur-sm rounded-full px-3 py-1">
-                <span className="text-white text-xs">
-                  Premium Sports Services
-                </span>
-              </div>
-            </div>
+              ref={mainCardRef}></div>
           </div>
 
           {/* 3. Service Card + Short Description + Navigation (similar to desktop’s right column) */}
@@ -321,7 +314,7 @@ export default function ServicesShowcase(): JSX.Element {
 
               {/* Title at bottom-left (mirrors desktop style) */}
               <div className="absolute inset-0 flex items-end p-6">
-                <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-1 max-w-xs w-fit">
+                <div className="bg-black backdrop-blur-sm rounded-full px-4 py-1 max-w-xs w-fit">
                   <h3 className="text-white font-medium tracking-tight">
                     {currentService.title}
                   </h3>
@@ -421,12 +414,7 @@ export default function ServicesShowcase(): JSX.Element {
               className="relative h-88 mx-4 md:h-[35rem] lg:h-[500px] bg-cover bg-center rounded-3xl overflow-hidden shadow-2xl"
               style={{
                 backgroundImage: `${backgroundImage}`,
-              }}>
-              {/* Floating Elements */}
-              <div className="absolute bottom-4 mx-4 bg-black/15 backdrop-blur-sm rounded-full px-4 py-2">
-                <span className="text-white">Premium Sports Services</span>
-              </div>
-            </div>
+              }}></div>
           </div>
 
           {/* Column 3: Service Image and Single Info Card */}
@@ -450,7 +438,7 @@ export default function ServicesShowcase(): JSX.Element {
               />
 
               <div className="absolute inset-0 flex items-end p-6">
-                <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-1 max-w-xs w-fit">
+                <div className="bg-black backdrop-blur-sm rounded-full px-4 py-1 max-w-xs w-fit">
                   <h3 className="text-white font-normal tracking-tight">
                     {currentService.title}
                   </h3>

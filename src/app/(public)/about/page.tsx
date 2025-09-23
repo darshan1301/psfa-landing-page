@@ -67,8 +67,12 @@ export default function AboutUsSection() {
         }
 
         const { teamMembers, milestones } = await response.json();
-        setTeamMembers(teamMembers);
+        // render milestones first
         setMilestones(milestones);
+
+        setTimeout(() => {
+          setTeamMembers(teamMembers);
+        }, 500);
       } catch (error) {
         console.error("Error fetching about us data:", error);
       } finally {
@@ -106,7 +110,7 @@ export default function AboutUsSection() {
     );
   }
 
-  if (!milestones.length || !teamMembers.length) {
+  if (!milestones.length) {
     return (
       <div className="text-center text-gray-500 py-20">
         <p>No data available at the moment.</p>
@@ -168,8 +172,8 @@ export default function AboutUsSection() {
               <p className="text-gray-700 leading-relaxed mb-6">
                 Founded in 2018, Pratigrham Sports Academy began as a small
                 community initiative to provide quality sports training. Today,
-                we stand as a premier sports facility serving over 1000+
-                athletes annually.
+                we stand as a premier sports training facility serving over
+                1000+ athletes annually.
               </p>
             </div>
 

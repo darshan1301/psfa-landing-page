@@ -10,7 +10,6 @@ import {
   CheckCircle,
   ArrowRight,
   Trophy,
-  ExternalLink,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,6 +29,7 @@ const services: Service[] = [
   {
     title: "Sports For All",
     tag: "sports-for-all",
+    link: <Link href="/services/sports-for-all">Learn More</Link>,
     icon: <School className="w-5 h-5 text-cyan-400" />,
     content: (
       <ul className="space-y-2">
@@ -117,15 +117,7 @@ const services: Service[] = [
     title: "Sports Space",
     tag: "sports-space",
     icon: <MapPin className="w-5 h-5 text-cyan-400" />,
-    link: (
-      <a
-        href="https://sportsspace.in"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-2">
-        Visit Sportsspace <ExternalLink className="w-4 h-4" />
-      </a>
-    ),
+    link: <Link href="/services/sportsspace">Learn More</Link>,
     content: (
       <ul className="space-y-2">
         <li className="flex items-start gap-2">
@@ -153,6 +145,7 @@ const services: Service[] = [
   {
     title: "SportsKart",
     tag: "sportskart",
+    link: <Link href="/services/sportskart">Learn More</Link>,
     icon: <ShoppingCart className="w-5 h-5 text-purple-400" />,
     content: (
       <ul className="space-y-2">

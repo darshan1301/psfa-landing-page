@@ -61,9 +61,9 @@ export default function page() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center">
+      <section className="relative min-h-[85vh] py-10 lg:py-0 lg:min-h-[80vh] flex items-center justify-center">
         <Image
-          src="https://res.cloudinary.com/hotel-booking-1301/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1749796301/psfa-landing-page/gli2bkv9qoph2kza7fzh.jpg"
+          src="https://res.cloudinary.com/hotel-booking-1301/image/upload/v1758617430/psfa-landing-page/abner-campos-yZWuJN76luY-unsplash_mkhw0g.jpg"
           alt="Sportsspace background"
           fill
           className="object-cover object-center brightness-75"
@@ -81,7 +81,7 @@ export default function page() {
             />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">
-            Play more. <span className="text-blue-200">Book Faster.</span>
+            Play more. <span className="text-white">Book Faster.</span>
           </h1>
           <p className="mt-4 text-lg text-gray-100">
             Discover and book PSFA‑managed turfs, courts and arenas across the
@@ -116,7 +116,7 @@ export default function page() {
           for the ultimate sports experience.
         </p>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mb-16">
           {[
             {
               name: "Sportshub@LMH",

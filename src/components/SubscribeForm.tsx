@@ -49,19 +49,19 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="lg:mx-4 mx-auto md:max-w-3xl lg:max-w-full max-w-88 bg-black text-white rounded-4xl p-8 lg:p-4 md:grid md:grid-cols-2 lg:grid-cols-4">
+    <div className="lg:mx-4 mx-4 md:mx-auto sm:max-w-3xl lg:max-w-full max-w-88 bg-black text-white rounded-4xl p-8 lg:p-4 md:grid md:grid-cols-2 lg:grid-cols-4">
       <div className="md:w-80 h-88 rounded-2xl overflow-hidden">
         <Image
           alt="sports"
           src={
             "https://res.cloudinary.com/hotel-booking-1301/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1749104766/psfa-landing-page/wwkdqhs4pig5yww8iq2j.jpg"
           }
-          width={500}
+          width={1000}
           height={400}
-          className=" w-80 h-88 object-cover"
+          className="sm:w-max md:w-auto w-80 h-88 object-cover"
         />
       </div>
-      <div className="lg:col-span-3 lg:mt-4 mt-8 gap-6 flex flex-col justify-center">
+      <div className="lg:col-span-3 lg:mt-4 mt-8 gap-6 md:ml-22 flex flex-col justify-center">
         <div className="flex gap-4">
           <p className="px-3 text tracking-tight py-1 border border-gray-300 rounded-full">
             Subscribe
@@ -71,16 +71,16 @@ const ContactForm = () => {
           </p>
         </div>
         <div className="">
-          <h3 className=" text-4xl lg:text-6xl leading">
+          <h3 className="text-4xl lg:text-5xl leading">
             Get the Latest Sports News, Special Offers and Exclusive Event
             Invitations!
           </h3>
         </div>
         <form
           onSubmit={handleSubmit}
-          className="px-4 py-3 flex items-center justify-between bg-gray-900 border border-gray-700 rounded-full lg:w-2xl">
+          className="px-4 py-3 flex items-center justify-between bg-gray-900 border border-gray-700 rounded-full ">
           <input
-            className=" w-full font-thin outline-0"
+            className=" max-w-4xl font-thin outline-0"
             type="text"
             name="emailNumber"
             placeholder="Enter your emai "

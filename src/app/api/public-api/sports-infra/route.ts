@@ -4,7 +4,7 @@ export async function GET() {
   try {
     const infrastructures = await prisma.sportsInfrastructure.findMany({
       orderBy: {
-        name: "asc",
+        name: "desc",
       },
     });
 

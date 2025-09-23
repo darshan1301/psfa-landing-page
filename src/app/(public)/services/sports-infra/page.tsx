@@ -61,8 +61,8 @@ export default async function Page() {
           <InfraPage />
 
           {/* Infrastructure Grid */}
-          <div className="space-y-16">
-            <section className="text-center max-w-4xl mx-auto  sm:px-10 py-16">
+          <div className="md:space-y-16">
+            <section className="text-center max-w-4xl mx-auto  sm:px-10 py-8 md:py-16">
               <h2 className="text-3xl sm:text-4xl font-normal text-gray-900 mb-4">
                 Our Previous &{" "}
                 <span className="font-medium text-blue-600">

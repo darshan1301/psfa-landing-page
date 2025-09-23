@@ -29,12 +29,11 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const { name, role, description, image, yearsOfExperience } =
-      await request.json();
+    const { name, role, image, yearsOfExperience } = await request.json();
 
-    if (!name || !role || !description) {
+    if (!name || !role) {
       return NextResponse.json(
-        { error: "Name, role, and description are required" },
+        { error: "Name, and role are required" },
         { status: 400 }
       );
     }
