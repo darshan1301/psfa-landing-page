@@ -7,7 +7,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Calendar,
-  Users,
   Trophy,
   Target,
   Eye,
@@ -16,7 +15,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import Loading from "@/components/Loader";
-import TeamMemberCard from "@/components/TeamMemberCard";
+import TeamSection from "@/components/TeamSection";
 
 interface Milestone {
   id: number;
@@ -24,15 +23,6 @@ interface Milestone {
   title: string;
   description: string;
   image: string;
-}
-
-interface TeamMember {
-  id: string;
-  name: string;
-  role: string;
-  image: string;
-  description: string;
-  yearsOfExperience: number;
 }
 
 const containerVariants = {
@@ -49,7 +39,7 @@ const YearsOfExcellence = () => {
 
 export default function AboutUsSection() {
   const [currentMilestone, setCurrentMilestone] = useState(0);
-  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+
   const [isAnimating, setIsAnimating] = useState(false);
   const [milestones, setMilestones] = useState<Milestone[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -66,13 +56,9 @@ export default function AboutUsSection() {
           throw new Error("Failed to fetch data");
         }
 
-        const { teamMembers, milestones } = await response.json();
+        const milestones = await response.json();
         // render milestones first
         setMilestones(milestones);
-
-        setTimeout(() => {
-          setTeamMembers(teamMembers);
-        }, 500);
       } catch (error) {
         console.error("Error fetching about us data:", error);
       } finally {
@@ -349,33 +335,7 @@ export default function AboutUsSection() {
         </motion.div>
 
         {/* Team Section */}
-        {teamMembers.length > 0 && (
-          <motion.div
-            id="our-team"
-            className="mb-20 lg:mx-24 px-4"
-            variants={containerVariants}
-            initial="initial"
-            animate="animate">
-            <div className="text-center mb-12">
-              <div className="flex items-center justify-center mb-6">
-                <Users className="w-8 h-8 text-green-600 mr-3" />
-                <h2 className="text-3xl md:text-4xl font-normal tracking-tight text-gray-900">
-                  Meet Our Team
-                </h2>
-              </div>
-              <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-                Dedicated professionals committed to your success
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-8 items-center">
-              {teamMembers.map((member) => {
-                return <TeamMemberCard key={member.id} member={member} />;
-              })}
-            </div>
-          </motion.div>
-        )}
-
+        <TeamSection />
         {/* CTA Section */}
         <motion.div
           className="text-center bg-gradient-to-br mx-4 lg:mx-0 from-gray-900 to-black shadow-md rounded-3xl p-8 md:p-12"
