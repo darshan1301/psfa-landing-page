@@ -62,7 +62,7 @@ export default async function Page() {
         <Link
           href="/contact"
           className="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white text-base sm:text-lg font-semibold rounded-full shadow-lg transition transform hover:scale-105">
-          Join a Batch
+          Enroll in Our Academy
         </Link>
       </section>
 

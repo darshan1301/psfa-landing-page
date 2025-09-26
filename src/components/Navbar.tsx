@@ -8,7 +8,7 @@ const LEFT_NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   {
-    label: "Offerings",
+    label: "Services",
     href: "/services",
     dropdown: [
       { label: "Sports For All", href: "/services/sports-for-all" },

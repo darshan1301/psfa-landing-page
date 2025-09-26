@@ -123,7 +123,7 @@ export default async function Page() {
             </p>
             <Link href="/contact">
               <button className="inline-flex items-center bg-gradient-to-r from-white to-gray-300 text-black font-light px-8 py-4 rounded-full hover:from-gray-100 hover:to-white transition-all duration-200 shadow-lg text-lg">
-                Let&apos;s Connect
+                Get a 3D view
                 <ArrowRight className="ml-2 w-5 h-5" />
               </button>
             </Link>

@@ -59,7 +59,7 @@ export default async function ASTPPage() {
         </p>
         <Link href="/contact">
           <button className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-4 rounded-full shadow-lg transition transform hover:scale-105 text-lg">
-            Program Insights
+            Bring ASTP to Your Campus
           </button>
         </Link>
       </section>

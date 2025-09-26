@@ -2,6 +2,8 @@ import AllSports from "@/components/Allsports";
 import ContactForm from "@/components/SubscribeForm";
 import ServicesSection from "@/components/ServicesSection";
 import prisma from "@/lib/db";
+import WhyPsfaSection from "@/components/WhyPsfaSection";
+import ServicesCards from "@/components/ServicesCards";
 
 export const metadata = {
   title: "Pratigrham Sports For All",
@@ -49,6 +51,8 @@ export default async function Home() {
           />
         </div>
         <ServicesSection />
+        <ServicesCards />
+        <WhyPsfaSection />
         {/* <hr className="border-t border-2 border-gray-300 mx-8" /> */}
         <AllSports sports={sports || []} />
         {/* <AnimatedTestimonials testimonials={testimonials || []} /> */}

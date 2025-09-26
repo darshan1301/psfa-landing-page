@@ -93,7 +93,7 @@ export default function page() {
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 rounded-full bg-white text-black font-medium hover:bg-gray-100 transition">
-              Book a Ground
+              Book a Slot
             </Link>
             <Link
               href="https://sportsspace.in"

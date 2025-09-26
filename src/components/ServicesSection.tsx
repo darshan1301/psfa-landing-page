@@ -89,6 +89,8 @@ const serviceCards: ServiceCard[] = [
 const backgroundImage =
   "url('https://res.cloudinary.com/hotel-booking-1301/image/upload/c_scale,w_1630/v1758279727/psfa-landing-page/IMG_1451_pztjuj.jpg')";
 
+const microHero: string = `Pratigrham Sports For All Pvt Ltd is a sports management company committed to making sports and fitness a way of life. Through structured training programs and expert-led sessions, we aim to make sports accessible and impactful for all age groups.
+`;
 export default function ServicesShowcase(): JSX.Element {
   const [currentCard, setCurrentCard] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
@@ -263,12 +265,7 @@ export default function ServicesShowcase(): JSX.Element {
         <div className="flex flex-col h-full md:hidden space-y-6">
           {/* 1. Text + CTA (same as desktop’s left column) */}
           <div ref={headerRef} className="px-4 space-y-4">
-            <p className="text-gray-700 leading-relaxed text-lg">
-              Pratigrham Sports For All Pvt Ltd is a sports management company
-              committed to making sports and fitness a way of life. Through
-              structured training programs and expert-led sessions, we aim to
-              make sports accessible and impactful for all age groups.
-            </p>
+            <p className="text-gray-700 leading-relaxed text-lg">{microHero}</p>
 
             <div ref={ctaRef} className="w-full">
               <Link href="/services">
@@ -384,13 +381,10 @@ export default function ServicesShowcase(): JSX.Element {
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 my-8 gap-8 items-start h-full">
           {/* Column 1: Text Content */}
           <div
-            className="space-y-6 md:my-4 md:col-span-2 lg:col-span-1 lg:h-max flex flex-col  justify-between desktop-animate"
+            className="space-y-6 md:my-4 md:col-span-2 lg:col-span-1 lg:h-full lg:pb-20 flex flex-col  justify-between desktop-animate"
             ref={headerRef}>
             <p className="text-black md:text-2xl px-4 leading-tight text-base lg:font-normal tracking-tighter lg:text-3xl">
-              Pratigrham Sports For All Pvt Ltd is a sports management company
-              committed to making sports and fitness a way of life. Through
-              structured training programs and expert-led sessions, we aim to
-              make sports accessible and impactful for all age groups.
+              {microHero}
             </p>
 
             <div ref={ctaRef}>
