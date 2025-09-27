@@ -32,6 +32,10 @@ export default async function Home() {
         id: true,
         name: true,
         image: true,
+        status: true,
+      },
+      where: {
+        status: true,
       },
     }),
   ]);

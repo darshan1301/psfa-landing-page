@@ -85,12 +85,13 @@ export async function DELETE(request: Request) {
 
 export async function PUT(request: Request) {
   try {
-    const { id, name, image } = await request.json();
+    const data = await request.json();
+    const { id, name, image, status } = data;
 
     // Validate input
     if (!id || !name || !image) {
       return NextResponse.json(
-        { error: "ID, name, and image URL are required" },
+        { error: "ID, name, status and image URL are required" },
         { status: 400 }
       );
     }
@@ -101,6 +102,7 @@ export async function PUT(request: Request) {
       data: {
         name,
         image,
+        status,
       },
     });
 
