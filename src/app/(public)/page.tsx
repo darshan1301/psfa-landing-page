@@ -24,6 +24,8 @@ export const metadata = {
   },
 };
 
+const videoSrc = "./psfa-vid.mp4";
+
 export default async function Home() {
   const [sports] = await Promise.all([
     prisma.sport.findMany({
@@ -45,14 +47,14 @@ export default async function Home() {
       <main className="">
         <div className="lg:w-full lg:h-fit h-screen overflow-hidden">
           <video
-            src={"/psfa-vid.mp4"}
-            width={1920}
-            height={1080}
+            src={videoSrc}
             autoPlay
-            preload="none"
             muted
-            className="h-screen lg:h-auto object-cover"
-          />
+            playsInline
+            preload="auto"
+            className="h-screen lg:h-auto object-cover w-full">
+            Your browser does not support the video tag.
+          </video>
         </div>
         <ServicesSection />
         <ServicesCards />
