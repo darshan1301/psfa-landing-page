@@ -12,7 +12,7 @@ type Sport = {
 //accept sports as a prop
 const FacilitiesCarousel = ({ sports }: { sports: Sport[] }) => {
   return (
-    <div className="lg:max-w-fit bg-white lg:rounded-4xl lg:mx-4 px-6 py-4 pt-10 lg:px-16 lg:py-4 my-4">
+    <div className="lg:max-w-fit bg-white lg:rounded-4xl lg:mx-4 px-2 sm:px-4 py-4 pt-10 lg:px-4 lg:py-4 my-4">
       {/* Header / Search / View All */}
       <div className="flex lg:flex-row justify-between md:justify-center lg:justify-between mb-6 items-center md:my-10 gap-4">
         <div className="md:flex w-full md:gap-4 lg:items-center ">
@@ -26,7 +26,7 @@ const FacilitiesCarousel = ({ sports }: { sports: Sport[] }) => {
       </div>
 
       {/* Carousel */}
-      <div className=" grid lg:grid-cols-4 md:grid-cols-3 md:gap-4 gap-2 lg:gap-6 grid-cols-2">
+      <div className=" grid lg:grid-cols-4 md:grid-cols-3 md:gap-4 gap-2 lg:gap-4 grid-cols-2">
         {sports.map((facility) => (
           <div key={facility.id} className="px-1">
             <div className="relative rounded-3xl overflow-hidden">
@@ -38,7 +38,7 @@ const FacilitiesCarousel = ({ sports }: { sports: Sport[] }) => {
                 className="w-full transition-all hover:h-100 overflow-hidden h-44 md:h-96 object-cover"
               />
               {/* Tag Pill */}
-              <div className="absolute left-2 bottom-4 md:left-4 lg:font backdrop-blur-lg text-white font-medium tracking-tight px-3 py-1 rounded-full">
+              <div className="absolute left-2 bottom-4 md:left-4 lg:font backdrop-blur-lg bg-black/50 text-white font-medium tracking-tight px-3 py-1 rounded-full">
                 {facility.name}
               </div>
             </div>
