@@ -268,9 +268,14 @@ export default function ServicesShowcase(): JSX.Element {
             <p className="text-gray-700 leading-relaxed text-lg">{microHero}</p>
 
             <div ref={ctaRef} className="w-full">
-              <Link href="/services">
+              <Link href="#verticals">
                 <button
                   className="w-full inline-flex items-center justify-center bg-gradient-to-r from-black to-gray-800 text-white font-light px-6 py-3 rounded-full hover:from-gray-800 hover:to-gray-700 transition-all duration-200 shadow-lg text-lg"
+                  onClick={() => {
+                    document.getElementById("verticals")?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }}
                   onMouseEnter={(e) => handleButtonHover(e.currentTarget, true)}
                   onMouseLeave={(e) =>
                     handleButtonHover(e.currentTarget, false)
@@ -388,7 +393,7 @@ export default function ServicesShowcase(): JSX.Element {
             </p>
 
             <div ref={ctaRef}>
-              <Link href="/services">
+              <Link href="#verticals">
                 <button
                   className="inline-flex items-center lg:mt-14 bg-gradient-to-r from-black to-gray-800 text-white font-light px-8 py-4 rounded-full hover:from-gray-800 hover:to-gray-700 transition-all duration-200 shadow-lg text-lg"
                   onMouseEnter={(e) => handleButtonHover(e.currentTarget, true)}

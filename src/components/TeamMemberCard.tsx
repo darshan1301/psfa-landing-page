@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 interface TeamMember {
-  id: string;
+  id?: string;
   name: string;
   role: string;
   image: string;

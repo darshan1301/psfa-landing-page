@@ -47,7 +47,7 @@ export const services = [
 
 const ServicesCards: React.FC = () => {
   return (
-    <section className="py-10 px-6 md:px-0">
+    <section id="verticals" className="py-10 px-6 md:px-0">
       <div className="max-w-7xl mx-auto ">
         {/* Header */}
         <div className="text-center mb-16">

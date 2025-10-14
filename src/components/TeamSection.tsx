@@ -13,6 +13,24 @@ interface TeamMember {
   yearsOfExperience: number;
 }
 
+type Mentor = {
+  id?: string;
+  name: string;
+  role: string;
+  image: string;
+  yearsOfExperience: number;
+};
+
+const mentors: Mentor[] = [
+  {
+    name: "Atit Mehta",
+    role: "Growth Advisor",
+    yearsOfExperience: 25,
+    image:
+      "https://res.cloudinary.com/hotel-booking-1301/image/upload/v1760424897/psfa-landing-page/team/Atit_sir_x0uic6.jpg",
+  },
+];
+
 const containerVariants = {
   initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -54,6 +72,27 @@ const TeamSection = () => {
   }
   return (
     <div>
+      <motion.div
+        id="our-team"
+        className="mb-20 lg:mx-24 px-4"
+        variants={containerVariants}
+        initial="initial"
+        animate="animate">
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center mb-6">
+            <Users className="w-8 h-8 text-green-600 mr-3" />
+            <h2 className="text-3xl md:text-4xl font-normal tracking-tight text-gray-900">
+              Our Mentors
+            </h2>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-8 items-center">
+          {mentors.map((member) => {
+            return <TeamMemberCard key={member.name} member={member} />;
+          })}
+        </div>
+      </motion.div>
       {teamMembers.length > 0 && (
         <motion.div
           id="our-team"
