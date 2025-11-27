@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { uploadToS3, deleteFromS3 } from "@/lib/generatePresignedUrl";
+import { uploadToS3, deleteFromS3 } from "@/lib/s3bucketMethods";
 
 export async function POST(request: NextRequest) {
   console.log("Received upload request");

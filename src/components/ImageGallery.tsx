@@ -16,7 +16,7 @@ interface ImageGalleryProps {
 export function ImageGallery({
   images,
   altPrefix = "Image",
-  responsiveHeights = "h-64 sm:h-80 md:h-96 lg:h-[500px]",
+  responsiveHeights = "h-64 sm:h-68 md:h-72 lg:h-72",
   aspectRatio = "",
   rounded = "rounded-2xl",
   showThumbnails = true,

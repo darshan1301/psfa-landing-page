@@ -21,11 +21,37 @@ export const metadata: Metadata = {
   description:
     "Shop high-quality sports equipment for all levels. Fast delivery across India. Equip yourself with the best gear from SportsKart by PSFA.",
   keywords: [
-    "sports equipment online",
-    "buy sports gear India",
-    "premium sports products",
-    "sports gear delivery",
-    "athletic equipment India",
+    "sports gear",
+    "sports gear near me",
+    "sport gear",
+    "gear for sports",
+    "academy sports",
+    "football gear",
+    "outdoor gear near me",
+    "gear football equipment",
+    "fitness gear",
+    "sports gear demo",
+    "best sports gear mumbai",
+    "gym equipment",
+    "sports gear maharashtra",
+    "sports shop mumbai",
+    "sports shop nagpur",
+    "fitness wear maharashtra",
+    "in-store sports",
+    "team sports gear",
+    "sports gear suppliers",
+    "high quality sports equipment maharashtra",
+    "buy sports gear for schools maharashtra",
+    "custom sports event kits maharashtra",
+    "bulk sports gear suppliers india",
+    "sports gear and apparel bulk purchase",
+    "cricket gear maharashtra",
+    "football gear bulk order india",
+    "badminton gear online",
+    "table tennis paddle",
+    "home fitness gear bulk",
+    "boxing gloves maharashtra",
+    "branded table tennis",
   ],
 };
 
@@ -175,16 +201,6 @@ export default function SportsKartPage() {
             Discover high-quality sports equipment tailored for athletes of all
             levels. Equip yourself with the best and perform at your peak.
           </p>
-
-          {/* Hero CTA */}
-          {/* <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="group relative px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-2xl font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-1">
-              <span className="relative z-10">Shop Now</span>
-            </button>
-            <button className="px-8 py-4 border-2 border-blue-600 rounded-2xl font-semibold text-blue-600 hover:bg-blue-50 transition-all duration-300 hover:scale-105">
-              View Catalog
-            </button>
-          </div> */}
         </div>
       </section>
 

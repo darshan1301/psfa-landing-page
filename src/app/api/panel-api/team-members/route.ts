@@ -1,5 +1,5 @@
 import prisma from "@/lib/db";
-import { deleteFromS3 } from "@/lib/generatePresignedUrl";
+import { deleteFromS3 } from "@/lib/s3bucketMethods";
 import { NextResponse } from "next/server";
 
 export async function GET() {

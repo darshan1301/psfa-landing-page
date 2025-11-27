@@ -8,9 +8,43 @@ import InfraPage from "@/components/InfraPage";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Sports Infrastructure | Pratigrham Sports For All",
+  title:
+    "Leading Sports Infrastructure & Facility Construction Company in Maharashtra & Central India",
   description:
-    "Discover world-class sports facilities designed for excellence and performance",
+    "Build world-class sports infrastructure in Maharashtra, Chhattisgarh, and Madhya Pradesh with Pratigrham Sports. Multi-sport complexes, synthetic athletic tracks, turfs, and turnkey facility construction services.",
+  keywords: [
+    "sports infrastructure Maharashtra",
+    "sports infrastructure Chhattisgarh",
+    "sports infrastructure Madhya Pradesh",
+    "sports infrastructure development in Maharashtra",
+    "sports infrastructure development in Chhattisgarh",
+    "sports infrastructure development in Madhya Pradesh",
+    "sports facilities in Maharashtra",
+    "sports facilities in Chhattisgarh",
+    "sports facilities in Madhya Pradesh",
+    "sports complex in Maharashtra",
+    "sports complex in Chhattisgarh",
+    "sports complex in Madhya Pradesh",
+    "multi sport complex in central India",
+    "sports infrastructure projects in Maharashtra",
+    "synthetic athletic track project Chhattisgarh",
+    "integrated sports complex project in Raigarh Chhattisgarh",
+    "international sports complex masterplan Madhya Pradesh",
+    "synthetic athletic track in Maharashtra",
+    "synthetic athletic track in Chhattisgarh",
+    "synthetic athletic track in Madhya Pradesh",
+    "hockey turf stadium in Chhattisgarh",
+    "synthetic hockey turf in Madhya Pradesh",
+    "football stadium and football turf in Maharashtra",
+    "cricket and football stadium in Chhattisgarh",
+    "multi sport indoor stadium in Madhya Pradesh",
+    "swimming pool and athletics stadium development Madhya Pradesh",
+    "development of sports infrastructure in Maharashtra",
+    "sports infrastructure projects in Maharashtra",
+    "international standard sports complex in Maharashtra",
+    "multi sport indoor stadium in Maharashtra",
+    "sports facility construction company in Maharashtra",
+  ],
 };
 
 interface SportsInfrastructure {
@@ -75,7 +109,7 @@ export default async function Page() {
                 and cricket nets to full-scale academies.
               </p>
             </section>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {infrastructures.map((infrastructure) => (
                 <InfrastructureCard
                   key={infrastructure.id}
@@ -142,11 +176,9 @@ const InfrastructureCard = ({
   <div className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.02] h-full">
     {/* Image Section - Full width on top */}
     <div className="w-full p-4">
-      <ImageGallery
-        images={infrastructure.images}
-        responsiveHeights="h-56 sm:h-64 md:h-[30rem]"
-        aspectRatio="aspect-w-16 aspect-h-10"
-      />
+      <div className="aspect-[12/10] w-full">
+        <ImageGallery images={infrastructure.images} />
+      </div>
     </div>
 
     {/* Content Section - Below images */}

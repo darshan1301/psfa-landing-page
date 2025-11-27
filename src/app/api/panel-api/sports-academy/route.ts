@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
-import { deleteFromS3 } from "@/lib/generatePresignedUrl";
+import { deleteFromS3 } from "@/lib/s3bucketMethods";
 
 export async function POST(request: Request) {
   const { name, location, description, images } = await request.json();
