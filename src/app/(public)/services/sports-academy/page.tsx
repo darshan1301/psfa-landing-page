@@ -18,6 +18,7 @@ import {
 import Image from "next/image";
 import { Section } from "@/components/Section";
 import FAQItem from "@/components/FAQItem";
+import { AcademiesSection } from "@/components/AcademySection";
 
 export const metadata: Metadata = {
   title: "Sports Academy in Nagpur – Football, Cricket, Pickleball Coaching ",
@@ -237,6 +238,8 @@ export default async function Page() {
           </div>
         </div>
       </section>
+
+      <AcademiesSection />
 
       {/* How It Works */}
       <section className="max-w-6xl mx-auto px-6 sm:px-10 py-10">
