@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const teamMembers = await prisma.teamMember.findMany({
       orderBy: {
-        createdAt: "asc",
+        sortOrder: "asc",
       },
       select: {
         id: true,

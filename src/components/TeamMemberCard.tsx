@@ -20,7 +20,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       {/* Card content */}
-      <div className="relative p-3 md:p-6">
+      <div className="relative p-4 md:px-2 md:py-4">
         {/* Profile image */}
         <div className="flex justify-center mb-6">
           <div className="relative">

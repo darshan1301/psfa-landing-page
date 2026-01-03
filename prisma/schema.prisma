@@ -119,6 +119,7 @@ model TeamMember {
   name      String
   role      String
   image     String
+  sortOrder Int   @default(1)
   createdAt DateTime @default(now())
   yearsOfExperience Int @default(0)
 }

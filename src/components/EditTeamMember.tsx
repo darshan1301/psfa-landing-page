@@ -15,9 +15,10 @@ import { Input } from "@/components/ui/input";
 import { useImageUpload } from "@/hooks/useImageUpload";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import { Plus, Upload, Loader2, X } from "lucide-react";
+import { Upload, Loader2, X, Pencil } from "lucide-react";
 
-interface MemberPayload {
+interface Member {
+  id: string;
   name: string;
   role: string;
   image: string;
@@ -26,10 +27,11 @@ interface MemberPayload {
 }
 
 interface Props {
-  onSubmit: (payload: MemberPayload) => void | Promise<void>;
+  member: Member;
+  onSubmit: (payload: Member) => void | Promise<void>;
 }
 
-export default function AddMemberForm({ onSubmit }: Props) {
+export default function EditTeamMember({ onSubmit, member }: Props) {
   const {
     register,
     handleSubmit,
@@ -37,7 +39,16 @@ export default function AddMemberForm({ onSubmit }: Props) {
     reset,
     setValue,
     watch,
-  } = useForm<MemberPayload>();
+  } = useForm<Member>({
+    defaultValues: {
+      id: member.id,
+      name: member.name,
+      role: member.role,
+      image: member.image,
+      yearsOfExperience: member.yearsOfExperience,
+      sortOrder: member.sortOrder,
+    },
+  });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
@@ -57,14 +68,27 @@ export default function AddMemberForm({ onSubmit }: Props) {
     }
   }, [uploadedUrl, setValue]);
 
-  const onInternalSubmit = async (data: MemberPayload) => {
+  useEffect(() => {
+    if (member) {
+      reset({
+        name: member.name,
+        role: member.role,
+        image: member.image,
+        yearsOfExperience: member.yearsOfExperience,
+        sortOrder: member.sortOrder,
+      });
+    }
+  }, [member, reset]);
+
+  const onInternalSubmit = async (data: Member) => {
+    console.log();
     if (!data.image) {
       setError("Please upload an image or provide a valid URL.");
       return;
     }
 
     try {
-      await onSubmit(data);
+      await onSubmit({ ...data, id: member.id });
       reset();
       resetUpload();
       setOpen(false);
@@ -93,15 +117,15 @@ export default function AddMemberForm({ onSubmit }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="flex items-center space-x-2">
-          <Plus className="w-5 h-5" />
-          <span>Add Team Member</span>
+        <Button variant={"outline"} className="flex items-center space-x-2">
+          <Pencil className="w-5 h-5" />
+          <span>Edit Info</span>
         </Button>
       </DialogTrigger>
 
       <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Add Member</DialogTitle>
+          <DialogTitle>Edit Member</DialogTitle>
           <DialogDescription>
             Upload a profile image (≤ 1MB) and fill in all required fields.
           </DialogDescription>
@@ -113,7 +137,6 @@ export default function AddMemberForm({ onSubmit }: Props) {
             register={register("name", { required: "Name is required" })}
             error={errors.name?.message}
           />
-
           <InputBlock
             label="Role"
             register={register("role", { required: "Role is required" })}
@@ -154,6 +177,22 @@ export default function AddMemberForm({ onSubmit }: Props) {
               </Button>
             </div>
 
+            <select
+              className="w-full h-10 rounded-md border border-input bg-background px-3 text-sm"
+              {...register("sortOrder", {
+                required: "Sort order is required",
+                valueAsNumber: true, // 👈 THIS is the key
+              })}>
+              {Array.from({ length: 100 }, (_, i) => {
+                const val = i + 1;
+                return (
+                  <option key={val} value={val}>
+                    {val}
+                  </option>
+                );
+              })}
+            </select>
+
             <input
               ref={fileInputRef}
               type="file"
@@ -189,7 +228,7 @@ export default function AddMemberForm({ onSubmit }: Props) {
 
           <DialogFooter>
             <Button type="submit" disabled={isUploading}>
-              Create Member
+              Update Member
             </Button>
           </DialogFooter>
         </form>

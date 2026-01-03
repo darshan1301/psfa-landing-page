@@ -14,6 +14,7 @@ export async function GET() {
         role: true,
         image: true,
         yearsOfExperience: true,
+        sortOrder: true,
       },
     });
 
@@ -59,7 +60,8 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
   try {
-    const { id, image } = await request.json();
+    const { id, image, yearsOfExperience, sortOrder, role, name } =
+      await request.json();
 
     if (!id || !image) {
       return NextResponse.json(
@@ -72,6 +74,10 @@ export async function PUT(request: Request) {
       where: { id },
       data: {
         image: image || "",
+        yearsOfExperience,
+        sortOrder,
+        role,
+        name,
       },
     });
 

@@ -87,7 +87,7 @@ const TeamSection = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-8 items-center">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 items-center">
           {mentors.map((member) => {
             return <TeamMemberCard key={member.name} member={member} />;
           })}
@@ -112,7 +112,7 @@ const TeamSection = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-8 items-center">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 items-center">
             {teamMembers.map((member) => {
               return <TeamMemberCard key={member.id} member={member} />;
             })}
