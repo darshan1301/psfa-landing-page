@@ -17,8 +17,12 @@ export default function Footer() {
             alt="pratigrham logo"
           />
           <p className="text-lg font-normal tracking-tigh">
-            Pratigrham Sports for All Pvt. Ltd Ground Floor, Ankit Apartment,
-            Atrey Layout, Pratap Nagar, Nagpur, Maharashtra 440020
+            <p className="text-lg font-normal tracking-tight">
+              Pratigrham Sports for All Pvt. Ltd <br />
+              3rd Floor, Plot No. 5, RPTS Rd, <br />
+              behind Jeril Lawn, Kotwal Nagar, <br />
+              Pratap Nagar, Nagpur, Maharashtra 440022
+            </p>
           </p>
           {/* <button className="my-6 bg-white px-4 py-1  font-normal  rounded-full">
             Some Button
