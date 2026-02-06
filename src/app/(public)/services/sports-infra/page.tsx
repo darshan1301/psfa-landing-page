@@ -109,7 +109,7 @@ export default async function Page() {
                 and cricket nets to full-scale academies.
               </p>
             </section>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 2xl:grid-cols-4">
               {infrastructures.map((infrastructure) => (
                 <InfrastructureCard
                   key={infrastructure.id}
@@ -128,7 +128,8 @@ export default async function Page() {
                     className="w-12 h-12 text-gray-400"
                     fill="none"
                     stroke="currentColor"
-                    viewBox="0 0 24 24">
+                    viewBox="0 0 24 24"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -230,7 +231,8 @@ const InfrastructureCard = ({
           {infrastructure.Amenities.map((amenity, amenityIndex) => (
             <span
               key={amenityIndex}
-              className="px-3 py-1.5 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 rounded-full text-sm font-medium hover:from-blue-200 hover:to-purple-200 transition-all duration-300 cursor-default border border-blue-200">
+              className="px-3 py-1.5 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 rounded-full text-sm font-medium hover:from-blue-200 hover:to-purple-200 transition-all duration-300 cursor-default border border-blue-200"
+            >
               {amenity}
             </span>
           ))}
